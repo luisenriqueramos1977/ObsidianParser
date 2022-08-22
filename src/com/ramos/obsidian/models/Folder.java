@@ -43,11 +43,6 @@ public final class Folder extends BasicObsidianObject{
 	private static List<Folder> contained_folders;
 	private static List<Note> contained_notes;
 	
-	
-	
-	
-	
-	
 	/**
 	 * 
 	 */
@@ -150,11 +145,30 @@ public final class Folder extends BasicObsidianObject{
 
 		return joinedString;
 	}
+	
+	//get string with all notes
+		private String getNotesJson(List<Note> notes) {
+			
+			final String my_notes;
+			
+			//lambda foreach
+			
+			//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
+			
+			// Convert elements to strings and concatenate them, separated by commas
+			// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
+			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
+			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
+			String joinedString = notes.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
+
+			return joinedString;
+		}
 
 	@Override
 	public String getJSON() {
 		// TODO Auto-generated method stub
 		String folder_json = getFoldersJson(contained_folders);
+		String notes_json = getNotesJson(contained_notes);
 		
 		final String a_json = "{\"_id: \""+ this.getName()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""
@@ -162,7 +176,7 @@ public final class Folder extends BasicObsidianObject{
 							  "\"creator\""+":"+"\""+this.getCreator()+"\""+
 							  "\"located_in\""+":"+"\""+this.getLocated_in()+"\""+
 							  folder_json+
-							  "\"constains_note\""+":"+"\""+this.getContained_notes()+"\""+
+							  notes_json+
 							  "}";
 		return a_json;
 		
