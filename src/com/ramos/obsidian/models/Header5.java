@@ -35,7 +35,7 @@ public final class Header5 extends BasicObsidianObject{
 	 * 
 	 */
 	private Header5() {
-		super();
+		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 	}
 

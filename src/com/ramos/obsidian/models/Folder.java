@@ -47,7 +47,7 @@ public final class Folder extends BasicObsidianObject{
 	 * 
 	 */
 	private Folder(LocalDate creation_on, String creator, String located_in, List<Folder> contained_folders, List<Note> contained_notes) {
-		super();
+		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 		this.creation_on = creation_on;
 		this.creator = creator;

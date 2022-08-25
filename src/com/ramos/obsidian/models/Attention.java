@@ -35,7 +35,7 @@ public final class Attention extends BasicObsidianObject{
 	 * 
 	 */
 	private Attention() {
-		super();
+		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 	}
 

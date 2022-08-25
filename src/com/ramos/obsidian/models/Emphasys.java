@@ -35,7 +35,7 @@ public final class Emphasys extends BasicObsidianObject{
 	 * 
 	 */
 	private Emphasys() {
-		super();
+		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 	}
 

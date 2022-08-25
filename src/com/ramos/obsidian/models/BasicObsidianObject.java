@@ -32,31 +32,48 @@ package com.ramos.obsidian.models;
 public abstract class BasicObsidianObject {
 	private static String name;
 	private static String content;
+	
+	
+	/**
+	 * @param name
+	 * @param content
+	 */
+	public BasicObsidianObject(String name, String content) {
+		this.name = name;
+		this.content = content;
+	}
+	
+	
 	/**
 	 * @return the name
 	 */
 	public static String getName() {
 		return name;
 	}
+
 	/**
 	 * @param name the name to set
 	 */
-	public static void setName(String name) {
-		BasicObsidianObject.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	/**
 	 * @return the content
 	 */
 	public static String getContent() {
 		return content;
 	}
+
+
 	/**
 	 * @param content the content to set
 	 */
-	public static void setContent(String content) {
-		BasicObsidianObject.content = content;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	
+
+
 	public abstract String getJSON();
 
 }

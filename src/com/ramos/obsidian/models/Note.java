@@ -55,7 +55,7 @@ public final class Note extends BasicObsidianObject{
 	private Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,List<Note> contained_notes,
 			List<Attention> contained_attention, List<Emphasys> contained_emphasys, List<Header1> contained_header1,
 			List<Header2> contained_header2, List<Header3> contained_header3, List<Header4> contained_header4, List<Header5> contained_header5) {
-		super();
+		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 		this.created_on = created_on;
 		this.creator = creator;
