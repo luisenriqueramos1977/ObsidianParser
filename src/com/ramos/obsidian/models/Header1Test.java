@@ -26,39 +26,12 @@ import org.junit.jupiter.api.Test;
 
 class Header1Test {
 	
-	Header1 my_header1 = new Header1();
-
-	@Test
-	void testSetName() {
-		my_header1.setName("header_test1");
-	}
-
-	@Test
-	void testSetContent() {
-		my_header1.setContent("test content");
-	}
-	
-	@Test
-	void testGetName() {
-		System.out.println("the name: "+my_header1.getName());
-	}
-
-	
-
-	@Test
-	void testGetContent() {
-		System.out.println("the content: "+my_header1.getName());
-	}
-	
 	@Test
 	void testGetJSON() {
-
-		System.out.println("the fluree json: "+my_header1.getJSON());
-
+		Header1 my_header1 = new Header1();
+		my_header1.setName("header$test1");
+		my_header1.setContent("test header 1 content");
+		System.out.println("the partial fluree json: "+my_header1.getPartialJSON());
+		System.out.println("the full fluree json: "+my_header1.getFullJSON());
 	}
-
-	
-
-	
-
 }

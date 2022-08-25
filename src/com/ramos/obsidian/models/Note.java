@@ -47,12 +47,8 @@ public final class Note extends BasicObsidianObject{
 	private static List<Header4> contained_header4;
 	private static List<Header5> contained_header5;
 
-
-
 	
-	
-	
-	private Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,List<Note> contained_notes,
+	public Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,List<Note> contained_notes,
 			List<Attention> contained_attention, List<Emphasys> contained_emphasys, List<Header1> contained_header1,
 			List<Header2> contained_header2, List<Header3> contained_header3, List<Header4> contained_header4, List<Header5> contained_header5) {
 		super(getName(), getContent());
@@ -70,17 +66,12 @@ public final class Note extends BasicObsidianObject{
 	}
 
 	
-	
-	
 	/**
 	 * @return the created_on
 	 */
 	public static LocalDate getCreated_on() {
 		return created_on;
 	}
-
-
-
 
 	/**
 	 * @param created_on the created_on to set
@@ -89,14 +80,12 @@ public final class Note extends BasicObsidianObject{
 		Note.created_on = created_on;
 	}
 
-
 	/**
 	 * @return the creator
 	 */
 	public static String getCreator() {
 		return creator;
 	}
-
 
 	/**
 	 * @param creator the creator to set
@@ -122,7 +111,6 @@ public final class Note extends BasicObsidianObject{
 	}
 
 
-
 	/**
 	 * @return the contained_attention
 	 */
@@ -139,16 +127,12 @@ public final class Note extends BasicObsidianObject{
 	}
 
 
-
-
 	/**
 	 * @return the contained_emphasys
 	 */
 	public static List<Emphasys> getContained_emphasys() {
 		return contained_emphasys;
 	}
-
-
 
 
 	/**
@@ -158,9 +142,6 @@ public final class Note extends BasicObsidianObject{
 		Note.contained_emphasys = contained_emphasys;
 	}
 
-
-
-
 	/**
 	 * @return the contained_header1
 	 */
@@ -168,17 +149,12 @@ public final class Note extends BasicObsidianObject{
 		return contained_header1;
 	}
 
-
-
-
 	/**
 	 * @param contained_header1 the contained_header1 to set
 	 */
 	public static void setContained_header1(List<Header1> contained_header1) {
 		Note.contained_header1 = contained_header1;
 	}
-
-
 
 
 	/**
@@ -189,16 +165,12 @@ public final class Note extends BasicObsidianObject{
 	}
 
 
-
-
 	/**
 	 * @param contained_header2 the contained_header2 to set
 	 */
 	public static void setContained_header2(List<Header2> contained_header2) {
 		Note.contained_header2 = contained_header2;
 	}
-
-
 
 
 	/**
@@ -209,17 +181,12 @@ public final class Note extends BasicObsidianObject{
 	}
 
 
-
-
 	/**
 	 * @param contained_header3 the contained_header3 to set
 	 */
 	public static void setContained_header3(List<Header3> contained_header3) {
 		Note.contained_header3 = contained_header3;
 	}
-
-
-
 
 	/**
 	 * @return the contained_header4
@@ -228,9 +195,6 @@ public final class Note extends BasicObsidianObject{
 		return contained_header4;
 	}
 
-
-
-
 	/**
 	 * @param contained_header4 the contained_header4 to set
 	 */
@@ -238,18 +202,12 @@ public final class Note extends BasicObsidianObject{
 		Note.contained_header4 = contained_header4;
 	}
 
-
-
-
 	/**
 	 * @return the contained_header5
 	 */
 	public static List<Header5> getContained_header5() {
 		return contained_header5;
 	}
-
-
-
 
 	/**
 	 * @param contained_header5 the contained_header5 to set
@@ -267,14 +225,11 @@ public final class Note extends BasicObsidianObject{
 //	    },
 	 
 	//get string with all subfolders
-		private String getObsidianObjectJson(List<? extends BasicObsidianObject> Objects) {
+		public String getObsidianObjectJson(List<? extends BasicObsidianObject> Objects) {
 			
 			final String my_folders;
-			
 			//lambda foreach
-			
 			//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
-			
 			// Convert elements to strings and concatenate them, separated by commas
 			// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
 			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
@@ -286,7 +241,7 @@ public final class Note extends BasicObsidianObject{
 
 
 	@Override
-	public String getJSON() {
+	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		final String a_json = "{\"_id: \""+ this.getName()+"\","
 							  +"\"textContent\""+":"+"\""+this.getContent()+"\""
@@ -301,6 +256,11 @@ public final class Note extends BasicObsidianObject{
 							  "}";
 		return a_json;
 		
+	}
+	
+	@Override
+	public String getFullJSON() {
+		return "["+getPartialJSON()+"]";
 	}
 
 }

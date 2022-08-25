@@ -1,4 +1,5 @@
 
+
 /*
  * Copyright [2022] [Luis Enrique Ramos García].
  *
@@ -17,40 +18,17 @@
 
 
 
-/**
- * 
- */
 package com.ramos.obsidian.models;
 
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Luis Ramos
- *
- */
-public final class Header2 extends BasicObsidianObject{
-	
-	/**
-	 * 
-	 */
-	Header2() {
-		super(getName(), getContent());
-		// TODO Auto-generated constructor stub
+class NoteTest {
+
+	@Test
+	void testGetObsidianObjectJson() {
+		Note my_Note = new Note(null, null, null, null, null, null, null, null, null, null, null, null);
 	}
 
-	@Override
-	public String getPartialJSON() {
-		// TODO Auto-generated method stub
-		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
-							  +"\"name\""+":"+"\""+this.getName()+"\""+
-							  "}";
-		return a_json;
-	}
-	
-	@Override
-	public String getFullJSON() {
-		return "["+getPartialJSON()+"]";
-	}
-	
 }

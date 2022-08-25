@@ -1,4 +1,5 @@
 
+
 /*
  * Copyright [2022] [Luis Enrique Ramos García].
  *
@@ -17,40 +18,21 @@
 
 
 
-/**
- * 
- */
 package com.ramos.obsidian.models;
 
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Luis Ramos
- *
- */
-public final class Header2 extends BasicObsidianObject{
-	
-	/**
-	 * 
-	 */
-	Header2() {
-		super(getName(), getContent());
-		// TODO Auto-generated constructor stub
+class Header4Test {
+
+	@Test
+	void testGetFullJSON() {
+		Header4 my_header4 = new Header4();
+		my_header4.setName("header4$test");
+		my_header4.setContent("test header 4 content");
+		System.out.println("the partial fluree json: "+my_header4.getPartialJSON());
+		System.out.println("the full fluree json: "+my_header4.getFullJSON());
 	}
 
-	@Override
-	public String getPartialJSON() {
-		// TODO Auto-generated method stub
-		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
-							  +"\"name\""+":"+"\""+this.getName()+"\""+
-							  "}";
-		return a_json;
-	}
-	
-	@Override
-	public String getFullJSON() {
-		return "["+getPartialJSON()+"]";
-	}
-	
 }

@@ -34,19 +34,24 @@ public final class Tag extends BasicObsidianObject{
 	/**
 	 * 
 	 */
-	private Tag() {
+	Tag() {
 		super(getName(), getContent());
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public String getJSON() {
+	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\""
+							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
 							  "}";
 		return a_json;
+	}
+	
+	@Override
+	public String getFullJSON() {
+		return "["+getPartialJSON()+"]";
 	}
 
 }

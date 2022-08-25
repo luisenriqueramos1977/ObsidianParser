@@ -50,6 +50,13 @@ public abstract class BasicObsidianObject {
 	public static String getName() {
 		return name;
 	}
+	
+	/**
+	 * @return the content
+	 */
+	public static String getContent() {
+		return content;
+	}
 
 	/**
 	 * @param name the name to set
@@ -59,21 +66,15 @@ public abstract class BasicObsidianObject {
 	}
 
 	/**
-	 * @return the content
-	 */
-	public static String getContent() {
-		return content;
-	}
-
-
-	/**
 	 * @param content the content to set
 	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
+	public abstract String getPartialJSON();
+	
+	public abstract String getFullJSON();
 
-	public abstract String getJSON();
 
 }

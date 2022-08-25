@@ -165,7 +165,7 @@ public final class Folder extends BasicObsidianObject{
 		}
 
 	@Override
-	public String getJSON() {
+	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		String folder_json = getFoldersJson(contained_folders);
 		String notes_json = getNotesJson(contained_notes);
@@ -179,7 +179,11 @@ public final class Folder extends BasicObsidianObject{
 							  notes_json+
 							  "}";
 		return a_json;
-		
+	}
+	
+	@Override
+	public String getFullJSON() {
+		return "["+getPartialJSON()+"]";
 	}
 
 }
