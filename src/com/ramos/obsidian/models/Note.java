@@ -24,7 +24,11 @@
 package com.ramos.obsidian.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -33,26 +37,32 @@ import java.util.stream.Collectors;
  */
 
 
-public final class Note extends BasicObsidianObject{
+public final class Note {
 	
+	public String name;
+	public String content;
 	//specific note variables
 	private static LocalDate created_on;
 	private static String creator;
 	private static String located_in;
-	private static List<Attention> contained_attention;
-	private static List<Emphasys> contained_emphasys;
-	private static List<Header1> contained_header1;
-	private static List<Header2> contained_header2;
-	private static List<Header3> contained_header3;
-	private static List<Header4> contained_header4;
-	private static List<Header5> contained_header5;
+	private static List<Attention> contained_attention = new ArrayList<Attention>();
+	private static Set<Emphasys> contained_emphasys = new HashSet<>();
+	private static Set<Header1> contained_header1 = new HashSet<>();
+	private static Set<Header2> contained_header2 = new HashSet<>();
+	private static Set<Header3> contained_header3 = new HashSet<>();
+	private static Set<Header4> contained_header4= new HashSet<>();
+	private static Set<Header5> contained_header5= new HashSet<>();
+	private static Set<Tag> contained_tags= new HashSet<>();
+
 
 	
-	public Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,
-			List<Attention> contained_attention, List<Emphasys> contained_emphasys, List<Header1> contained_header1,
-			List<Header2> contained_header2, List<Header3> contained_header3, List<Header4> contained_header4, List<Header5> contained_header5) {
-		super(getName(), getContent());
+	public Note(String name, String content, LocalDate created_on, String creator,String located_in,Set<Folder> contained_folders,
+			List<Attention> contained_attention, Set<Emphasys> contained_emphasys, Set<Header1> contained_header1,
+			Set<Header2> contained_header2, Set<Header3> contained_header3, Set<Header4> contained_header4, 
+			Set<Header5> contained_header5, Set<Tag> contained_tags) {
 		// TODO Auto-generated constructor stub
+		this.name =name;
+		this.content= content;
 		this.created_on = created_on;
 		this.creator = creator;
 		this.located_in = located_in;
@@ -63,8 +73,36 @@ public final class Note extends BasicObsidianObject{
 		this.contained_header3 =contained_header3;
 		this.contained_header4 =contained_header4;
 		this.contained_header5 =contained_header5;
+		this.contained_tags = contained_tags;
 	}
 
+	/**
+	 * @return the name
+	 */
+	public  String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public  void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the content
+	 */
+	public  String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
 	
 	/**
 	 * @return the created_on
@@ -130,7 +168,7 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @return the contained_emphasys
 	 */
-	public static List<Emphasys> getContained_emphasys() {
+	public static Set<Emphasys> getContained_emphasys() {
 		return contained_emphasys;
 	}
 
@@ -138,21 +176,21 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @param contained_emphasys the contained_emphasys to set
 	 */
-	public static void setContained_emphasys(List<Emphasys> contained_emphasys) {
+	public static void setContained_emphasys(Set<Emphasys> contained_emphasys) {
 		Note.contained_emphasys = contained_emphasys;
 	}
 
 	/**
 	 * @return the contained_header1
 	 */
-	public static List<Header1> getContained_header1() {
+	public static Set<Header1> getContained_header1() {
 		return contained_header1;
 	}
 
 	/**
 	 * @param contained_header1 the contained_header1 to set
 	 */
-	public static void setContained_header1(List<Header1> contained_header1) {
+	public static void setContained_header1(Set<Header1> contained_header1) {
 		Note.contained_header1 = contained_header1;
 	}
 
@@ -160,7 +198,7 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @return the contained_header2
 	 */
-	public static List<Header2> getContained_header2() {
+	public static Set<Header2> getContained_header2() {
 		return contained_header2;
 	}
 
@@ -168,7 +206,7 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @param contained_header2 the contained_header2 to set
 	 */
-	public static void setContained_header2(List<Header2> contained_header2) {
+	public static void setContained_header2(Set<Header2> contained_header2) {
 		Note.contained_header2 = contained_header2;
 	}
 
@@ -176,7 +214,7 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @return the contained_header3
 	 */
-	public static List<Header3> getContained_header3() {
+	public static Set<Header3> getContained_header3() {
 		return contained_header3;
 	}
 
@@ -184,59 +222,56 @@ public final class Note extends BasicObsidianObject{
 	/**
 	 * @param contained_header3 the contained_header3 to set
 	 */
-	public static void setContained_header3(List<Header3> contained_header3) {
+	public static void setContained_header3(Set<Header3> contained_header3) {
 		Note.contained_header3 = contained_header3;
 	}
 
 	/**
 	 * @return the contained_header4
 	 */
-	public static List<Header4> getContained_header4() {
+	public static Set<Header4> getContained_header4() {
 		return contained_header4;
 	}
 
 	/**
 	 * @param contained_header4 the contained_header4 to set
 	 */
-	public static void setContained_header4(List<Header4> contained_header4) {
+	public static void setContained_header4(Set<Header4> contained_header4) {
 		Note.contained_header4 = contained_header4;
 	}
 
 	/**
 	 * @return the contained_header5
 	 */
-	public static List<Header5> getContained_header5() {
+	public static Set<Header5> getContained_header5() {
 		return contained_header5;
 	}
 
 	/**
 	 * @param contained_header5 the contained_header5 to set
 	 */
-	public static void setContained_header5(List<Header5> contained_header5) {
-		Note.contained_header5 = contained_header5;
+	public static void setContained_tags(Set<Tag> contained_tags) {
+		Note.contained_tags = contained_tags;
 	}
-
-    //get json per object
-//	  {
-//	        "_id": "_predicate",
-//	        "name": "Header3/textContent",
-//	        "type": "string",
-//	        "doc": "Text content of Header level 3 of a note"
-//	    },
+	
+	/**
+	 * @return the contained_attention
+	 */
+	public static Set<Tag> getContained_tags() {
+		return contained_tags;
+	}
 	 
 	//get string with all subfolders
 		public String getObsidianObjectJson(List<? extends BasicObsidianObject> Objects) {
 			String my_folders;
 			String joinedString;
-			
+			// enhanced for-loop also uses an iterator behind the scenes
+	        for (BasicObsidianObject item: Objects) {
+	            System.out.println("item.getName():"+ item.getName());
+	        }
 			try {
 				//lambda foreach
-				//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
-				// Convert elements to strings and concatenate them, separated by commas
-				// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
-				//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
-				//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
-				joinedString = Objects.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
+				joinedString = Objects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString="";
@@ -246,27 +281,262 @@ public final class Note extends BasicObsidianObject{
 		}
 
 
-	@Override
+	
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
-							  +"\"name\""+":"+"\""+this.getName()+"\""+
-							  getObsidianObjectJson(contained_attention)+
-							  getObsidianObjectJson(contained_emphasys)+
-							  getObsidianObjectJson(contained_header1)+
-							  getObsidianObjectJson(contained_header2)+
-							  getObsidianObjectJson(contained_header3)+
-							  getObsidianObjectJson(contained_header4)+
-							  getObsidianObjectJson(contained_header5)+
-							  "}";
+		final String a_json = "\n [{\"_id: \""+ this.getName()+"\",\n"+
+							  "\"textContent\""+":"+"\""+this.getContent()+"\",\n"+
+							  "\"name\""+":"+"\""+this.getName()+"\",\n"+
+							  "\"created_on\""+":"+"\""+this.getCreated_on()+"\",\n"+
+							  getAttentionRelationJson(contained_attention, "\"contained_attention\":[")+
+							  getEmphasysRelationJson(contained_emphasys, "\"contained_emphasys\":[")+ 
+							  getHeader1RelationJson(contained_header1, "\"contained_header1\":[")+
+							  getHeader2RelationJson(contained_header2, "\"contained_header2\":[")+
+							  getHeader3RelationJson(contained_header3, "\"contained_header3\":[")+
+							  getHeader4RelationJson(contained_header4, "\"contained_header4\":[")+
+							  getHeader5RelationJson(contained_header5, "\"contained_header5\":[")+
+							  getTagRelationJson(contained_tags, "\"contained_tags\":[")+
+							  "},\n"+
+							  getAttentionJson(contained_attention)+
+							  getEmphasysJson(contained_emphasys)+
+							  getHeader1Json(contained_header1)+
+							  getHeader2Json(contained_header2)+
+							  getHeader3Json(contained_header3)+
+							  getHeader4Json(contained_header4)+
+							  getHeader5Json(contained_header5)+
+							  getTagJson(contained_tags)+
+							  "]";
 		return a_json;
 		
 	}
 	
-	@Override
-	public String getFullJSON() {
-		return "["+getPartialJSON()+"]";
+	
+	private String getAttentionRelationJson(List<Attention> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	private String getAttentionJson(List<Attention> ListofObjects) {
+		String joinedString;
+	
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+
+		return joinedString;
 	}
 
-}
+	private String getEmphasysRelationJson(Set<Emphasys> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	private String getEmphasysJson(Set<Emphasys> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+
+	private String getHeader1RelationJson(Set<Header1> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	private String getHeader1Json(Set<Header1> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+	
+	
+	private String getHeader2RelationJson(Set<Header2> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	
+	private String getHeader2Json(Set<Header2> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+	
+	private String getHeader3RelationJson(Set<Header3> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	
+
+	private String getHeader3Json(Set<Header3> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+	
+	private String getHeader4RelationJson(Set<Header4> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	
+	private String getHeader4Json(Set<Header4> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+	
+	private String getHeader5RelationJson(Set<Header5> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		joinedString3=joinedString2+"],\n";
+		return joinedString3;
+	}
+	
+	private String getHeader5Json(Set<Header5> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+	
+	private String getTagRelationJson(Set<Tag> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;//"\"contains_attention\"[";
+		try {
+			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString3="";
+		}
+		
+		joinedString3=joinedString2+"],\n";
+		
+		return joinedString3;
+	}
+	
+	private String getTagJson(Set<Tag> ListofObjects) {
+		String joinedString;
+		try {
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+		} catch (Exception e) {
+			// TODO: handle exception
+			joinedString="";
+		}
+		return joinedString;
+	}
+}//end of note

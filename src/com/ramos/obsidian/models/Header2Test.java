@@ -28,9 +28,7 @@ class Header2Test {
 
 	@Test
 	void testGetFullJSON() {
-		Header2 my_header2 = new Header2();
-		my_header2.setName("header$test2");
-		my_header2.setContent("test header 2 content");
+		Header2 my_header2 = new Header2("header2","test header 2 content");
 		System.out.println("the partial fluree json: "+my_header2.getPartialJSON());
 		System.out.println("the full fluree json: "+my_header2.getFullJSON());
 	}

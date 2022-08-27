@@ -28,9 +28,7 @@ class EmphasysTest {
 
 	@Test
 	void testGetFullJSON() {
-		Emphasys my_emphasys = new Emphasys();
-		my_emphasys.setName("emphasys$test2");
-		my_emphasys.setContent("test emphasys text");
+		Emphasys my_emphasys = new Emphasys("emphasys$test2","test emphasys text");
 		System.out.println("the partial fluree json: "+my_emphasys.getPartialJSON());
 		System.out.println("the full fluree json: "+my_emphasys.getFullJSON());
 	}

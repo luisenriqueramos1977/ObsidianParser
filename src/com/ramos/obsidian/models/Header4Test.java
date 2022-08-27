@@ -28,9 +28,7 @@ class Header4Test {
 
 	@Test
 	void testGetFullJSON() {
-		Header4 my_header4 = new Header4();
-		my_header4.setName("header4$test");
-		my_header4.setContent("test header 4 content");
+		Header4 my_header4 = new Header4("header4$test","test header 4 content");
 		System.out.println("the partial fluree json: "+my_header4.getPartialJSON());
 		System.out.println("the full fluree json: "+my_header4.getFullJSON());
 	}

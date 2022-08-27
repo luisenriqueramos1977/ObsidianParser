@@ -28,9 +28,7 @@ class TagTest {
 
 	@Test
 	void testGetFullJSON() {
-		Tag my_tag = new Tag();
-		my_tag.setName("Tag$test2");
-		my_tag.setContent("test tag content");
+		Tag my_tag = new Tag("Tag$test2","test tag content");
 		System.out.println("the partial fluree json: "+my_tag.getPartialJSON());
 		System.out.println("the full fluree json: "+my_tag.getFullJSON());
 	}

@@ -18,19 +18,28 @@
 
 
 
-package com.ramos.obsidian.models;
+package com.ramos.obsidian;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import com.ramos.obsidian.models.Car;
 
-class AttentionTest {
+public class CarTester {
 
-	@Test
-	void testGetFullJSON() {
-		Attention my_attention = new Attention("attention$test2","test attention text");
-		System.out.println("the partial fluree json: "+my_attention.getPartialJSON());
-		System.out.println("the full fluree json: "+my_attention.getFullJSON());
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List<Car> list = new ArrayList<>();
+		list.add(new Car("Volvo V40" , "XYZ 201845", 5));
+		list.add(new Car("Citroen C1", "ABC 164521", 4));
+		list.add(new Car("Dodge Ram" , "KLM 845990", 2));
+		
+		Iterator<Car> iterator = list.iterator();
+		while(iterator.hasNext()) {
+		    Car next = iterator.next();
+		    System.out.println(next.getBrand());
+		}
 	}
 
 }

@@ -29,30 +29,58 @@ package com.ramos.obsidian.models;
  */
 
 
-public final class Attention extends BasicObsidianObject{
+public class Attention{
+    public String name;
+	public String content;
+
+    public Attention(String name, String content) {
+        this.name = name;
+		this.content = content;
+    }
+
 	
 	/**
-	 * 
+	 * @return the name
 	 */
-	public Attention() {
-		super(getName(), getContent());
-		// TODO Auto-generated constructor stub
+	public  String getName() {
+		return name;
 	}
 
-	@Override
+	/**
+	 * @param name the name to set
+	 */
+	public  void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the content
+	 */
+	public  String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
+	}
+    
+    //methods to get fluree jsons
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		final String a_json = "{\"_id: \""+ this.getName()+"\","
+		final String a_json = "{\"_id\""+":"+"\""+ this.getName()+"\","
 							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
-							  "}";
+							  "}\n";
 		return a_json;
 	}
 	
-	@Override
+	
 	public String getFullJSON() {
 		return "["+getPartialJSON()+"]";
 	}
-
 }
+
 

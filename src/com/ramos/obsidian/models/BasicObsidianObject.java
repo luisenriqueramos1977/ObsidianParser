@@ -35,8 +35,8 @@ public abstract class BasicObsidianObject {
 	
 	
 	/**
-	 * @param name
-	 * @param content
+	 * @param object
+	 * @param object2
 	 */
 	public BasicObsidianObject(String name, String content) {
 		this.name = name;
