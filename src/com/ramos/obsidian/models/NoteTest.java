@@ -22,13 +22,33 @@ package com.ramos.obsidian.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 class NoteTest {
+	
+	private static List<Attention> contained_attention;
+	
+	@ParameterizedTest
+    @CsvFileSource(resources = "/attentions.csv", delimiter = ';')
+    public void testListattentions(String name, String contains) {
+    assertNotNull(name);
+    assertNotNull(contains);
+	 Attention my_attention = new Attention();
+	 my_attention.setName(name);
+	 my_attention.setContent(contains);
+     System.out.println("fucking name: "+name);
+      //assertNotNull(name);
+    }
 
-	@Test
-	void testGetObsidianObjectJson() {
-		Note my_Note = new Note(null, null, null, null, null, null, null, null, null, null, null, null);
-	}
+//	@Test
+//	void testGetObsidianObjectJson() {
+//		Note my_Note = new Note(null, null, null, null, null, null, null, null, null, null, null);
+//		System.out.println("the partial fluree json: "+my_Note.getPartialJSON());
+//
+//	}
 
 }

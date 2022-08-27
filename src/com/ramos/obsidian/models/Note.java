@@ -48,7 +48,7 @@ public final class Note extends BasicObsidianObject{
 	private static List<Header5> contained_header5;
 
 	
-	public Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,List<Note> contained_notes,
+	public Note(LocalDate creation_on, String creator,String located_in,List<Folder> contained_folders,
 			List<Attention> contained_attention, List<Emphasys> contained_emphasys, List<Header1> contained_header1,
 			List<Header2> contained_header2, List<Header3> contained_header3, List<Header4> contained_header4, List<Header5> contained_header5) {
 		super(getName(), getContent());
@@ -226,15 +226,21 @@ public final class Note extends BasicObsidianObject{
 	 
 	//get string with all subfolders
 		public String getObsidianObjectJson(List<? extends BasicObsidianObject> Objects) {
+			String my_folders;
+			String joinedString;
 			
-			final String my_folders;
-			//lambda foreach
-			//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
-			// Convert elements to strings and concatenate them, separated by commas
-			// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
-			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
-			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
-			String joinedString = Objects.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
+			try {
+				//lambda foreach
+				//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
+				// Convert elements to strings and concatenate them, separated by commas
+				// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
+				//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
+				//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
+				joinedString = Objects.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString="";
+			}
 
 			return joinedString;
 		}
@@ -244,7 +250,7 @@ public final class Note extends BasicObsidianObject{
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\""
+							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
 							  getObsidianObjectJson(contained_attention)+
 							  getObsidianObjectJson(contained_emphasys)+
