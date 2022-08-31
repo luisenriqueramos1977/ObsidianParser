@@ -124,9 +124,7 @@ class NoteTest {
 	@AfterAll
 	public static void testGetObsidianObjectJson() {
 		
-		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder", null, 
-								contained_attention, contained_emphasys, contained_header1, contained_header2, 
-								contained_header3, contained_header4,contained_header5, contained_tags);
+		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder");
 
 		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 		//System.out.println("getObsidianObjectJson: "+my_Note.getObsidianObjectJson(contained_attention));

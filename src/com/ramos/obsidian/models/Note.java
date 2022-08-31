@@ -29,6 +29,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -56,24 +59,13 @@ public final class Note {
 
 
 	
-	public Note(String name, String content, LocalDate created_on, String creator,String located_in,Set<Folder> contained_folders,
-			List<Attention> contained_attention, Set<Emphasys> contained_emphasys, Set<Header1> contained_header1,
-			Set<Header2> contained_header2, Set<Header3> contained_header3, Set<Header4> contained_header4, 
-			Set<Header5> contained_header5, Set<Tag> contained_tags) {
+	public Note(String name, String content, LocalDate created_on, String creator,String located_in) {
 		// TODO Auto-generated constructor stub
 		this.name =name;
 		this.content= content;
 		this.created_on = created_on;
 		this.creator = creator;
 		this.located_in = located_in;
-		this.contained_attention = contained_attention;
-		this.contained_emphasys = contained_emphasys;
-		this.contained_header1 =contained_header1 ;
-		this.contained_header2 =contained_header2;
-		this.contained_header3 =contained_header3;
-		this.contained_header4 =contained_header4;
-		this.contained_header5 =contained_header5;
-		this.contained_tags = contained_tags;
 	}
 
 	/**
@@ -538,5 +530,56 @@ public final class Note {
 			joinedString="";
 		}
 		return joinedString;
+	}//end gettag
+	
+	
+	public void generateHeader1() {
+		Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
+		Matcher m = h1.matcher(this.content);
+		while (m.find()) {
+			String[] parts = m.group().split("#");
+			String part1 = parts[0]; // 004
+			String contains = parts[1]; // 034556
+	        UUID uuid = UUID.randomUUID();
+	        String uuidAsString = uuid.toString();
+			//generating uuid for every header
+		    contained_header1.add(new Header1("header1$"+uuidAsString,contains));
+		}
+		if (contained_header1.size()>0) {
+			this.setContained_header1(contained_header1);
+		}
+	}//end generateHeader1()
+	
+	
+	public Set<Header2> getHeader2(String aNote) {
+		Pattern h2 = Pattern.compile("(?m)^#{2}(?!#)(.*)");
+		return null;
 	}
+	
+	public Set<Header3> getHeader3(String aNote) {
+		Pattern h3 = Pattern.compile("(?m)^#{3}(?!#)(.*)");
+		return null;
+	}
+	
+	public Set<Header4> getHeader4(String aNote) {
+		Pattern h4 = Pattern.compile("(?m)^#{4}(?!#)(.*)");
+		return null;
+	}
+	
+	
+	public Set<Header5> getHeader5(String aNote) {
+		Pattern h5 = Pattern.compile("(?m)^#{5}(?!#)(.*)");
+		return null;
+	}
+	
+	//public Set<Header6> getHeader6(String aNote) {
+	//	Pattern h3 = Pattern.compile("(?m)^#{3}(?!#)(.*)");
+	//	return null;
+	//}
+	
+	
+	
+	
+	
+	
 }//end of note
