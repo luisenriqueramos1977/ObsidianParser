@@ -56,6 +56,7 @@ public final class Note {
 	private static Set<Header4> contained_header4= new HashSet<>();
 	private static Set<Header5> contained_header5= new HashSet<>();
 	private static Set<Tag> contained_tags= new HashSet<>();
+	private static Set<Note> contained_notes= new HashSet<>();
 
 
 	
@@ -238,6 +239,13 @@ public final class Note {
 	public static Set<Header5> getContained_header5() {
 		return contained_header5;
 	}
+	
+	/**
+	 * @param contained_header5 the contained_header4 to set
+	 */
+	public static void setContained_header5(Set<Header5> contained_header4) {
+		Note.contained_header5 = contained_header5;
+	}
 
 	/**
 	 * @param contained_header5 the contained_header5 to set
@@ -308,15 +316,20 @@ public final class Note {
 		String joinedString2= null;
 		String joinedString3 = null;
 		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		
+		if (ListofObjects.size()>0) {
+			System.out.println("some attention: "+ListofObjects.size());
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
-		
+			
 		return joinedString3;
 	}
 	
@@ -337,15 +350,17 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
 		
 		return joinedString3;
 	}
@@ -365,15 +380,19 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
 		
 		return joinedString3;
 	}
@@ -395,14 +414,17 @@ public final class Note {
 		String joinedString2= null;
 		String joinedString3 = null;
 		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
 		
 		return joinedString3;
 	}
@@ -423,16 +445,18 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
-		
 		return joinedString3;
 	}
 	
@@ -453,16 +477,18 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
-		
 		return joinedString3;
 	}
 	
@@ -482,14 +508,20 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		joinedString3=joinedString2+"],\n";
+		
 		return joinedString3;
 	}
 	
@@ -508,16 +540,20 @@ public final class Note {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
-		joinedString1 = containment;//"\"contains_attention\"[";
-		try {
-			joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
-		} catch (Exception e) {
-			// TODO: handle exception
+		joinedString1 = containment;
+		
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			
+			joinedString3=joinedString2+"],\n";
+		} else {
 			joinedString3="";
 		}
-		
-		joinedString3=joinedString2+"],\n";
-		
 		return joinedString3;
 	}
 	
@@ -534,12 +570,14 @@ public final class Note {
 	
 	
 	public void generateHeader1() {
+		//System.out.println("entering generateHeader1");
 		Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
 		Matcher m = h1.matcher(this.content);
 		while (m.find()) {
 			String[] parts = m.group().split("#");
 			String part1 = parts[0]; // 004
 			String contains = parts[1]; // 034556
+			//System.out.println("contains = parts[1] "+contains);
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
@@ -551,31 +589,115 @@ public final class Note {
 	}//end generateHeader1()
 	
 	
-	public Set<Header2> getHeader2(String aNote) {
-		Pattern h2 = Pattern.compile("(?m)^#{2}(?!#)(.*)");
-		return null;
+	public void generateHeader2() {
+		Pattern h2 = Pattern.compile("(?m)^#{2}\s+(?!#)(.*)");
+		Matcher m = h2.matcher(this.content);
+		while (m.find()) {
+			String[] parts = m.group().split("##");
+			String part1 = parts[0]; // 004
+			String contains = parts[1]; // 034556
+			//System.out.println("contains = parts[1] "+contains);
+	        UUID uuid = UUID.randomUUID();
+	        String uuidAsString = uuid.toString();
+			//generating uuid for every header
+		    contained_header2.add(new Header2("header2$"+uuidAsString,contains));
+		}
+		if (contained_header2.size()>0) {
+			this.setContained_header2(contained_header2);
+		}
+		
 	}
 	
-	public Set<Header3> getHeader3(String aNote) {
-		Pattern h3 = Pattern.compile("(?m)^#{3}(?!#)(.*)");
-		return null;
+	public void generateHeader3() {
+		Pattern h3 = Pattern.compile("(?m)^#{3}\s+(?!#)(.*)");
+		Matcher m = h3.matcher(this.content);
+		while (m.find()) {
+			String[] parts = m.group().split("###");
+			String part1 = parts[0]; // 004
+			String contains = parts[1]; // 034556
+			//System.out.println("contains = parts[1] "+contains);
+	        UUID uuid = UUID.randomUUID();
+	        String uuidAsString = uuid.toString();
+			//generating uuid for every header
+		    contained_header3.add(new Header3("header3$"+uuidAsString,contains));
+		}
+		if (contained_header3.size()>0) {
+			this.setContained_header3(contained_header3);
+		}
+
 	}
 	
-	public Set<Header4> getHeader4(String aNote) {
-		Pattern h4 = Pattern.compile("(?m)^#{4}(?!#)(.*)");
-		return null;
+	public void generateHeader4() {
+		Pattern h4 = Pattern.compile("(?m)^#{4}\s+(?!#)(.*)");
+		Matcher m = h4.matcher(this.content);
+		while (m.find()) {
+			String[] parts = m.group().split("####");
+			String part1 = parts[0]; // 004
+			String contains = parts[1]; // 034556
+			//System.out.println("contains = parts[1] "+contains);
+	        UUID uuid = UUID.randomUUID();
+	        String uuidAsString = uuid.toString();
+			//generating uuid for every header
+		    contained_header4.add(new Header4("header4$"+uuidAsString,contains));
+		}
+		if (contained_header4.size()>0) {
+			this.setContained_header4(contained_header4);
+		}
 	}
 	
 	
-	public Set<Header5> getHeader5(String aNote) {
-		Pattern h5 = Pattern.compile("(?m)^#{5}(?!#)(.*)");
-		return null;
+	public void generateHeader5() {
+		Pattern h5 = Pattern.compile("(?m)^#{5}\s+(?!#)(.*)");
+		Matcher m = h5.matcher(this.content);
+		while (m.find()) {
+			String[] parts = m.group().split("#####");
+			String part1 = parts[0]; // 004
+			String contains = parts[1]; // 034556
+			//System.out.println("contains = parts[1] "+contains);
+	        UUID uuid = UUID.randomUUID();
+	        String uuidAsString = uuid.toString();
+			//generating uuid for every header
+		    contained_header5.add(new Header5("header5$"+uuidAsString,contains));
+		}
+		if (contained_header5.size()>0) {
+			this.setContained_header5(contained_header5);
+		}
+
 	}
+	
+	public void generateTags() {
+		//System.out.println("entering generateHeader1");
+		Pattern h1 = Pattern.compile("\\w+\\#");
+		Matcher m = h1.matcher(this.content);
+		while (m.find()) {
+//			String[] parts = m.group().split("#");
+//			String part1 = parts[0]; // 004
+//			String contains = parts[1]; // 034556
+//			//System.out.println("contains = parts[1] "+contains);
+//	        UUID uuid = UUID.randomUUID();
+//	        String uuidAsString = uuid.toString();
+//			//generating uuid for every header
+//	        contained_tags.add(new Tag("tag$"+uuidAsString,contains));
+		}
+//		if (contained_tags.size()>0) {
+//			this.setContained_tags(contained_tags);
+//		}
+	}//end generateHeader1()
+	
+	public void generateNoteLinks() {
+		Pattern note_link = Pattern.compile("\\[\\[(.+?)\\]\\]");
+		Matcher m = note_link.matcher(this.content);
+		while (m.find()) {
+			System.out.println(" notes linked: "+m.group(1)); 
+		}
+	}//end generateNoteLinks()
 	
 	//public Set<Header6> getHeader6(String aNote) {
 	//	Pattern h3 = Pattern.compile("(?m)^#{3}(?!#)(.*)");
 	//	return null;
 	//}
+	
+	
 	
 	
 	

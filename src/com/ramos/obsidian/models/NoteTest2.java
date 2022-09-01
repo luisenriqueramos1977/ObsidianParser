@@ -46,13 +46,17 @@ class NoteTest2 {
 		private static Set<Tag> contained_tags= new HashSet<>();
 	
 	//create note string
-		final String content = "#heading 1 \n"
-				 + "#second heading 1 \n"
+		final String content = "# heading 1 \n"
+				 + "# second heading 1 \n"
 			     + "bla bla bla\n"
-			     + "### heading 3 djdjdj\n"
-			     + "bla bla bla\n"
-			     + "## heading 2 bal;kasddfas\n"
-			     + "fbla bla bla";
+			     + "fbla bla bla [[note 2]] \n"
+			     + "### heading 3 djdjdj \n"
+			     + "bla [[note 3]] bla bla \n"
+			     + "## heading 2 bal;kasddfas \n"
+			     + "fbla bla bla \n"
+		         + "fbla [[note 4]] bla bla \n"
+				+ "#happy, #new, #year \n";
+		
 	
 	//create note
 		
@@ -65,7 +69,14 @@ class NoteTest2 {
 	void testGetHeader1() {
 		my_Note.setContent(content);
 		my_Note.generateHeader1();
-		System.out.println("headers 1 generated");
+		my_Note.generateHeader2();
+		my_Note.generateHeader3();
+		my_Note.generateHeader4();
+		my_Note.generateHeader5();
+		my_Note.generateNoteLinks();
+		my_Note.generateTags();
+
+		System.out.println("generated all elements");
 		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 	}
 
