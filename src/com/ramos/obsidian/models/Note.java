@@ -33,6 +33,10 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.json.JSONObject;
+import org.json.JSONException;
+
+import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
 
 /**
  * @author Luis Ramos
@@ -665,11 +669,54 @@ public final class Note {
 
 	}
 	
-	public void generateTags() {
-		//System.out.println("entering generateHeader1");
-		Pattern h1 = Pattern.compile("\\w+\\#");
-		Matcher m = h1.matcher(this.content);
+	public void generateTags(String content_type, String target_url, String http_method) {
+		//Pattern pretags = Pattern.compile("(?m)^#(?!#)(.*)");
+		String consulting_response;
+		Pattern pretags = Pattern.compile("#(\\w+)");
+		Matcher m = pretags.matcher(this.content);
 		while (m.find()) {
+			System.out.println(" found tags: "+m.group(1)); 
+			//creating the http connection
+			try {
+				String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
+				System.out.println("http body: "+http_body);
+				consulting_response = HttpURLFlureeDBConnection.
+						sendOkHttpClientPost(content_type,target_url,http_method,http_body);
+				
+				System.out.println("the response: "+consulting_response);
+				//generating json object for processing
+				 try {
+					 	Pattern pattern1 = Pattern.compile("\\[\\d+\\]");
+				        Matcher matcher1 = pattern1.matcher(consulting_response);
+				        //checking matches
+				         while (matcher1.find()) {
+				             System.out.println("the fluree key: "+ matcher1.group(0) );
+				             //parsing the string
+				             String fluree_id = matcher1.group(0).substring(matcher1.group(0).indexOf("[")+1, matcher1.group(0).indexOf("]"));
+				             System.out.println("fluree_id: "+fluree_id);
+						}
+			        } catch (JSONException err) {
+			            System.out.println("Exception : "+err.toString());
+			        }
+
+				
+				
+			} catch (Exception e) {
+			    e.printStackTrace();
+			}
+			
+			//testing if the element is in db
+//			Pattern posttags = Pattern.compile("#(\\w+)");
+//			Matcher m2 = posttags.matcher(m.group(0));
+//			//second matching
+//			while (m2.find()) {
+//				try {
+//					System.out.println(" found second tags: "+m2.group(0)); 
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//			}
+			
 //			String[] parts = m.group().split("#");
 //			String part1 = parts[0]; // 004
 //			String contains = parts[1]; // 034556

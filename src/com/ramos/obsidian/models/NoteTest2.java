@@ -47,7 +47,7 @@ class NoteTest2 {
 	
 	//create note string
 		final String content = "# heading 1 \n"
-				 + "# second heading 1 \n"
+				 + "# second heading 1 #testingtag \n"
 			     + "bla bla bla\n"
 			     + "fbla bla bla [[note 2]] \n"
 			     + "### heading 3 djdjdj \n"
@@ -68,14 +68,15 @@ class NoteTest2 {
 	@Order(1)
 	void testGetHeader1() {
 		my_Note.setContent(content);
-		my_Note.generateHeader1();
-		my_Note.generateHeader2();
-		my_Note.generateHeader3();
-		my_Note.generateHeader4();
-		my_Note.generateHeader5();
-		my_Note.generateNoteLinks();
-		my_Note.generateTags();
-
+//		my_Note.generateHeader1();
+//		my_Note.generateHeader2();
+//		my_Note.generateHeader3();
+//		my_Note.generateHeader4();
+//		my_Note.generateHeader5();
+//		my_Note.generateNoteLinks();
+		my_Note.generateTags("text/plain", 
+				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
+				"POST");
 		System.out.println("generated all elements");
 		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 	}
