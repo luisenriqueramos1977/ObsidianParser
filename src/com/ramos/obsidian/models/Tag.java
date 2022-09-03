@@ -33,10 +33,12 @@ public final class Tag{
 	
 	public String name;
 	public String content;
+	public String fluree_id;
 
-    public Tag(String name, String content) {
+    public Tag(String name, String content, String fluree_id) {
         this.name = name;
 		this.content = content;
+		this.fluree_id = fluree_id;
     }
 
 	
@@ -70,7 +72,7 @@ public final class Tag{
 
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		final String a_json = "{\"_id\""+":"+"\""+  this.getName()+"\","
+		final String a_json = "{\"_id\""+":"+"\""+ "Tag$"+ this.getName()+"\","
 							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
 							  "}\n";
@@ -80,6 +82,24 @@ public final class Tag{
 	public String getFullJSON() {
 		return "["+getPartialJSON()+"]";
 	}
+
+
+	/**
+	 * @return the fluree_id
+	 */
+	public String getFluree_id() {
+		return fluree_id;
+	}
+
+
+	/**
+	 * @param fluree_id the fluree_id to set
+	 */
+	public void setFluree_id(String fluree_id) {
+		this.fluree_id = fluree_id;
+	}
+	
+	
 
 }
 

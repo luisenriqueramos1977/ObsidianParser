@@ -675,60 +675,50 @@ public final class Note {
 		Pattern pretags = Pattern.compile("#(\\w+)");
 		Matcher m = pretags.matcher(this.content);
 		while (m.find()) {
-			System.out.println(" found tags: "+m.group(1)); 
+			//System.out.println(" found tags: "+m.group(1)); 
 			//creating the http connection
 			try {
 				String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
-				System.out.println("http body: "+http_body);
+				//System.out.println("http body: "+http_body);
 				consulting_response = HttpURLFlureeDBConnection.
 						sendOkHttpClientPost(content_type,target_url,http_method,http_body);
 				
-				System.out.println("the response: "+consulting_response);
+				//System.out.println("the response: "+consulting_response);
 				//generating json object for processing
 				 try {
 					 	Pattern pattern1 = Pattern.compile("\\[\\d+\\]");
 				        Matcher matcher1 = pattern1.matcher(consulting_response);
 				        //checking matches
+				        if (matcher1.find()) {
+							 System.out.println("something found");
+						} else {
+							 System.out.println("nothing found");
+							 //creating the tag object in db
+								final String an_json_tag = "{\"_id\""+":"+"\""+ m.group(1)+"\","
+										  +"\"textContent\""+":"+"\""+m.group(1)+"\","
+										  +"\"name\""+":"+"\""+m.group(1)+"\""+
+										  "}\n";
+								 System.out.println("tag to be created: "+an_json_tag);
+
+								
+							 
+							 //Tag new_tag = new Tag(http_body, http_body, http_body);
+							 
+						}
 				         while (matcher1.find()) {
-				             System.out.println("the fluree key: "+ matcher1.group(0) );
+				             //System.out.println("the fluree key: "+ matcher1.group(0) );
 				             //parsing the string
 				             String fluree_id = matcher1.group(0).substring(matcher1.group(0).indexOf("[")+1, matcher1.group(0).indexOf("]"));
-				             System.out.println("fluree_id: "+fluree_id);
+				             //System.out.println("fluree_id: "+fluree_id);
 						}
 			        } catch (JSONException err) {
 			            System.out.println("Exception : "+err.toString());
 			        }
-
-				
-				
 			} catch (Exception e) {
 			    e.printStackTrace();
 			}
-			
-			//testing if the element is in db
-//			Pattern posttags = Pattern.compile("#(\\w+)");
-//			Matcher m2 = posttags.matcher(m.group(0));
-//			//second matching
-//			while (m2.find()) {
-//				try {
-//					System.out.println(" found second tags: "+m2.group(0)); 
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//			}
-			
-//			String[] parts = m.group().split("#");
-//			String part1 = parts[0]; // 004
-//			String contains = parts[1]; // 034556
-//			//System.out.println("contains = parts[1] "+contains);
-//	        UUID uuid = UUID.randomUUID();
-//	        String uuidAsString = uuid.toString();
-//			//generating uuid for every header
-//	        contained_tags.add(new Tag("tag$"+uuidAsString,contains));
+
 		}
-//		if (contained_tags.size()>0) {
-//			this.setContained_tags(contained_tags);
-//		}
 	}//end generateHeader1()
 	
 	public void generateNoteLinks() {
