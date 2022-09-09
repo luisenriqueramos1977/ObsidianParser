@@ -31,17 +31,39 @@ package com.ramos.obsidian.models;
 
 public final class Tag{
 	
-	public String name;
-	public String content;
-	public String fluree_id;
+	private static String name;
+	private static String content;
+	private static long fluree_id;
+	private static Boolean  exists_in_fluree;
 
-    public Tag(String name, String content, String fluree_id) {
+    public Tag(String name, String content, long fluree_id, Boolean exists_in_fluree) {
         this.name = name;
 		this.content = content;
 		this.fluree_id = fluree_id;
+		this.exists_in_fluree=exists_in_fluree;
     }
+    
+    
 
 	
+	/**
+	 * @return the exists_in_fluree
+	 */
+	public static Boolean getExists_in_fluree() {
+		return exists_in_fluree;
+	}
+
+
+	/**
+	 * @param exists_in_fluree the exists_in_fluree to set
+	 */
+	public static void setExists_in_fluree(Boolean exists_in_fluree) {
+		Tag.exists_in_fluree = exists_in_fluree;
+	}
+
+
+
+
 	/**
 	 * @return the name
 	 */
@@ -87,7 +109,7 @@ public final class Tag{
 	/**
 	 * @return the fluree_id
 	 */
-	public String getFluree_id() {
+	public long getFluree_id() {
 		return fluree_id;
 	}
 
@@ -95,10 +117,9 @@ public final class Tag{
 	/**
 	 * @param fluree_id the fluree_id to set
 	 */
-	public void setFluree_id(String fluree_id) {
+	public void setFluree_id(long fluree_id) {
 		this.fluree_id = fluree_id;
 	}
-	
 	
 
 }

@@ -23,11 +23,17 @@
  */
 package com.ramos.obsidian.models;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -61,17 +67,41 @@ public final class Note {
 	private static Set<Header5> contained_header5= new HashSet<>();
 	private static Set<Tag> contained_tags= new HashSet<>();
 	private static Set<Note> contained_notes= new HashSet<>();
+	private static Map<String, String> tags_map = new HashMap<String, String>();
+	private static Boolean full_notes_links;
+
 
 
 	
-	public Note(String name, String content, LocalDate created_on, String creator,String located_in) {
+	public Note(String name, String content, LocalDate created_on, String creator,String located_in, Boolean full_notes_links) {
 		// TODO Auto-generated constructor stub
 		this.name =name;
 		this.content= content;
 		this.created_on = created_on;
 		this.creator = creator;
 		this.located_in = located_in;
+		this.full_notes_links=false;
 	}
+
+	
+	
+	/**
+	 * @return the tags_map
+	 */
+	public static Map<String, String> getTags_map() {
+		return tags_map;
+	}
+
+
+
+	/**
+	 * @param tags_map the tags_map to set
+	 */
+	public static void setTags_map(Map<String, String> tags_map) {
+		Note.tags_map = tags_map;
+	}
+
+
 
 	/**
 	 * @return the name
@@ -288,9 +318,9 @@ public final class Note {
 	
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		final String a_json = "\n [{\"_id: \""+ this.getName()+"\",\n"+
+		final String a_json = "\n [{\"_id\": \""+ this.getName()+"\",\n"+
 							  "\"textContent\""+":"+"\""+this.getContent()+"\",\n"+
-							  "\"name\""+":"+"\""+this.getName()+"\",\n"+
+							  "\"note_name\""+":"+"\""+this.getName()+"\",\n"+
 							  "\"created_on\""+":"+"\""+this.getCreated_on()+"\",\n"+
 							  getAttentionRelationJson(contained_attention, "\"contained_attention\":[")+
 							  getEmphasysRelationJson(contained_emphasys, "\"contained_emphasys\":[")+ 
@@ -299,8 +329,7 @@ public final class Note {
 							  getHeader3RelationJson(contained_header3, "\"contained_header3\":[")+
 							  getHeader4RelationJson(contained_header4, "\"contained_header4\":[")+
 							  getHeader5RelationJson(contained_header5, "\"contained_header5\":[")+
-							  getTagRelationJson(contained_tags, "\"contained_tags\":[")+
-							  "},\n"+
+							  getTagRelationJson(tags_map, "\"contained_tags\":[")+
 							  getAttentionJson(contained_attention)+
 							  getEmphasysJson(contained_emphasys)+
 							  getHeader1Json(contained_header1)+
@@ -405,6 +434,9 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			if (!joinedString.isBlank()) {
+				return joinedString+",";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -438,6 +470,9 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			if (!joinedString.isBlank()) {
+				return joinedString+",";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -470,6 +505,9 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			if (!joinedString.isBlank()) {
+				return joinedString+",";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -485,6 +523,7 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
@@ -501,6 +540,9 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			if (!joinedString.isBlank()) {
+				return joinedString+",";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -533,6 +575,9 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			if (!joinedString.isBlank()) {
+				return joinedString+",";
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -540,7 +585,7 @@ public final class Note {
 		return joinedString;
 	}
 	
-	private String getTagRelationJson(Set<Tag> ListofObjects, String containment) {
+	private String getTagRelationJson(Map <String,String> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -548,7 +593,10 @@ public final class Note {
 		
 		if (ListofObjects.size()>0) {
 			try {
-				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				joinedString2 = joinedString1+ListofObjects.entrySet()
+	                     .stream()
+	                     .map(e -> e.getValue())
+	                     .collect(Collectors.joining(","));
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
@@ -558,6 +606,7 @@ public final class Note {
 		} else {
 			joinedString3="";
 		}
+				
 		return joinedString3;
 	}
 	
@@ -669,64 +718,91 @@ public final class Note {
 
 	}
 	
-	public void generateTags(String content_type, String target_url, String http_method) {
-		//Pattern pretags = Pattern.compile("(?m)^#(?!#)(.*)");
+	public void generateTags(String content_type, String query_url, String transaction_url, String http_method) {
+
 		String consulting_response;
+		String transaction_response;
+		//contained_tags=null;
+		List<String> fucking_tags = new ArrayList<String>();
+		Set<Tag> fucking_tags2 = new HashSet<Tag>();
+		Map<String, String> tags_map = new HashMap<String, String>();
 		Pattern pretags = Pattern.compile("#(\\w+)");
 		Matcher m = pretags.matcher(this.content);
 		while (m.find()) {
-			//System.out.println(" found tags: "+m.group(1)); 
-			//creating the http connection
-			try {
-				String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
-				//System.out.println("http body: "+http_body);
-				consulting_response = HttpURLFlureeDBConnection.
-						sendOkHttpClientPost(content_type,target_url,http_method,http_body);
-				
-				//System.out.println("the response: "+consulting_response);
-				//generating json object for processing
-				 try {
-					 	Pattern pattern1 = Pattern.compile("\\[\\d+\\]");
-				        Matcher matcher1 = pattern1.matcher(consulting_response);
-				        //checking matches
-				        if (matcher1.find()) {
-							 System.out.println("something found");
-						} else {
-							 System.out.println("nothing found");
-							 //creating the tag object in db
-								final String an_json_tag = "{\"_id\""+":"+"\""+ m.group(1)+"\","
-										  +"\"textContent\""+":"+"\""+m.group(1)+"\","
-										  +"\"name\""+":"+"\""+m.group(1)+"\""+
-										  "}\n";
-								 System.out.println("tag to be created: "+an_json_tag);
 
-								
-							 
-							 //Tag new_tag = new Tag(http_body, http_body, http_body);
-							 
-						}
-				         while (matcher1.find()) {
-				             //System.out.println("the fluree key: "+ matcher1.group(0) );
-				             //parsing the string
-				             String fluree_id = matcher1.group(0).substring(matcher1.group(0).indexOf("[")+1, matcher1.group(0).indexOf("]"));
-				             //System.out.println("fluree_id: "+fluree_id);
-						}
-			        } catch (JSONException err) {
-			            System.out.println("Exception : "+err.toString());
-			        }
-			} catch (Exception e) {
-			    e.printStackTrace();
-			}
+				try {
+					String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
+					consulting_response = HttpURLFlureeDBConnection.
+							sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+					 try {
+						 	Pattern pattern1 = Pattern.compile("\\[(\\d+)\\]");
+					        Matcher matcher1 = pattern1.matcher(consulting_response);
+					        //checking matches
+					        if (matcher1.find()) {
+							     HashMap result = new HashMap<>();
+								 tags_map.put(m.group(1), matcher1.group(1));
+								 //we found the tag, thus we get its fluree id, and set exist in fluree to true
+							} else {
+								 System.out.println("tag " +m.group(1)+ " not found");
+								 //creating the tag object in db
+									final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
+											  +"\"textContent\""+":"+"\""+m.group(1)+"\"}]\n";
+									 //request to create the tag
+									 transaction_response = HttpURLFlureeDBConnection.
+												sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
+									  //converting to json to get fluree id
+									  JSONObject tag_json = new JSONObject(transaction_response);
+									  tags_map.put(m.group(1), Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$cancer")));
+							}
 
+				        } catch (JSONException err) {
+				            System.out.println("Exception : "+err.toString());
+				        }//end of second try catch
+				} catch (Exception e) {
+				    e.printStackTrace();
+				}//end of first try catch
+		}//end while of m
+		
+		//adding tags to note
+		if (tags_map.size()>0) {
+			this.setTags_map(tags_map);
 		}
-	}//end generateHeader1()
+		
+	}//end generatetags()
 	
-	public void generateNoteLinks() {
+	public void generateNoteLinks(String content_type, String query_url, String http_method) {
+		String consulting_response;
 		Pattern note_link = Pattern.compile("\\[\\[(.+?)\\]\\]");
 		Matcher m = note_link.matcher(this.content);
 		while (m.find()) {
 			System.out.println(" notes linked: "+m.group(1)); 
-		}
+			//querying if to be linked note exists in db.
+			try {
+				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", m.group(1));
+				System.out.println("http body for note: "+http_body);
+				consulting_response = HttpURLFlureeDBConnection.
+						sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+				//second try
+				try {
+					Pattern pattern1 = Pattern.compile("\\[(\\d+)\\]");
+			        Matcher matcher1 = pattern1.matcher(consulting_response);
+			        if (matcher1.find()) {
+						 System.out.println("note not found");
+//					     HashMap result = new HashMap<>();
+//						 tags_map.put(m.group(1), matcher1.group(1));
+						 //we found the tag, thus we get its fluree id, and set exist in fluree to true
+			        	
+					} else {
+						 System.out.println("note not found");
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}//end second try
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}//end first try catch
+		}//end while m.find
 	}//end generateNoteLinks()
 	
 	//public Set<Header6> getHeader6(String aNote) {
@@ -735,7 +811,7 @@ public final class Note {
 	//}
 	
 	
-	
+
 	
 	
 	

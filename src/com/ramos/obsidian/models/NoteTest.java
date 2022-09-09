@@ -117,14 +117,14 @@ class NoteTest {
     void testListtags(String name, String contains) {
 	    assertNotNull(name);
 	    assertNotNull(contains);
-	    contained_tags.add(new Tag(name,contains));
+	    contained_tags.add(new Tag(name,contains,0,false));
     }
 
 	@Test
 	@AfterAll
 	public static void testGetObsidianObjectJson() {
 		
-		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder");
+		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder",false);
 
 		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 		//System.out.println("getObsidianObjectJson: "+my_Note.getObsidianObjectJson(contained_attention));
