@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,6 +69,7 @@ public final class Note {
 	private static Set<Tag> contained_tags= new HashSet<>();
 	private static Set<Note> contained_notes= new HashSet<>();
 	private static Map<String, String> tags_map = new HashMap<String, String>();
+	private static List<String> linked_notes = new ArrayList<String>();
 	private static Boolean full_notes_links;
 
 
@@ -318,30 +320,155 @@ public final class Note {
 	
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		final String a_json = "\n [{\"_id\": \""+ this.getName()+"\",\n"+
-							  "\"textContent\""+":"+"\""+this.getContent()+"\",\n"+
-							  "\"note_name\""+":"+"\""+this.getName()+"\",\n"+
-							  "\"created_on\""+":"+"\""+this.getCreated_on()+"\",\n"+
-							  getAttentionRelationJson(contained_attention, "\"contained_attention\":[")+
-							  getEmphasysRelationJson(contained_emphasys, "\"contained_emphasys\":[")+ 
-							  getHeader1RelationJson(contained_header1, "\"contained_header1\":[")+
-							  getHeader2RelationJson(contained_header2, "\"contained_header2\":[")+
-							  getHeader3RelationJson(contained_header3, "\"contained_header3\":[")+
-							  getHeader4RelationJson(contained_header4, "\"contained_header4\":[")+
-							  getHeader5RelationJson(contained_header5, "\"contained_header5\":[")+
-							  getTagRelationJson(tags_map, "\"contained_tags\":[")+
-							  getAttentionJson(contained_attention)+
-							  getEmphasysJson(contained_emphasys)+
-							  getHeader1Json(contained_header1)+
-							  getHeader2Json(contained_header2)+
-							  getHeader3Json(contained_header3)+
-							  getHeader4Json(contained_header4)+
-							  getHeader5Json(contained_header5)+
-							  getTagJson(contained_tags)+
-							  "]";
-		return a_json;
+		LinkedList<String> fluree_links=new LinkedList<String>();  
+		LinkedList<String> fluree_bodies=new LinkedList<String>();  
+
+		String json_links;
+		String json_bodies;
+		String fluree_head_links;
 		
-	}
+		String fluree_string_head = "\n [{\"_id\": \"Note$"+this.getName()+"\",\n"+
+				  "\"text_content\""+":"+"\""+this.getContent().replace("\n", "").replace("\r", "")+"\",\n"+
+				  "\"note_name\""+":"+"\""+this.getName()+"\",\n"+
+				  "\"created\""+":"+"\""+this.getCreated_on()+"\"";
+		
+		//adding attentions
+		if (!contained_attention.isEmpty()) {
+			if (contained_attention.size()>1) {
+				fluree_links.add(getAttentionRelationJson(contained_attention, "\"contains_attention\":["));
+			} else {
+				fluree_links.add(getAttentionRelationJson(contained_attention, "\"contains_attention\":"));
+			}
+			
+			fluree_bodies.add(getAttentionJson(contained_attention));
+			
+		} else {
+			System.out.println("contained_attention.isEmpty()***: "+contained_attention.isEmpty());
+		}
+		
+		//adding emphasys
+		if (!contained_emphasys.isEmpty()) {
+			if (contained_emphasys.size()>1) {
+				fluree_links.add(getEmphasysRelationJson(contained_emphasys, "\"contains_emphasys\":["));
+			} else {
+				fluree_links.add(getEmphasysRelationJson(contained_emphasys, "\"contains_emphasys\":"));
+			}
+			fluree_bodies.add(getEmphasysJson(contained_emphasys));
+		} else {
+			System.out.println("contained_emphasys.isEmpty()***: "+contained_emphasys.isEmpty());
+		}
+		
+		//adding header1
+		if (!contained_header1.isEmpty()) {
+			if (contained_header1.size()>1) {
+				fluree_links.add(getHeader1RelationJson(contained_header1, "\"contains_header1\":["));
+			} else {
+				fluree_links.add(getHeader1RelationJson(contained_header1, "\"contains_header1\":"));
+			}
+			fluree_bodies.add(getHeader1Json(contained_header1));
+		} else {
+			System.out.println("contained_header1.isEmpty()***: "+contained_header1.isEmpty());
+		}
+		
+		//adding header2
+		if (!contained_header2.isEmpty()) {
+			if (contained_header2.size()>1) {
+				fluree_links.add(getHeader2RelationJson(contained_header2, "\"contains_header2\":["));
+			} else {
+				fluree_links.add(getHeader2RelationJson(contained_header2, "\"contains_header2\":"));
+			}
+			fluree_bodies.add(getHeader2Json(contained_header2));
+		} else {
+			System.out.println("contained_header2.isEmpty()***: "+contained_header2.isEmpty());
+		}
+		
+		//adding header3
+		if (!contained_header3.isEmpty()) {
+			if (contained_header3.size()>1) {
+				fluree_links.add(getHeader3RelationJson(contained_header3, "\"contains_header3\":["));
+			} else {
+				fluree_links.add( getHeader3RelationJson(contained_header3, "\"contains_header3\":"));
+			}
+			fluree_bodies.add(getHeader3Json(contained_header3));
+		} else {
+			System.out.println("contained_header3.isEmpty()***: "+contained_header3.isEmpty());
+		}
+		
+		//adding header4
+		if (!contained_header4.isEmpty()) {
+			if (contained_header4.size()>1) {
+				fluree_links.add(getHeader4RelationJson(contained_header4, "\"contains_header4\":["));
+			} else {
+				fluree_links.add(getHeader4RelationJson(contained_header4, "\"contains_header4\":"));
+			}
+			fluree_bodies.add(getHeader4Json(contained_header4));
+		} else {
+			System.out.println("contained_header4.isEmpty()***: "+contained_header4.isEmpty());
+		}
+		
+		
+		//adding header5
+		if (!contained_header5.isEmpty()) {
+			if (contained_header5.size()>1) {
+				fluree_links.add(getHeader5RelationJson(contained_header5, "\"contains_header5\":["));
+			} else {
+				fluree_links.add(getHeader5RelationJson(contained_header5, "\"contains_header5\":"));
+			}
+			fluree_bodies.add(getHeader5Json(contained_header5));
+		} else {
+			System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
+		}
+		
+		//adding tags relations links
+		if (!tags_map.isEmpty()) {
+
+			if (tags_map.size()>1) {
+				fluree_links.add(getTagRelationJson(tags_map, "\"contains_tag\":["));
+			} else {
+				fluree_links.add(getTagRelationJson(tags_map, "\"contains_tag\":"));
+			}
+			fluree_bodies.add(getTagJson(contained_tags));
+		} else {
+			System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
+		}
+		
+		
+		System.out.println("fluree_links.size()***: "+fluree_links.size());
+		//if fluree array is not larger than 1
+		String test_string = null;
+		if (fluree_links.isEmpty()) {
+			 System.out.println("final fluree string: "+fluree_string_head +"}]");
+			 return fluree_string_head +"}]";
+		} else {
+			//streaming to generate the header string
+			fluree_head_links = fluree_links.stream().map(n -> n.toString()).collect(Collectors.joining(",\n"));
+			 System.out.println("fluree_head_links : "+fluree_head_links );
+			 if (fluree_bodies.isEmpty()) {
+				return fluree_string_head +fluree_head_links+"}]";
+			}
+		}
+		//end fluree_array.size()==1
+		
+		//System.out.println("fluree_bodies.size()***: "+fluree_bodies.size());
+		//if fluree array is not larger than 1
+		if (fluree_bodies.isEmpty()) {
+			 //System.out.println("final fluree string: "+fluree_string_head +"}]");
+			 return fluree_string_head +fluree_head_links+"}]";
+		} else {
+			//streaming to generate the header string
+			String fluree_bodies_string = fluree_bodies.stream().map(n -> n).collect(Collectors.joining(",\n"));
+			
+		    		    
+			String body_result = null;
+
+			//check end of string
+		    body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
+			
+			System.out.println("fluree_bodies_string : "+body_result);
+			 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"]";
+		    }
+		    //end fluree_array.size()==1
+	    }//fluree_bodies.isEmpty()
 	
 	
 	private String getAttentionRelationJson(List<Attention> ListofObjects, String containment) {
@@ -351,14 +478,18 @@ public final class Note {
 		joinedString1 = containment;//"\"contains_attention\"[";
 		
 		if (ListofObjects.size()>0) {
-			System.out.println("some attention: "+ListofObjects.size());
+			//System.out.println("some attention: "+ListofObjects.size());
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"],";
+				} else {
+					joinedString3=joinedString2+",";
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -370,7 +501,7 @@ public final class Note {
 		String joinedString;
 	
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -387,6 +518,11 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"],";
+				} else {
+					joinedString3=joinedString2+",";
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
@@ -401,7 +537,8 @@ public final class Note {
 	private String getEmphasysJson(Set<Emphasys> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -418,11 +555,16 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
+
 		} else {
 			joinedString3="";
 		}
@@ -433,9 +575,9 @@ public final class Note {
 	private String getHeader1Json(Set<Header1> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 			if (!joinedString.isBlank()) {
-				return joinedString+",";
+				return joinedString;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -453,11 +595,15 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -469,9 +615,9 @@ public final class Note {
 	private String getHeader2Json(Set<Header2> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 			if (!joinedString.isBlank()) {
-				return joinedString+",";
+				return joinedString;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -488,11 +634,15 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -504,9 +654,9 @@ public final class Note {
 	private String getHeader3Json(Set<Header3> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 			if (!joinedString.isBlank()) {
-				return joinedString+",";
+				return joinedString;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -523,12 +673,16 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 				
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -539,9 +693,9 @@ public final class Note {
 	private String getHeader4Json(Set<Header4> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 			if (!joinedString.isBlank()) {
-				return joinedString+",";
+				return joinedString;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -559,11 +713,15 @@ public final class Note {
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -574,9 +732,9 @@ public final class Note {
 	private String getHeader5Json(Set<Header5> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 			if (!joinedString.isBlank()) {
-				return joinedString+",";
+				return joinedString;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -597,12 +755,16 @@ public final class Note {
 	                     .stream()
 	                     .map(e -> e.getValue())
 	                     .collect(Collectors.joining(","));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
 			} catch (Exception e) {
 				// TODO: handle exception
 				joinedString3="";
 			}
 			
-			joinedString3=joinedString2+"],\n";
 		} else {
 			joinedString3="";
 		}
@@ -613,13 +775,42 @@ public final class Note {
 	private String getTagJson(Set<Tag> ListofObjects) {
 		String joinedString;
 		try {
-			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(","));
+			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
 		}
 		return joinedString;
 	}//end gettag
+	
+	
+	//get linked notes
+	
+	private String getNoteRelationJson(List <String> ListofObjects, String containment) {
+		String joinedString1= null;
+		String joinedString2= null;
+		String joinedString3 = null;
+		joinedString1 = containment;
+		
+		if (ListofObjects.size()>0) {
+			try {
+				joinedString2 = joinedString1+ListofObjects.stream().collect(Collectors.joining(","));
+				if (ListofObjects.size()>1) {
+					joinedString3=joinedString2+"]";
+				} else {
+					joinedString3=joinedString2;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				joinedString3="";
+			}
+			
+		} else {
+			joinedString3="";
+		}
+				
+		return joinedString3;
+	}
 	
 	
 	public void generateHeader1() {
@@ -634,7 +825,7 @@ public final class Note {
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
-		    contained_header1.add(new Header1("header1$"+uuidAsString,contains));
+		    contained_header1.add(new Header1("Header1$"+uuidAsString,contains));
 		}
 		if (contained_header1.size()>0) {
 			this.setContained_header1(contained_header1);
@@ -653,7 +844,7 @@ public final class Note {
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
-		    contained_header2.add(new Header2("header2$"+uuidAsString,contains));
+		    contained_header2.add(new Header2("Header2$"+uuidAsString,contains));
 		}
 		if (contained_header2.size()>0) {
 			this.setContained_header2(contained_header2);
@@ -672,7 +863,7 @@ public final class Note {
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
-		    contained_header3.add(new Header3("header3$"+uuidAsString,contains));
+		    contained_header3.add(new Header3("Header3$"+uuidAsString,contains));
 		}
 		if (contained_header3.size()>0) {
 			this.setContained_header3(contained_header3);
@@ -691,7 +882,7 @@ public final class Note {
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
-		    contained_header4.add(new Header4("header4$"+uuidAsString,contains));
+		    contained_header4.add(new Header4("Header4$"+uuidAsString,contains));
 		}
 		if (contained_header4.size()>0) {
 			this.setContained_header4(contained_header4);
@@ -710,7 +901,7 @@ public final class Note {
 	        UUID uuid = UUID.randomUUID();
 	        String uuidAsString = uuid.toString();
 			//generating uuid for every header
-		    contained_header5.add(new Header5("header5$"+uuidAsString,contains));
+		    contained_header5.add(new Header5("Header5$"+uuidAsString,contains));
 		}
 		if (contained_header5.size()>0) {
 			this.setContained_header5(contained_header5);
@@ -723,8 +914,6 @@ public final class Note {
 		String consulting_response;
 		String transaction_response;
 		//contained_tags=null;
-		List<String> fucking_tags = new ArrayList<String>();
-		Set<Tag> fucking_tags2 = new HashSet<Tag>();
 		Map<String, String> tags_map = new HashMap<String, String>();
 		Pattern pretags = Pattern.compile("#(\\w+)");
 		Matcher m = pretags.matcher(this.content);
@@ -746,7 +935,7 @@ public final class Note {
 								 System.out.println("tag " +m.group(1)+ " not found");
 								 //creating the tag object in db
 									final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
-											  +"\"textContent\""+":"+"\""+m.group(1)+"\"}]\n";
+											  +"\"text_content\""+":"+"\""+m.group(1)+"\"}]\n";
 									 //request to create the tag
 									 transaction_response = HttpURLFlureeDBConnection.
 												sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
@@ -775,22 +964,23 @@ public final class Note {
 		Pattern note_link = Pattern.compile("\\[\\[(.+?)\\]\\]");
 		Matcher m = note_link.matcher(this.content);
 		while (m.find()) {
-			System.out.println(" notes linked: "+m.group(1)); 
+			System.out.println(" notes linked: "+m.group(1).replaceAll("\\s+","_")); 
 			//querying if to be linked note exists in db.
 			try {
-				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", m.group(1));
+				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", m.group(1).replaceAll("\\s+","_"));
 				System.out.println("http body for note: "+http_body);
 				consulting_response = HttpURLFlureeDBConnection.
 						sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+				System.out.println("note response: "+consulting_response);
+
 				//second try
 				try {
 					Pattern pattern1 = Pattern.compile("\\[(\\d+)\\]");
 			        Matcher matcher1 = pattern1.matcher(consulting_response);
 			        if (matcher1.find()) {
-						 System.out.println("note not found");
-//					     HashMap result = new HashMap<>();
-//						 tags_map.put(m.group(1), matcher1.group(1));
+						 System.out.println("note  found "+matcher1.group(1));
 						 //we found the tag, thus we get its fluree id, and set exist in fluree to true
+						 linked_notes.add(matcher1.group(1));
 			        	
 					} else {
 						 System.out.println("note not found");

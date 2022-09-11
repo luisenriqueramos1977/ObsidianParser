@@ -95,7 +95,7 @@ public final class Tag{
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		final String a_json = "{\"_id\""+":"+"\""+ "Tag$"+ this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
+							  +"\"text_content\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
 							  "}\n";
 		return a_json;

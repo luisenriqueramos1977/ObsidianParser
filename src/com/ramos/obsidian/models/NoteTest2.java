@@ -60,7 +60,7 @@ class NoteTest2 {
 	
 	//create note
 		
-	Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder", false);
+	Note my_Note = new Note("test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder", false);
 	
 
 

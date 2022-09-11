@@ -72,9 +72,9 @@ public final class Header3 {
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
 		final String a_json = "{\"_id\""+":"+"\""+  this.getName()+"\","
-							  +"\"textContent\""+":"+"\""+this.getContent()+"\","
+							  +"\"text_content\""+":"+"\""+this.getContent()+"\","
 							  +"\"name\""+":"+"\""+this.getName()+"\""+
-							  "}\n";
+							  "}";
 		return a_json;
 	}
 
