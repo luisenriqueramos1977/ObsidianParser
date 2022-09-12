@@ -41,6 +41,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import org.json.JSONException;
 
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
@@ -93,7 +94,6 @@ public final class Note {
 	public static Map<String, String> getTags_map() {
 		return tags_map;
 	}
-
 
 
 	/**
@@ -318,15 +318,13 @@ public final class Note {
 
 
 	
-	public String getPartialJSON() {
+	public String getPartialJSON(Logger logger) {
 		// TODO Auto-generated method stub
 		LinkedList<String> fluree_links=new LinkedList<String>();  
 		LinkedList<String> fluree_bodies=new LinkedList<String>();  
-
 		String json_links;
 		String json_bodies;
 		String fluree_head_links;
-		
 		String fluree_string_head = "\n [{\"_id\": \"Note$"+this.getName()+"\",\n"+
 				  "\"text_content\""+":"+"\""+this.getContent().replace("\n", "").replace("\r", "")+"\",\n"+
 				  "\"note_name\""+":"+"\""+this.getName()+"\",\n"+
@@ -335,49 +333,49 @@ public final class Note {
 		//adding attentions
 		if (!contained_attention.isEmpty()) {
 			if (contained_attention.size()>1) {
-				fluree_links.add(getAttentionRelationJson(contained_attention, "\"contains_attention\":["));
+				fluree_links.add(getAttentionRelationJson(logger, contained_attention, "\"contains_attention\":["));
 			} else {
-				fluree_links.add(getAttentionRelationJson(contained_attention, "\"contains_attention\":"));
+				fluree_links.add(getAttentionRelationJson(logger,contained_attention, "\"contains_attention\":"));
 			}
 			
-			fluree_bodies.add(getAttentionJson(contained_attention));
+			fluree_bodies.add(getAttentionJson(logger, contained_attention));
 			
 		} else {
-			System.out.println("contained_attention.isEmpty()***: "+contained_attention.isEmpty());
+			//System.out.println("contained_attention.isEmpty()***: "+contained_attention.isEmpty());
 		}
 		
 		//adding emphasys
 		if (!contained_emphasys.isEmpty()) {
 			if (contained_emphasys.size()>1) {
-				fluree_links.add(getEmphasysRelationJson(contained_emphasys, "\"contains_emphasys\":["));
+				fluree_links.add(getEmphasysRelationJson(logger, contained_emphasys, "\"contains_emphasys\":["));
 			} else {
-				fluree_links.add(getEmphasysRelationJson(contained_emphasys, "\"contains_emphasys\":"));
+				fluree_links.add(getEmphasysRelationJson(logger, contained_emphasys, "\"contains_emphasys\":"));
 			}
-			fluree_bodies.add(getEmphasysJson(contained_emphasys));
+			fluree_bodies.add(getEmphasysJson(logger, contained_emphasys));
 		} else {
-			System.out.println("contained_emphasys.isEmpty()***: "+contained_emphasys.isEmpty());
+			//System.out.println("contained_emphasys.isEmpty()***: "+contained_emphasys.isEmpty());
 		}
 		
 		//adding header1
 		if (!contained_header1.isEmpty()) {
 			if (contained_header1.size()>1) {
-				fluree_links.add(getHeader1RelationJson(contained_header1, "\"contains_header1\":["));
+				fluree_links.add(getHeader1RelationJson(logger, contained_header1, "\"contains_header1\":["));
 			} else {
-				fluree_links.add(getHeader1RelationJson(contained_header1, "\"contains_header1\":"));
+				fluree_links.add(getHeader1RelationJson(logger, contained_header1, "\"contains_header1\":"));
 			}
-			fluree_bodies.add(getHeader1Json(contained_header1));
+			fluree_bodies.add(getHeader1Json(logger, contained_header1));
 		} else {
-			System.out.println("contained_header1.isEmpty()***: "+contained_header1.isEmpty());
+			//System.out.println("contained_header1.isEmpty()***: "+contained_header1.isEmpty());
 		}
 		
 		//adding header2
 		if (!contained_header2.isEmpty()) {
 			if (contained_header2.size()>1) {
-				fluree_links.add(getHeader2RelationJson(contained_header2, "\"contains_header2\":["));
+				fluree_links.add(getHeader2RelationJson(logger, contained_header2, "\"contains_header2\":["));
 			} else {
-				fluree_links.add(getHeader2RelationJson(contained_header2, "\"contains_header2\":"));
+				fluree_links.add(getHeader2RelationJson(logger, contained_header2, "\"contains_header2\":"));
 			}
-			fluree_bodies.add(getHeader2Json(contained_header2));
+			fluree_bodies.add(getHeader2Json(logger, contained_header2));
 		} else {
 			System.out.println("contained_header2.isEmpty()***: "+contained_header2.isEmpty());
 		}
@@ -385,64 +383,64 @@ public final class Note {
 		//adding header3
 		if (!contained_header3.isEmpty()) {
 			if (contained_header3.size()>1) {
-				fluree_links.add(getHeader3RelationJson(contained_header3, "\"contains_header3\":["));
+				fluree_links.add(getHeader3RelationJson(logger, contained_header3, "\"contains_header3\":["));
 			} else {
-				fluree_links.add( getHeader3RelationJson(contained_header3, "\"contains_header3\":"));
+				fluree_links.add( getHeader3RelationJson(logger, contained_header3, "\"contains_header3\":"));
 			}
-			fluree_bodies.add(getHeader3Json(contained_header3));
+			fluree_bodies.add(getHeader3Json(logger, contained_header3));
 		} else {
-			System.out.println("contained_header3.isEmpty()***: "+contained_header3.isEmpty());
+			//System.out.println("contained_header3.isEmpty()***: "+contained_header3.isEmpty());
 		}
 		
 		//adding header4
 		if (!contained_header4.isEmpty()) {
 			if (contained_header4.size()>1) {
-				fluree_links.add(getHeader4RelationJson(contained_header4, "\"contains_header4\":["));
+				fluree_links.add(getHeader4RelationJson(logger, contained_header4, "\"contains_header4\":["));
 			} else {
-				fluree_links.add(getHeader4RelationJson(contained_header4, "\"contains_header4\":"));
+				fluree_links.add(getHeader4RelationJson(logger, contained_header4, "\"contains_header4\":"));
 			}
-			fluree_bodies.add(getHeader4Json(contained_header4));
+			fluree_bodies.add(getHeader4Json(logger, contained_header4));
 		} else {
-			System.out.println("contained_header4.isEmpty()***: "+contained_header4.isEmpty());
+			//System.out.println("contained_header4.isEmpty()***: "+contained_header4.isEmpty());
 		}
 		
 		
 		//adding header5
 		if (!contained_header5.isEmpty()) {
 			if (contained_header5.size()>1) {
-				fluree_links.add(getHeader5RelationJson(contained_header5, "\"contains_header5\":["));
+				fluree_links.add(getHeader5RelationJson(logger, contained_header5, "\"contains_header5\":["));
 			} else {
-				fluree_links.add(getHeader5RelationJson(contained_header5, "\"contains_header5\":"));
+				fluree_links.add(getHeader5RelationJson(logger, contained_header5, "\"contains_header5\":"));
 			}
-			fluree_bodies.add(getHeader5Json(contained_header5));
+			fluree_bodies.add(getHeader5Json(logger, contained_header5));
 		} else {
-			System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
+			//System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
 		}
 		
 		//adding tags relations links
 		if (!tags_map.isEmpty()) {
 
 			if (tags_map.size()>1) {
-				fluree_links.add(getTagRelationJson(tags_map, "\"contains_tag\":["));
+				fluree_links.add(getTagRelationJson(logger, tags_map, "\"contains_tag\":["));
 			} else {
-				fluree_links.add(getTagRelationJson(tags_map, "\"contains_tag\":"));
+				fluree_links.add(getTagRelationJson(logger, tags_map, "\"contains_tag\":"));
 			}
-			fluree_bodies.add(getTagJson(contained_tags));
+			fluree_bodies.add(getTagJson(logger, contained_tags));
 		} else {
-			System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
+			//System.out.println("contained_header5.isEmpty()***: "+contained_header5.isEmpty());
 		}
 		
 		
-		System.out.println("fluree_links.size()***: "+fluree_links.size());
+		//System.out.println("fluree_links.size()***: "+fluree_links.size());
 		//if fluree array is not larger than 1
 		String test_string = null;
 		if (fluree_links.isEmpty()) {
-			 System.out.println("final fluree string: "+fluree_string_head +"}]");
+			 //System.out.println("final fluree string: "+fluree_string_head +"}]");
 			 return fluree_string_head +"}]";
 		} else {
 			//streaming to generate the header string
 			fluree_head_links = fluree_links.stream().map(n -> n.toString()).collect(Collectors.joining(",\n"));
-			 System.out.println("fluree_head_links : "+fluree_head_links );
+			 //System.out.println("fluree_head_links : "+fluree_head_links );
 			 if (fluree_bodies.isEmpty()) {
 				return fluree_string_head +fluree_head_links+"}]";
 			}
@@ -457,21 +455,18 @@ public final class Note {
 		} else {
 			//streaming to generate the header string
 			String fluree_bodies_string = fluree_bodies.stream().map(n -> n).collect(Collectors.joining(",\n"));
-			
-		    		    
 			String body_result = null;
-
 			//check end of string
 		    body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
 			
-			System.out.println("fluree_bodies_string : "+body_result);
+			//System.out.println("fluree_bodies_string : "+body_result);
 			 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"]";
 		    }
 		    //end fluree_array.size()==1
 	    }//fluree_bodies.isEmpty()
 	
 	
-	private String getAttentionRelationJson(List<Attention> ListofObjects, String containment) {
+	private String getAttentionRelationJson(Logger logger, List<Attention> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -488,6 +483,7 @@ public final class Note {
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
+				logger.error("Error extracting attention on: "+ this.name);
 				joinedString3="";
 			}
 		} else {
@@ -497,7 +493,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getAttentionJson(List<Attention> ListofObjects) {
+	private String getAttentionJson(Logger logger, List<Attention> ListofObjects) {
 		String joinedString;
 	
 		try {
@@ -510,7 +506,7 @@ public final class Note {
 		return joinedString;
 	}
 
-	private String getEmphasysRelationJson(Set<Emphasys> ListofObjects, String containment) {
+	private String getEmphasysRelationJson(Logger logger, Set<Emphasys> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -534,7 +530,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getEmphasysJson(Set<Emphasys> ListofObjects) {
+	private String getEmphasysJson(Logger logger, Set<Emphasys> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -546,7 +542,7 @@ public final class Note {
 		return joinedString;
 	}
 
-	private String getHeader1RelationJson(Set<Header1> ListofObjects, String containment) {
+	private String getHeader1RelationJson(Logger logger, Set<Header1> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -572,7 +568,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getHeader1Json(Set<Header1> ListofObjects) {
+	private String getHeader1Json(Logger logger, Set<Header1> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -587,7 +583,7 @@ public final class Note {
 	}
 	
 	
-	private String getHeader2RelationJson(Set<Header2> ListofObjects, String containment) {
+	private String getHeader2RelationJson(Logger logger, Set<Header2> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -612,7 +608,7 @@ public final class Note {
 	}
 	
 	
-	private String getHeader2Json(Set<Header2> ListofObjects) {
+	private String getHeader2Json(Logger logger, Set<Header2> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -626,7 +622,7 @@ public final class Note {
 		return joinedString;
 	}
 	
-	private String getHeader3RelationJson(Set<Header3> ListofObjects, String containment) {
+	private String getHeader3RelationJson(Logger logger, Set<Header3> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -651,7 +647,7 @@ public final class Note {
 	
 	
 
-	private String getHeader3Json(Set<Header3> ListofObjects) {
+	private String getHeader3Json(Logger logger, Set<Header3> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -665,7 +661,7 @@ public final class Note {
 		return joinedString;
 	}
 	
-	private String getHeader4RelationJson(Set<Header4> ListofObjects, String containment) {
+	private String getHeader4RelationJson(Logger logger, Set<Header4> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -690,7 +686,7 @@ public final class Note {
 	}
 	
 	
-	private String getHeader4Json(Set<Header4> ListofObjects) {
+	private String getHeader4Json(Logger logger, Set<Header4> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -704,7 +700,7 @@ public final class Note {
 		return joinedString;
 	}
 	
-	private String getHeader5RelationJson(Set<Header5> ListofObjects, String containment) {
+	private String getHeader5RelationJson(Logger logger, Set<Header5> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -729,7 +725,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getHeader5Json(Set<Header5> ListofObjects) {
+	private String getHeader5Json(Logger logger, Set<Header5> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -743,7 +739,7 @@ public final class Note {
 		return joinedString;
 	}
 	
-	private String getTagRelationJson(Map <String,String> ListofObjects, String containment) {
+	private String getTagRelationJson(Logger logger, Map <String,String> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -772,7 +768,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getTagJson(Set<Tag> ListofObjects) {
+	private String getTagJson(Logger logger, Set<Tag> ListofObjects) {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
@@ -786,7 +782,7 @@ public final class Note {
 	
 	//get linked notes
 	
-	private String getNoteRelationJson(List <String> ListofObjects, String containment) {
+	private String getNoteRelationJson(Logger logger, List <String> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -813,7 +809,7 @@ public final class Note {
 	}
 	
 	
-	public void generateHeader1() {
+	public void generateHeader1(Logger logger) {
 		//System.out.println("entering generateHeader1");
 		Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
 		Matcher m = h1.matcher(this.content);
@@ -833,7 +829,7 @@ public final class Note {
 	}//end generateHeader1()
 	
 	
-	public void generateHeader2() {
+	public void generateHeader2(Logger logger) {
 		Pattern h2 = Pattern.compile("(?m)^#{2}\s+(?!#)(.*)");
 		Matcher m = h2.matcher(this.content);
 		while (m.find()) {
@@ -852,7 +848,7 @@ public final class Note {
 		
 	}
 	
-	public void generateHeader3() {
+	public void generateHeader3(Logger logger) {
 		Pattern h3 = Pattern.compile("(?m)^#{3}\s+(?!#)(.*)");
 		Matcher m = h3.matcher(this.content);
 		while (m.find()) {
@@ -871,7 +867,7 @@ public final class Note {
 
 	}
 	
-	public void generateHeader4() {
+	public void generateHeader4(Logger logger) {
 		Pattern h4 = Pattern.compile("(?m)^#{4}\s+(?!#)(.*)");
 		Matcher m = h4.matcher(this.content);
 		while (m.find()) {
@@ -890,7 +886,7 @@ public final class Note {
 	}
 	
 	
-	public void generateHeader5() {
+	public void generateHeader5(Logger logger) {
 		Pattern h5 = Pattern.compile("(?m)^#{5}\s+(?!#)(.*)");
 		Matcher m = h5.matcher(this.content);
 		while (m.find()) {
@@ -909,7 +905,7 @@ public final class Note {
 
 	}
 	
-	public void generateTags(String content_type, String query_url, String transaction_url, String http_method) {
+	public void generateTags(Logger logger, String content_type, String query_url, String transaction_url, String http_method) {
 
 		String consulting_response;
 		String transaction_response;
@@ -959,26 +955,26 @@ public final class Note {
 		
 	}//end generatetags()
 	
-	public void generateNoteLinks(String content_type, String query_url, String http_method) {
+	public void generateNoteLinks(Logger logger, String content_type, String query_url, String http_method) {
 		String consulting_response;
 		Pattern note_link = Pattern.compile("\\[\\[(.+?)\\]\\]");
 		Matcher m = note_link.matcher(this.content);
 		while (m.find()) {
-			System.out.println(" notes linked: "+m.group(1).replaceAll("\\s+","_")); 
+			//System.out.println(" notes linked: "+m.group(1).replaceAll("\\s+","_")); 
 			//querying if to be linked note exists in db.
 			try {
 				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", m.group(1).replaceAll("\\s+","_"));
-				System.out.println("http body for note: "+http_body);
+				//System.out.println("http body for note: "+http_body);
 				consulting_response = HttpURLFlureeDBConnection.
 						sendOkHttpClientPost(content_type,query_url,http_method,http_body);
-				System.out.println("note response: "+consulting_response);
+				//System.out.println("note response: "+consulting_response);
 
 				//second try
 				try {
 					Pattern pattern1 = Pattern.compile("\\[(\\d+)\\]");
 			        Matcher matcher1 = pattern1.matcher(consulting_response);
 			        if (matcher1.find()) {
-						 System.out.println("note  found "+matcher1.group(1));
+						 //System.out.println("note  found "+matcher1.group(1));
 						 //we found the tag, thus we get its fluree id, and set exist in fluree to true
 						 linked_notes.add(matcher1.group(1));
 			        	

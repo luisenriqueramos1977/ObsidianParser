@@ -126,7 +126,7 @@ class NoteTest {
 		
 		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder",false);
 
-		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
+		//System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 		//System.out.println("getObsidianObjectJson: "+my_Note.getObsidianObjectJson(contained_attention));
 	}
 

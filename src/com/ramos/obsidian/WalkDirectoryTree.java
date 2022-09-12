@@ -18,18 +18,48 @@
 
 package com.ramos.obsidian;
 
+import java.io.File;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
  
 // Java sample program to iterate through directory tree
 // Uses the Files.walk method added in Java 8
 public class WalkDirectoryTree {
-    public static void main(String[] args) throws Exception {
+	
+    private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+    
+    
+    public static void main(String[] args)  {
+    	
+    	 System.setProperty("log4j.configurationFile",  "bin/com/ramos/obsidian/resources/log4j2.xml");
+    	 System.setProperty("logFilename", "myApp.log");
+    	
+        Logger logger = LoggerFactory.getLogger( WalkDirectoryTree.class);
+
         // in windows use the form c:\\folder
         String rootFolder = "C:\\Users\\User\\Documents\\luis_obsidian";
-        walkDirTree(rootFolder);
+        try {
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			logger.info("process started at "+timestamp);
+			walkDirTree(rootFolder);
+			//write finalization to log
+			timestamp = new Timestamp(System.currentTimeMillis());
+			logger.info("process finishing at "+timestamp);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//write error to log
+			logger.error("error reading the files "+e);
+			e.printStackTrace();
+		}
         //walkDirTreeWithSymLinks(rootFolder);
  
        // String searchFor = "md";
@@ -40,41 +70,27 @@ public class WalkDirectoryTree {
     // Prints all file/directory names in the entire directory tree!
     private static void walkDirTree(String rootFolder) throws Exception {
     	System.out.println("simply print files and folders");
+   	    String separator = System.getProperty("file.separator");
+        System.out.println(separator);
+
         Files.walk(Paths.get(rootFolder)).forEach(path -> {
         	String name = path.toString();
         	int lastIndexOf = name.lastIndexOf(".");
             if (lastIndexOf == -1) {
                 System.out.println(name + " is a folder");
                 //create folder in fluree
+                String folder_name = name.substring(name.lastIndexOf(separator) + 1);
+                System.out.println(folder_name + " is a folder_name");
+                
             }
             else if (name.substring(lastIndexOf).endsWith(".md")){
             	System.out.println(name + " is a markdown file");
+            	  File file = new File(name);
+            	  
                 //create note in fluree
             }
             
         });
     }
- 
-    // This example uses FileVisitOption to follow symbolic links
-    // Prints all file/directory names in the entire directory tree
-    // Prints all file/directory names in the entire directory tree!
-//    private static void walkDirTreeWithSymLinks(String rootFolder) throws Exception {
-//    	System.out.println("with symbolic links");
-//        Files.walk(Paths.get(rootFolder), FileVisitOption.FOLLOW_LINKS).forEach(path -> {
-//            System.out.println(path);
-//        });
-//    }
-// 
-    
-
-    // Walk the directory tree looking for files/folder with the search field
-    // May throw AccessDeniedException or FileSystemLoopException exception.
-//    private static void walkDirTreeAndSearch(String rootFolder, String search) throws Exception {
-//    	System.out.println("with search text");
-//        Files.walk(Paths.get(rootFolder), FileVisitOption.FOLLOW_LINKS).filter(t -> {
-//            return t.toString().contains(search);
-//        }).forEach(path -> {
-//            System.out.println(path);
-//        });
-//    }
+  
 }

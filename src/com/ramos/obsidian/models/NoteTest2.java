@@ -32,11 +32,13 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+import com.ramos.obsidian.WalkDirectoryTree;
+
 class NoteTest2 {
 	
 	//local date, current data
 		private static LocalDate created_on = LocalDate.now();
-		//private static List<Attention> contained_attention = new ArrayList<>();
+    	org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NoteTest2.class);
 		//private static Set<Emphasys> contained_emphasys = new HashSet<>();
 		//private static Set<Header1> contained_header1 = new HashSet<>();
 		//private static Set<Header2> contained_header2 = new HashSet<>();
@@ -68,19 +70,19 @@ class NoteTest2 {
 	@Order(1)
 	void testGetHeader1() {
 		my_Note.setContent(content);
-		my_Note.generateHeader1();
-		my_Note.generateHeader2();
-		my_Note.generateHeader3();
-		my_Note.generateHeader4();
-		my_Note.generateHeader5();
-		my_Note.generateNoteLinks("text/plain", 
+		my_Note.generateHeader1(logger);
+		my_Note.generateHeader2(logger);
+		my_Note.generateHeader3(logger);
+		my_Note.generateHeader4(logger);
+		my_Note.generateHeader5(logger);
+		my_Note.generateNoteLinks(logger,"text/plain", 
 				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql"
 				,"POST");
-		my_Note.generateTags("text/plain", 
+		my_Note.generateTags(logger,"text/plain", 
 				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
 				"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
 		System.out.println("parsed all elements");
-		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
+		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON(logger));
 	}
 
 	
