@@ -23,6 +23,7 @@
  */
 package com.ramos.obsidian.models;
 
+import java.nio.file.attribute.FileTime;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collector;
@@ -34,55 +35,69 @@ import java.util.stream.Collectors;
  */
 
 
-public final class Folder extends BasicObsidianObject{
+public final class Folder {
 	
 	//specific folder variables
-	private static LocalDate creation_on;
-	private static String creator;
+	private static String name;
+	private static FileTime creation_on;
 	private static String located_in;
 	private static List<Folder> contained_folders;
 	private static List<Note> contained_notes;
 	
+	
+	
+	/**
+	 * @return the name
+	 */
+	public static String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public static void setName(String name) {
+		Folder.name = name;
+	}
+
+	/**
+	 * @return the contained_folders
+	 */
+	public static List<Folder> getContained_folders() {
+		return contained_folders;
+	}
+
+	/**
+	 * @param contained_folders the contained_folders to set
+	 */
+	public static void setContained_folders(List<Folder> contained_folders) {
+		Folder.contained_folders = contained_folders;
+	}
+
 	/**
 	 * 
 	 */
-	private Folder(LocalDate creation_on, String creator, String located_in, List<Folder> contained_folders, List<Note> contained_notes) {
-		super(getName(), getContent());
+	public Folder(String name, FileTime creation_on, String located_in) {
+		this.name=name;
 		// TODO Auto-generated constructor stub
 		this.creation_on = creation_on;
-		this.creator = creator;
 		this.located_in = located_in;
-		this.contained_folders= contained_folders;
-		this.contained_notes= contained_notes;
 	}
 
 	/**
 	 * @return the creation_on
 	 */
-	public static LocalDate getCreation_on() {
+	public static FileTime getCreation_on() {
 		return creation_on;
 	}
 
 	/**
 	 * @param creation_on the creation_on to set
 	 */
-	public static void setCreation_on(LocalDate creation_on) {
+	public static void setCreation_on(FileTime creation_on) {
 		Folder.creation_on = creation_on;
 	}
 
-	/**
-	 * @return the creator
-	 */
-	public static String getCreator() {
-		return creator;
-	}
-
-	/**
-	 * @param creator the creator to set
-	 */
-	public static void setCreator(String creator) {
-		Folder.creator = creator;
-	}
 
 	/**
 	 * @return the located_in
@@ -133,14 +148,6 @@ public final class Folder extends BasicObsidianObject{
 		
 		final String my_folders;
 		
-		//lambda foreach
-		
-		//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
-		
-		// Convert elements to strings and concatenate them, separated by commas
-		// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
-		//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
-		//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
 		String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
 
 		return joinedString;
@@ -150,38 +157,25 @@ public final class Folder extends BasicObsidianObject{
 		private String getNotesJson(List<Note> notes) {
 			
 			final String my_notes;
-			
-			//lambda foreach
-			
-			//folders.stream().forEach((folder) -> my_folders = my_folders+ "\"constains_folder\""+":"+"\""+folder+"\"" );
-			
-			// Convert elements to strings and concatenate them, separated by commas
-			// String joined = folders.stream().map(n -> n.getName()).collect(Collectors.joining("\"constains_folder\""+":"+"\""));
-			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining());    //ABCD
-			//String joinedString = folders.stream().map(n -> n.getName()).collect(Collectors.joining(","));
 			String joinedString = notes.stream().map(n -> n.getName()).collect(Collectors.joining("\",\"","{", "}"));
 
 			return joinedString;
 		}
 
-	@Override
+	
 	public String getPartialJSON() {
 		// TODO Auto-generated method stub
-		String folder_json = getFoldersJson(contained_folders);
-		String notes_json = getNotesJson(contained_notes);
+		//String folder_json = getFoldersJson(contained_folders);
+		//String notes_json = getNotesJson(contained_notes);
 		
-		final String a_json = "{\"_id: \""+ this.getName()+"\","
-							  +"\"name\""+":"+"\""+this.getName()+"\""
-							  +"\"created_on\""+":"+"\""+this.getCreation_on()+"\""+
-							  "\"creator\""+":"+"\""+this.getCreator()+"\""+
-							  "\"located_in\""+":"+"\""+this.getLocated_in()+"\""+
-							  folder_json+
-							  notes_json+
-							  "}";
+		final String a_json = "{\"_id\""+":"+"\""+ "Folder$"+this.getName()+"\",\n"
+							  +"\"folderName\""+":"+"\""+this.getName()+"\",\n"
+							  +"\"created_on\""+":"+"\""+this.getCreation_on().toString()+"\",\n"+
+							  "\"located_in\""+":"+"\""+this.getLocated_in()+"\"}";
 		return a_json;
 	}
 	
-	@Override
+	
 	public String getFullJSON() {
 		return "["+getPartialJSON()+"]";
 	}

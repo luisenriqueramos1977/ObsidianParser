@@ -914,7 +914,6 @@ public final class Note {
 		Pattern pretags = Pattern.compile("#(\\w+)");
 		Matcher m = pretags.matcher(this.content);
 		while (m.find()) {
-
 				try {
 					String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
 					consulting_response = HttpURLFlureeDBConnection.
@@ -937,7 +936,7 @@ public final class Note {
 												sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
 									  //converting to json to get fluree id
 									  JSONObject tag_json = new JSONObject(transaction_response);
-									  tags_map.put(m.group(1), Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$cancer")));
+									  tags_map.put(m.group(1), Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1))));
 							}
 
 				        } catch (JSONException err) {

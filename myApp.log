@@ -1,18 +1,77 @@
-2022-09-12 20:11:35.237 [main] INFO  - process started at 2022-09-12 20:11:35.234
-2022-09-12 20:11:35.247 [main] INFO  - process finishing at 2022-09-12 20:11:35.247
-2022-09-12 20:39:50.473 [main] INFO  - process started at 2022-09-12 20:39:50.469
-2022-09-12 20:39:50.481 [main] INFO  - process finishing at 2022-09-12 20:39:50.481
-2022-09-12 20:41:02.401 [main] INFO  - process started at 2022-09-12 20:41:02.398
-2022-09-12 20:41:02.410 [main] INFO  - process finishing at 2022-09-12 20:41:02.41
-2022-09-12 20:43:30.981 [main] INFO  - process started at 2022-09-12 20:43:30.977
-2022-09-12 20:43:30.992 [main] INFO  - process finishing at 2022-09-12 20:43:30.992
-2022-09-12 20:44:23.661 [main] INFO  - process started at 2022-09-12 20:44:23.657
-2022-09-12 20:44:23.676 [main] INFO  - process finishing at 2022-09-12 20:44:23.676
-2022-09-12 20:51:14.711 [main] INFO  - process started at 2022-09-12 20:51:14.706
-2022-09-12 20:51:14.719 [main] INFO  - process finishing at 2022-09-12 20:51:14.719
-2022-09-12 20:52:03.504 [main] INFO  - process started at 2022-09-12 20:52:03.502
-2022-09-12 20:52:03.515 [main] INFO  - process finishing at 2022-09-12 20:52:03.515
-2022-09-12 20:53:55.064 [main] INFO  - process started at 2022-09-12 20:53:55.062
-2022-09-12 20:53:55.072 [main] INFO  - process finishing at 2022-09-12 20:53:55.072
-2022-09-12 20:54:24.232 [main] INFO  - process started at 2022-09-12 20:54:24.229
-2022-09-12 20:54:24.242 [main] INFO  - process finishing at 2022-09-12 20:54:24.242
+2022-09-13 19:06:55.802 [main] INFO  - process started at 2022-09-13 19:06:55.798
+2022-09-13 19:06:55.830 [main] INFO  - process finishing at 2022-09-13 19:06:55.83
+2022-09-13 19:16:03.974 [main] INFO  - process started at 2022-09-13 19:16:03.969
+2022-09-13 19:16:04.002 [main] INFO  - process finishing at 2022-09-13 19:16:04.002
+2022-09-13 19:18:11.316 [main] INFO  - process started at 2022-09-13 19:18:11.311
+2022-09-13 19:18:11.335 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian
+2022-09-13 19:18:11.337 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 19:18:11.343 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 19:18:11.352 [main] INFO  - process finishing at 2022-09-13 19:18:11.352
+2022-09-13 19:20:10.109 [main] INFO  - process started at 2022-09-13 19:20:10.102
+2022-09-13 19:20:10.142 [main] INFO  - process finishing at 2022-09-13 19:20:10.141
+2022-09-13 20:06:17.824 [main] INFO  - process started at 2022-09-13 20:06:17.822
+2022-09-13 20:06:18.254 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian
+2022-09-13 20:06:18.266 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 20:06:18.282 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 20:06:18.286 [main] INFO  - process finishing at 2022-09-13 20:06:18.286
+2022-09-13 20:07:57.943 [main] INFO  - process started at 2022-09-13 20:07:57.94
+2022-09-13 20:07:58.399 [main] INFO  - process finishing at 2022-09-13 20:07:58.399
+2022-09-13 20:22:27.657 [main] INFO  - process started at 2022-09-13 20:22:27.653
+2022-09-13 20:22:28.427 [main] INFO  - process finishing at 2022-09-13 20:22:28.426
+2022-09-13 20:23:43.552 [main] INFO  - process started at 2022-09-13 20:23:43.549
+2022-09-13 20:23:43.977 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian
+2022-09-13 20:23:44.067 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 20:23:44.117 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 20:23:44.121 [main] INFO  - process finishing at 2022-09-13 20:23:44.121
+2022-09-13 20:27:05.118 [main] INFO  - process started at 2022-09-13 20:27:05.114
+2022-09-13 20:27:05.518 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian
+2022-09-13 20:27:05.551 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 20:27:05.591 [main] ERROR - error while reading response of folder: C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 20:27:05.593 [main] INFO  - process finishing at 2022-09-13 20:27:05.593
+2022-09-13 20:32:14.253 [main] INFO  - process started at 2022-09-13 20:32:14.251
+2022-09-13 20:32:14.703 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian
+2022-09-13 20:32:14.740 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 20:32:14.778 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 20:32:14.781 [main] INFO  - process finishing at 2022-09-13 20:32:14.781
+2022-09-13 20:33:13.480 [main] INFO  - process started at 2022-09-13 20:33:13.477
+2022-09-13 20:33:14.012 [main] INFO  - process finishing at 2022-09-13 20:33:14.012
+2022-09-13 20:34:10.481 [main] INFO  - process started at 2022-09-13 20:34:10.476
+2022-09-13 20:34:10.958 [main] INFO  - process finishing at 2022-09-13 20:34:10.958
+2022-09-13 20:34:28.678 [main] INFO  - process started at 2022-09-13 20:34:28.675
+2022-09-13 20:34:29.057 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian
+2022-09-13 20:34:29.092 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\.obsidian
+2022-09-13 20:34:29.133 [main] ERROR - error while searching for folder C:\Users\User\Documents\luis_obsidian\markdown2
+2022-09-13 20:34:29.136 [main] INFO  - process finishing at 2022-09-13 20:34:29.136
+2022-09-13 20:35:11.822 [main] INFO  - process started at 2022-09-13 20:35:11.817
+2022-09-13 20:35:12.227 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "folders" is null
+2022-09-13 20:35:12.267 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "folders" is null
+2022-09-13 20:35:12.304 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "folders" is null
+2022-09-13 20:35:12.306 [main] INFO  - process finishing at 2022-09-13 20:35:12.306
+2022-09-13 20:35:48.109 [main] INFO  - process started at 2022-09-13 20:35:48.106
+2022-09-13 20:35:48.690 [main] INFO  - process finishing at 2022-09-13 20:35:48.69
+2022-09-13 20:36:44.020 [main] INFO  - process started at 2022-09-13 20:36:44.016
+2022-09-13 20:36:44.534 [main] INFO  - process finishing at 2022-09-13 20:36:44.534
+2022-09-13 20:37:40.714 [main] INFO  - process started at 2022-09-13 20:37:40.712
+2022-09-13 20:37:41.237 [main] INFO  - process finishing at 2022-09-13 20:37:41.236
+2022-09-13 20:38:24.519 [main] INFO  - process started at 2022-09-13 20:38:24.512
+2022-09-13 20:38:25.056 [main] INFO  - process finishing at 2022-09-13 20:38:25.056
+2022-09-13 20:41:02.319 [main] INFO  - process started at 2022-09-13 20:41:02.316
+2022-09-13 20:41:02.828 [main] INFO  - process finishing at 2022-09-13 20:41:02.828
+2022-09-13 20:41:36.272 [main] INFO  - process started at 2022-09-13 20:41:36.268
+2022-09-13 20:41:36.785 [main] INFO  - process finishing at 2022-09-13 20:41:36.785
+2022-09-13 20:45:34.226 [main] INFO  - process started at 2022-09-13 20:45:34.223
+2022-09-13 20:45:34.838 [main] INFO  - process finishing at 2022-09-13 20:45:34.838
+2022-09-13 20:47:19.082 [main] INFO  - process started at 2022-09-13 20:47:19.08
+2022-09-13 20:47:19.602 [main] INFO  - process finishing at 2022-09-13 20:47:19.602
+2022-09-13 20:49:44.548 [main] INFO  - process started at 2022-09-13 20:49:44.543
+2022-09-13 20:49:45.071 [main] INFO  - process finishing at 2022-09-13 20:49:45.071
+2022-09-13 20:51:42.646 [main] INFO  - process started at 2022-09-13 20:51:42.643
+2022-09-13 20:51:43.114 [main] INFO  - process finishing at 2022-09-13 20:51:43.114
+2022-09-13 21:03:31.702 [main] INFO  - process started at 2022-09-13 21:03:31.699
+2022-09-13 21:03:32.213 [main] INFO  - process finishing at 2022-09-13 21:03:32.213
+2022-09-13 21:05:50.714 [main] INFO  - process started at 2022-09-13 21:05:50.71
+2022-09-13 21:05:51.285 [main] INFO  - process finishing at 2022-09-13 21:05:51.285
+2022-09-13 21:06:24.730 [main] INFO  - process started at 2022-09-13 21:06:24.727
+2022-09-13 21:06:25.304 [main] INFO  - process finishing at 2022-09-13 21:06:25.304
+2022-09-13 21:06:57.143 [main] INFO  - process started at 2022-09-13 21:06:57.139
+2022-09-13 21:06:57.952 [main] INFO  - process finishing at 2022-09-13 21:06:57.952

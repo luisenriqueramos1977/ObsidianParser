@@ -19,6 +19,7 @@
 package com.ramos.obsidian;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,9 +27,18 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.attribute.BasicFileAttributes;
 
+
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.ramos.obsidian.models.Folder;
+import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
  
 // Java sample program to iterate through directory tree
 // Uses the Files.walk method added in Java 8
@@ -49,7 +59,9 @@ public class WalkDirectoryTree {
         try {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			logger.info("process started at "+timestamp);
-			walkDirTree(rootFolder);
+			walkDirTree(rootFolder, logger, "text/plain", 
+					"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
+					"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
 			//write finalization to log
 			timestamp = new Timestamp(System.currentTimeMillis());
 			logger.info("process finishing at "+timestamp);
@@ -68,27 +80,103 @@ public class WalkDirectoryTree {
     }
  
     // Prints all file/directory names in the entire directory tree!
-    private static void walkDirTree(String rootFolder) throws Exception {
+    private static void walkDirTree(String rootFolder, Logger logger, String content_type, String query_url, String transaction_url, String http_method) throws Exception {
     	System.out.println("simply print files and folders");
    	    String separator = System.getProperty("file.separator");
         System.out.println(separator);
 
         Files.walk(Paths.get(rootFolder)).forEach(path -> {
-        	String name = path.toString();
-        	int lastIndexOf = name.lastIndexOf(".");
-            if (lastIndexOf == -1) {
-                System.out.println(name + " is a folder");
-                //create folder in fluree
-                String folder_name = name.substring(name.lastIndexOf(separator) + 1);
-                System.out.println(folder_name + " is a folder_name");
-                
-            }
-            else if (name.substring(lastIndexOf).endsWith(".md")){
-            	System.out.println(name + " is a markdown file");
-            	  File file = new File(name);
-            	  
-                //create note in fluree
-            }
+        	
+        	File directory = new File(path.toString());
+        	
+            BasicFileAttributes fileAttributes;
+            
+			try {
+				fileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
+				
+				if (directory.isDirectory()) {
+	        		//System.out.println(directory + " is a folder directory");
+	        		String folder_name = directory.toString().substring(directory.toString().lastIndexOf(separator) + 1);
+//	                System.out.println(folder_name + " is a folder_name ******");
+//	                System.out.println("created_on:     " + fileAttributes.creationTime());
+//	                System.out.println("lastAccessTime:   " + fileAttributes.lastAccessTime());
+//	                System.out.println("lastModifiedTime: " + fileAttributes.lastModifiedTime());
+	                //search for folder by name and location
+	                try {
+	                	//modify separator
+	                	String modified_directory = null;
+	                	if (directory.toString().contains("\\")) {
+							modified_directory = directory.toString().replace("\\", "/");
+						}
+	                	String http_body = String.format("\"SELECT ?folder WHERE { ?folder fd:Folder/folderName \\\"%s\\\"; fd:Folder/folderName \\\"%s\\\" . }\"", folder_name, modified_directory);
+	                	//System.out.println("the query: "+http_body);
+	                	String consulting_response = HttpURLFlureeDBConnection.
+								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+	                	System.out.println("the response: "+consulting_response);
+	                	//reading response
+	                	
+				        if (consulting_response.equals("[]")) {
+						     //create folder because it does not exist
+				        	Folder a_folder;
+				        	if (modified_directory.equals(null)) {
+					        	a_folder = new Folder(folder_name,fileAttributes.creationTime(),directory.toString());
+							} else {
+					        	a_folder = new Folder(folder_name,fileAttributes.creationTime(),modified_directory);
+							}
+				        	System.out.println("folder json: "+a_folder.getFullJSON());
+				        		 //request to create the tag
+				        	try {
+				        		String transaction_response = HttpURLFlureeDBConnection.
+										sendOkHttpClientPost(content_type,transaction_url,http_method,a_folder.getFullJSON());
+				        		System.out.println("transaction_response: "+transaction_response);
+							} catch (Exception e) {
+								// TODO: handle exception
+								logger.error("error while creating the folder: "+directory.toString());
+							}
+								 
+						} //consulting response
+						
+	                	
+					} catch (Exception e) {
+						// TODO: handle exception
+						logger.error(e.toString());
+					}
+	                
+				} else if ((FilenameUtils.getExtension(directory.toString())).equalsIgnoreCase("md")){
+	        		System.out.println(directory.getName() + " is markdown file name");
+//	        		System.out.println("file name: "+directory.getName());
+//	        		System.out.println("file path: "+directory.getParent());
+//	        		System.out.println("file extension: "+FilenameUtils.getExtension(directory.toString()));
+//	                System.out.println("created_on:     " + fileAttributes.creationTime());
+//	                System.out.println("lastAccessTime:   " + fileAttributes.lastAccessTime());
+//	                System.out.println("lastModifiedTime: " + fileAttributes.lastModifiedTime());
+				}//directory.isDirectory()
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				logger.info("error while reading attributes of  "+directory);
+			}
+
+        	
+        	
+        	
+//				        	String name = path.toString();
+//				        	int lastIndexOf = name.lastIndexOf(".");
+//				            if (lastIndexOf == -1) {
+//				                System.out.println(name + " is a folder");
+//				                //create folder in fluree
+//				                String folder_name = name.substring(name.lastIndexOf(separator) + 1);
+//				                System.out.println(folder_name + " is a folder_name");
+//				                
+//				            }
+//				            else if (name.substring(lastIndexOf).endsWith(".md")){
+//				            	System.out.println(name + " is a markdown file");
+//				            	  File file = new File(name);
+//				            	  
+//				                //create note in fluree
+//				            }
             
         });
     }
