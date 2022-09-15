@@ -22,8 +22,10 @@ package com.ramos.obsidian.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.attribute.FileTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +39,8 @@ import com.ramos.obsidian.WalkDirectoryTree;
 class NoteTest2 {
 	
 	//local date, current data
-		private static LocalDate created_on = LocalDate.now();
+		private static Date firstDate = new Date();
+		private static FileTime created_on = FileTime.fromMillis( firstDate.getTime() );
     	org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NoteTest2.class);
 
 	
@@ -56,7 +59,7 @@ class NoteTest2 {
 	
 	//create note
 		
-	Note my_Note = new Note("test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder", false);
+	Note my_Note = new Note("test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder");
 	
 
 

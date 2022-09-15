@@ -22,12 +22,17 @@ package com.ramos.obsidian.utilities;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.UserPrincipal;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import com.ramos.obsidian.models.Folder;
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
+import com.ramos.obsidian.models.Note;
 
 public abstract class NotesReader {
 	
@@ -42,13 +47,17 @@ public abstract class NotesReader {
 			try {
 				fileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
 				if ((FilenameUtils.getExtension(directory.toString())).equalsIgnoreCase("md")){
-	        		System.out.println(directory.getName() + " is markdown file name");
-	        		System.out.println("file name: "+directory.getName());
-	        		System.out.println("file path: "+directory.getParent());
-	        		System.out.println("file extension: "+FilenameUtils.getExtension(directory.toString()));
-	                System.out.println("created_on:     " + fileAttributes.creationTime());
-	                System.out.println("lastAccessTime:   " + fileAttributes.lastAccessTime());
-	                System.out.println("lastModifiedTime: " + fileAttributes.lastModifiedTime());
+					UserPrincipal owner = Files.getOwner(path, LinkOption.NOFOLLOW_LINKS);
+//	        		System.out.println(owner.getName() + " name of file owner");
+
+//	        		System.out.println(directory.getName() + " is markdown file name");
+//	        		System.out.println("file name: "+directory.getName());
+//	        		System.out.println("file path: "+directory.getParent());
+//	        		System.out.println("file content: "+FileUtils.readFileToString(directory, "UTF-8"));
+//	        		System.out.println("file extension: "+FilenameUtils.getExtension(directory.toString()));
+//	                System.out.println("created_on:     " + fileAttributes.creationTime());
+//	                System.out.println("lastAccessTime:   " + fileAttributes.lastAccessTime());
+//	                System.out.println("lastModifiedTime: " + fileAttributes.lastModifiedTime());
 	                //proceeding to work with the note
 	                //we check if the note exist in fluree, before proceed to create it
 	                try {
@@ -58,31 +67,35 @@ public abstract class NotesReader {
 //							modified_directory = directory.toString().replace("\\", "/");
 //						}
 	                	String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", directory.getName().replaceAll("\\s+","_"));
-	                	System.out.println("the query: "+http_body);
-//	                	String consulting_response = HttpURLFlureeDBConnection.
-//								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+	                	//System.out.println("the query: "+http_body);
+	                	String consulting_response = HttpURLFlureeDBConnection.
+								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
 	                	//System.out.println("the response: "+consulting_response);
 	                	//reading response
 	                	
-//				        if (consulting_response.equals("[]")) {
-//						     //create folder because it does not exist
-//				        	Folder a_folder;
-//				        	if (modified_directory.equals(null)) {
-//					        	a_folder = new Folder(folder_name,fileAttributes.creationTime(),directory.toString());
-//							} else {
-//					        	a_folder = new Folder(folder_name,fileAttributes.creationTime(),modified_directory);
-//							}
-//				        	//System.out.println("folder json: "+a_folder.getFullJSON());
-//				        		 //request to create the tag
-//				        	try {
-//				        		String transaction_response = HttpURLFlureeDBConnection.
-//										sendOkHttpClientPost(content_type,transaction_url,http_method,a_folder.getFullJSON());
-//				        		//System.out.println("transaction_response: "+transaction_response);
-//							} catch (Exception e) {
-//								// TODO: handle exception
-//								logger.error("error while creating the folder: "+directory.toString());
-//							}
-//						} //consulting response
+				        if (consulting_response.equals("[]")) {
+						     //create folder because it does not exist
+				        	//create note
+				    		
+				        	Note my_Note = new Note(directory.getName().toString(), FileUtils.readFileToString(directory, "UTF-8"),fileAttributes.creationTime(), owner.getName().toString(), directory.getParent());
+				        	
+				        	my_Note.generateHeader1(logger);
+				    		my_Note.generateHeader2(logger);
+				    		my_Note.generateHeader3(logger);
+				    		my_Note.generateHeader4(logger);
+				    		my_Note.generateHeader5(logger);
+				    		my_Note.generateTags(logger,content_type, query_url,transaction_url,http_method);
+				        	//System.out.println("notes json: "+my_Note.getFullJSON(logger));
+				        		 //request to create the tag
+				        	try {
+				        		String transaction_response = HttpURLFlureeDBConnection.
+										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getFullJSON(logger));
+				        		System.out.println("transaction_response: "+transaction_response);
+							} catch (Exception e) {
+								// TODO: handle exception
+								logger.error("error while creating the folder: "+directory.toString());
+							}
+						} //consulting response
 					} catch (Exception e) {
 						// TODO: handle exception
 						logger.error(e.toString());

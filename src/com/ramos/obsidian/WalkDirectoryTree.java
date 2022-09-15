@@ -50,6 +50,11 @@ public class WalkDirectoryTree {
 	
     private static final SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
     
+    private static final String sparql_url = "http://127.0.0.1:8090/fdb/my/obsidian3/sparql";
+    private static final String transaction_url = "http://127.0.0.1:8090/fdb/my/obsidian3/transact";
+    private static final String content_type = "text/plain";
+    private static final String http_method = "POST";
+    
     
     public static void main(String[] args)  {
     	
@@ -73,9 +78,7 @@ public class WalkDirectoryTree {
 				System.out.println("Doy you want to read obsidian folders?: (y/n)");
 				String read_folder_answer = input.nextLine();    //getting an answer from user.
 				if (read_folder_answer.equalsIgnoreCase("y")) {
-					FolderReader.folderSearchWrite(rootFolder, logger, "text/plain", 
-							"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
-							"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+					FolderReader.folderSearchWrite(rootFolder, logger, content_type, sparql_url, transaction_url,http_method);
 					read_folder=true;
 				} else if (read_folder_answer.equalsIgnoreCase("n")){
 					read_folder=true;
@@ -87,9 +90,7 @@ public class WalkDirectoryTree {
 				System.out.println("Doy you want to read obsidian notes?: (y/n)");
 				String read_note_answer = input.nextLine();    //getting an answer from user.
 				if (read_note_answer.equalsIgnoreCase("y")) {
-					NotesReader.notesSearchWrite(rootFolder, logger, "text/plain", 
-							"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
-							"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+					NotesReader.notesSearchWrite(rootFolder, logger, content_type, sparql_url, transaction_url,http_method);
 					read_notes=true;
 				} else if (read_note_answer.equalsIgnoreCase("n")){
 					read_notes=true;

@@ -22,8 +22,10 @@ package com.ramos.obsidian.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.file.attribute.FileTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +39,8 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 class NoteTest {
 	
 	//local date, current data
-	static LocalDate created_on = LocalDate.now();
+	private static Date firstDate = new Date();
+	private static FileTime created_on = FileTime.fromMillis( firstDate.getTime() );
 	private static List<Attention> contained_attention = new ArrayList<>();
 	private static Set<Emphasys> contained_emphasys = new HashSet<>();
 	private static Set<Header1> contained_header1 = new HashSet<>();
@@ -124,7 +127,7 @@ class NoteTest {
 	@AfterAll
 	public static void testGetObsidianObjectJson() {
 		
-		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder",false);
+		Note my_Note = new Note("note1$test1", "content of note 1",created_on, "Luis Ramos", "c.//folder/folder");
 
 		//System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON());
 		//System.out.println("getObsidianObjectJson: "+my_Note.getObsidianObjectJson(contained_attention));

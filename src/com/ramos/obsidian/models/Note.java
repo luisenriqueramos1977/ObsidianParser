@@ -25,6 +25,7 @@ package com.ramos.obsidian.models;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.nio.file.attribute.FileTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,7 +58,7 @@ public final class Note {
 	public String name;
 	public String content;
 	//specific note variables
-	private static LocalDate created_on;
+	private static FileTime created_on;
 	private static String creator;
 	private static String located_in;
 	private static List<Attention> contained_attention = new ArrayList<Attention>();
@@ -76,14 +77,14 @@ public final class Note {
 
 
 	
-	public Note(String name, String content, LocalDate created_on, String creator,String located_in, Boolean full_notes_links) {
+	public Note(String name, String content, FileTime created_on, String creator,String located_in) {
 		// TODO Auto-generated constructor stub
-		this.name =name;
+		this.name =name.replaceAll("\\s+","_");
 		this.content= content;
 		this.created_on = created_on;
 		this.creator = creator;
 		this.located_in = located_in;
-		this.full_notes_links=false;
+		//this.full_notes_links=false;
 	}
 
 	
@@ -136,14 +137,14 @@ public final class Note {
 	/**
 	 * @return the created_on
 	 */
-	public static LocalDate getCreated_on() {
+	public static FileTime getCreated_on() {
 		return created_on;
 	}
 
 	/**
 	 * @param created_on the created_on to set
 	 */
-	public static void setCreated_on(LocalDate created_on) {
+	public static void setCreated_on(FileTime created_on) {
 		Note.created_on = created_on;
 	}
 
@@ -996,7 +997,9 @@ public final class Note {
 	//}
 	
 	
-
+	public String getFullJSON(Logger aLogger) {
+		return "["+this.getPartialJSON(aLogger);
+	}
 	
 	
 	
