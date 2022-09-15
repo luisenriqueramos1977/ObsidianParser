@@ -18,6 +18,7 @@
 
 package com.ramos.obsidian;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileVisitOption;
@@ -31,6 +32,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Scanner;
 
 
 import org.apache.commons.io.FilenameUtils;
@@ -39,6 +41,8 @@ import org.slf4j.LoggerFactory;
 
 import com.ramos.obsidian.models.Folder;
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
+import com.ramos.obsidian.utilities.FolderReader;
+import com.ramos.obsidian.utilities.NotesReader;
  
 // Java sample program to iterate through directory tree
 // Uses the Files.walk method added in Java 8
@@ -50,18 +54,49 @@ public class WalkDirectoryTree {
     public static void main(String[] args)  {
     	
     	 System.setProperty("log4j.configurationFile",  "bin/com/ramos/obsidian/resources/log4j2.xml");
-    	 System.setProperty("logFilename", "myApp.log");
-    	
+    	 System.setProperty("logFilename", "obsidian_fluree_logs.log");
         Logger logger = LoggerFactory.getLogger( WalkDirectoryTree.class);
+		Scanner input = new Scanner(System.in);//set up input reader
+		
+		//it is required to provide all information before begin!!!!
 
         // in windows use the form c:\\folder
         String rootFolder = "C:\\Users\\User\\Documents\\luis_obsidian";
         try {
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			logger.info("process started at "+timestamp);
-			walkDirTree(rootFolder, logger, "text/plain", 
-					"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
-					"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+			
+			//asking to customer, and getting answer
+			Console console = System.console();
+			Boolean read_folder = false;
+			while (!read_folder) {
+				System.out.println("Doy you want to read obsidian folders?: (y/n)");
+				String read_folder_answer = input.nextLine();    //getting an answer from user.
+				if (read_folder_answer.equalsIgnoreCase("y")) {
+					FolderReader.folderSearchWrite(rootFolder, logger, "text/plain", 
+							"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
+							"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+					read_folder=true;
+				} else if (read_folder_answer.equalsIgnoreCase("n")){
+					read_folder=true;
+				}
+			}//while (read_folder) 
+			//requesting reading folder
+			Boolean read_notes = false;
+			while (!read_notes) {
+				System.out.println("Doy you want to read obsidian notes?: (y/n)");
+				String read_note_answer = input.nextLine();    //getting an answer from user.
+				if (read_note_answer.equalsIgnoreCase("y")) {
+					NotesReader.notesSearchWrite(rootFolder, logger, "text/plain", 
+							"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
+							"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+					read_notes=true;
+				} else if (read_note_answer.equalsIgnoreCase("n")){
+					read_notes=true;
+				}
+			}//while (read_folder) 
+			
+			
 			//write finalization to log
 			timestamp = new Timestamp(System.currentTimeMillis());
 			logger.info("process finishing at "+timestamp);
@@ -128,7 +163,7 @@ public class WalkDirectoryTree {
 				        	try {
 				        		String transaction_response = HttpURLFlureeDBConnection.
 										sendOkHttpClientPost(content_type,transaction_url,http_method,a_folder.getFullJSON());
-				        		System.out.println("transaction_response: "+transaction_response);
+				        		//System.out.println("transaction_response: "+transaction_response);
 							} catch (Exception e) {
 								// TODO: handle exception
 								logger.error("error while creating the folder: "+directory.toString());

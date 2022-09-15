@@ -39,13 +39,7 @@ class NoteTest2 {
 	//local date, current data
 		private static LocalDate created_on = LocalDate.now();
     	org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NoteTest2.class);
-		//private static Set<Emphasys> contained_emphasys = new HashSet<>();
-		//private static Set<Header1> contained_header1 = new HashSet<>();
-		//private static Set<Header2> contained_header2 = new HashSet<>();
-		//private static Set<Header3> contained_header3 = new HashSet<>();
-		//private static Set<Header4> contained_header4= new HashSet<>();
-		//private static Set<Header5> contained_header5= new HashSet<>();
-		//private static Set<Tag> contained_tags= new HashSet<>();
+
 	
 	//create note string
 		final String content = "# heading 1 \n"
