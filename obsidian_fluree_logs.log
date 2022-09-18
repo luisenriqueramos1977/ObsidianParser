@@ -38,3 +38,473 @@
 2022-09-15 20:09:29.870 [main] INFO  - process finishing at 2022-09-15 20:09:29.87
 2022-09-15 20:10:36.972 [main] INFO  - process started at 2022-09-15 20:10:36.967
 2022-09-15 20:10:42.806 [main] INFO  - process finishing at 2022-09-15 20:10:42.806
+2022-09-16 18:42:11.099 [main] INFO  - process started at 2022-09-16 18:42:11.093
+2022-09-16 18:42:19.849 [main] INFO  - process finishing at 2022-09-16 18:42:19.849
+2022-09-16 18:59:07.735 [main] INFO  - process started at 2022-09-16 18:59:07.731
+2022-09-16 18:59:12.705 [main] INFO  - process finishing at 2022-09-16 18:59:12.705
+2022-09-16 19:11:44.153 [main] INFO  - process started at 2022-09-16 19:11:44.147
+2022-09-16 19:11:49.314 [main] ERROR - error while creatintg tag org.json.JSONException: JSONObject["message"] not found.
+2022-09-16 19:11:49.463 [main] ERROR - error while creatintg tag org.json.JSONException: JSONObject["message"] not found.
+2022-09-16 19:11:49.599 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-16 19:11:49.742 [main] ERROR - error while creatintg tag org.json.JSONException: JSONObject["message"] not found.
+2022-09-16 19:11:49.893 [main] ERROR - error while creatintg tag org.json.JSONException: JSONObject["message"] not found.
+2022-09-16 19:11:49.905 [main] INFO  - process finishing at 2022-09-16 19:11:49.905
+2022-09-16 19:15:52.784 [main] INFO  - process started at 2022-09-16 19:15:52.779
+2022-09-16 19:16:04.633 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-16 19:16:04.889 [main] INFO  - process finishing at 2022-09-16 19:16:04.888
+2022-09-16 19:18:51.212 [main] INFO  - process started at 2022-09-16 19:18:51.208
+2022-09-16 19:18:56.120 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-16 19:18:56.361 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-16 19:18:56.678 [main] INFO  - process finishing at 2022-09-16 19:18:56.678
+2022-09-16 19:21:54.814 [main] INFO  - process started at 2022-09-16 19:21:54.809
+2022-09-16 19:22:00.386 [main] INFO  - process finishing at 2022-09-16 19:22:00.386
+2022-09-16 19:31:38.878 [main] INFO  - process started at 2022-09-16 19:31:38.873
+2022-09-16 19:31:43.343 [main] INFO  - process finishing at 2022-09-16 19:31:43.343
+2022-09-16 19:37:01.807 [main] INFO  - process started at 2022-09-16 19:37:01.801
+2022-09-16 19:37:05.850 [main] ERROR - issue with tag conceptplease check tag frequency in db
+2022-09-16 19:37:05.905 [main] ERROR - issue with tag peopleplease check tag frequency in db
+2022-09-16 19:37:05.999 [main] ERROR - issue with tag conceptplease check tag frequency in db
+2022-09-16 19:37:06.055 [main] ERROR - issue with tag movieplease check tag frequency in db
+2022-09-16 19:37:06.114 [main] ERROR - issue with tag peopleplease check tag frequency in db
+2022-09-16 19:37:06.124 [main] INFO  - process finishing at 2022-09-16 19:37:06.124
+2022-09-16 19:42:49.439 [main] INFO  - process started at 2022-09-16 19:42:49.433
+2022-09-16 19:42:54.451 [main] INFO  - process finishing at 2022-09-16 19:42:54.451
+2022-09-16 19:47:26.273 [main] INFO  - process started at 2022-09-16 19:47:26.267
+2022-09-16 19:47:33.157 [main] INFO  - process finishing at 2022-09-16 19:47:33.157
+2022-09-16 19:52:17.373 [main] INFO  - process started at 2022-09-16 19:52:17.366
+2022-09-16 19:52:21.997 [main] INFO  - process finishing at 2022-09-16 19:52:21.997
+2022-09-16 19:55:03.198 [main] INFO  - process started at 2022-09-16 19:55:03.192
+2022-09-16 19:55:08.627 [main] INFO  - process finishing at 2022-09-16 19:55:08.627
+2022-09-16 19:59:08.618 [main] INFO  - process started at 2022-09-16 19:59:08.614
+2022-09-16 19:59:13.962 [main] INFO  - process finishing at 2022-09-16 19:59:13.962
+2022-09-16 20:03:07.651 [main] INFO  - process started at 2022-09-16 20:03:07.645
+2022-09-16 20:03:13.676 [main] INFO  - process finishing at 2022-09-16 20:03:13.676
+2022-09-17 08:56:00.133 [main] INFO  - process started at 2022-09-17 08:56:00.127
+2022-09-17 08:56:05.359 [main] INFO  - process finishing at 2022-09-17 08:56:05.359
+2022-09-17 09:00:25.963 [main] INFO  - process started at 2022-09-17 09:00:25.956
+2022-09-17 09:00:31.662 [main] INFO  - process finishing at 2022-09-17 09:00:31.662
+2022-09-17 09:01:18.039 [main] INFO  - process started at 2022-09-17 09:01:18.031
+2022-09-17 09:01:23.295 [main] INFO  - process finishing at 2022-09-17 09:01:23.295
+2022-09-17 09:03:07.498 [main] INFO  - process started at 2022-09-17 09:03:07.494
+2022-09-17 09:03:11.895 [main] INFO  - process finishing at 2022-09-17 09:03:11.895
+2022-09-17 09:10:22.160 [main] INFO  - process started at 2022-09-17 09:10:22.153
+2022-09-17 09:10:27.281 [main] INFO  - process finishing at 2022-09-17 09:10:27.281
+2022-09-17 09:13:03.721 [main] INFO  - process started at 2022-09-17 09:13:03.715
+2022-09-17 09:13:07.834 [main] INFO  - process finishing at 2022-09-17 09:13:07.834
+2022-09-17 09:13:56.955 [main] INFO  - process started at 2022-09-17 09:13:56.945
+2022-09-17 09:14:00.971 [main] INFO  - process finishing at 2022-09-17 09:14:00.971
+2022-09-17 09:20:03.979 [main] INFO  - process started at 2022-09-17 09:20:03.973
+2022-09-17 09:20:22.187 [main] INFO  - process started at 2022-09-17 09:20:22.181
+2022-09-17 09:20:27.096 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:20:27.155 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:20:27.249 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:20:27.315 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:20:27.379 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:20:27.389 [main] INFO  - process finishing at 2022-09-17 09:20:27.389
+2022-09-17 09:20:59.002 [main] INFO  - process started at 2022-09-17 09:20:58.998
+2022-09-17 09:21:04.601 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:21:04.669 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:21:04.767 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:21:04.829 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:21:04.890 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:21:04.901 [main] INFO  - process finishing at 2022-09-17 09:21:04.9
+2022-09-17 09:25:34.609 [main] INFO  - process started at 2022-09-17 09:25:34.605
+2022-09-17 09:25:39.898 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:25:39.960 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:25:40.063 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:25:40.126 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:25:40.184 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 09:25:40.194 [main] INFO  - process finishing at 2022-09-17 09:25:40.194
+2022-09-17 09:26:11.027 [main] INFO  - process started at 2022-09-17 09:26:11.023
+2022-09-17 09:26:15.790 [main] INFO  - process finishing at 2022-09-17 09:26:15.79
+2022-09-17 09:28:57.412 [main] INFO  - process started at 2022-09-17 09:28:57.408
+2022-09-17 09:29:02.211 [main] INFO  - process finishing at 2022-09-17 09:29:02.211
+2022-09-17 09:30:44.235 [main] INFO  - process started at 2022-09-17 09:30:44.23
+2022-09-17 09:30:48.763 [main] INFO  - process finishing at 2022-09-17 09:30:48.763
+2022-09-17 09:32:37.221 [main] INFO  - process started at 2022-09-17 09:32:37.216
+2022-09-17 09:32:41.054 [main] INFO  - process finishing at 2022-09-17 09:32:41.054
+2022-09-17 09:34:04.150 [main] INFO  - process started at 2022-09-17 09:34:04.145
+2022-09-17 09:34:08.980 [main] INFO  - process finishing at 2022-09-17 09:34:08.98
+2022-09-17 09:37:24.761 [main] INFO  - process started at 2022-09-17 09:37:24.757
+2022-09-17 09:37:31.078 [main] INFO  - process finishing at 2022-09-17 09:37:31.078
+2022-09-17 09:39:51.158 [main] INFO  - process started at 2022-09-17 09:39:51.153
+2022-09-17 09:39:54.987 [main] INFO  - process finishing at 2022-09-17 09:39:54.987
+2022-09-17 09:43:15.313 [main] INFO  - process started at 2022-09-17 09:43:15.308
+2022-09-17 09:43:19.676 [main] INFO  - process finishing at 2022-09-17 09:43:19.676
+2022-09-17 09:43:58.426 [main] INFO  - process started at 2022-09-17 09:43:58.421
+2022-09-17 09:44:03.125 [main] INFO  - process finishing at 2022-09-17 09:44:03.125
+2022-09-17 09:45:24.485 [main] INFO  - process started at 2022-09-17 09:45:24.48
+2022-09-17 09:45:27.798 [main] INFO  - process finishing at 2022-09-17 09:45:27.798
+2022-09-17 09:52:47.368 [main] INFO  - process started at 2022-09-17 09:52:47.363
+2022-09-17 09:52:52.394 [main] INFO  - process finishing at 2022-09-17 09:52:52.394
+2022-09-17 09:54:21.674 [main] INFO  - process started at 2022-09-17 09:54:21.669
+2022-09-17 09:54:25.692 [main] INFO  - process finishing at 2022-09-17 09:54:25.692
+2022-09-17 09:59:32.871 [main] INFO  - process started at 2022-09-17 09:59:32.866
+2022-09-17 09:59:39.714 [main] INFO  - process finishing at 2022-09-17 09:59:39.714
+2022-09-17 10:00:48.937 [main] INFO  - process started at 2022-09-17 10:00:48.929
+2022-09-17 10:00:52.351 [main] INFO  - process finishing at 2022-09-17 10:00:52.351
+2022-09-17 10:01:23.212 [main] INFO  - process started at 2022-09-17 10:01:23.204
+2022-09-17 10:01:27.250 [main] INFO  - process finishing at 2022-09-17 10:01:27.25
+2022-09-17 10:02:34.632 [main] INFO  - process started at 2022-09-17 10:02:34.626
+2022-09-17 10:02:38.792 [main] INFO  - process finishing at 2022-09-17 10:02:38.792
+2022-09-17 10:04:46.915 [main] INFO  - process started at 2022-09-17 10:04:46.91
+2022-09-17 10:06:42.065 [main] INFO  - process started at 2022-09-17 10:06:42.058
+2022-09-17 10:06:46.599 [main] INFO  - process finishing at 2022-09-17 10:06:46.598
+2022-09-17 10:07:19.232 [main] INFO  - process started at 2022-09-17 10:07:19.225
+2022-09-17 10:07:23.709 [main] INFO  - process finishing at 2022-09-17 10:07:23.709
+2022-09-17 10:07:52.041 [main] INFO  - process started at 2022-09-17 10:07:52.034
+2022-09-17 10:07:56.058 [main] INFO  - process finishing at 2022-09-17 10:07:56.058
+2022-09-17 10:08:23.884 [main] INFO  - process started at 2022-09-17 10:08:23.879
+2022-09-17 10:08:27.825 [main] ERROR - error while generating tag: concept
+2022-09-17 10:08:27.889 [main] ERROR - error while generating tag: people
+2022-09-17 10:08:28.001 [main] ERROR - error while generating tag: concept
+2022-09-17 10:08:28.071 [main] ERROR - error while generating tag: movie
+2022-09-17 10:08:28.143 [main] ERROR - error while generating tag: people
+2022-09-17 10:08:28.155 [main] INFO  - process finishing at 2022-09-17 10:08:28.155
+2022-09-17 10:09:16.126 [main] INFO  - process started at 2022-09-17 10:09:16.122
+2022-09-17 10:09:19.302 [main] ERROR - error while generating tag: concept
+2022-09-17 10:09:19.381 [main] ERROR - error while generating tag: people
+2022-09-17 10:09:19.483 [main] ERROR - error while generating tag: concept
+2022-09-17 10:09:19.544 [main] ERROR - error while generating tag: movie
+2022-09-17 10:09:19.602 [main] ERROR - error while generating tag: people
+2022-09-17 10:09:19.613 [main] INFO  - process finishing at 2022-09-17 10:09:19.613
+2022-09-17 10:11:31.575 [main] INFO  - process started at 2022-09-17 10:11:31.569
+2022-09-17 10:11:35.262 [main] ERROR - error while generating tag: concept
+2022-09-17 10:11:35.328 [main] ERROR - error while generating tag: people
+2022-09-17 10:11:35.424 [main] ERROR - error while generating tag: concept
+2022-09-17 10:11:35.497 [main] ERROR - error while generating tag: movie
+2022-09-17 10:11:35.561 [main] ERROR - error while generating tag: people
+2022-09-17 10:11:35.573 [main] INFO  - process finishing at 2022-09-17 10:11:35.573
+2022-09-17 10:16:31.049 [main] INFO  - process started at 2022-09-17 10:16:31.041
+2022-09-17 10:16:34.850 [main] ERROR - error while generating tag: concept
+2022-09-17 10:16:34.914 [main] ERROR - error while generating tag: people
+2022-09-17 10:16:35.023 [main] ERROR - error while generating tag: concept
+2022-09-17 10:16:35.098 [main] ERROR - error while generating tag: movie
+2022-09-17 10:16:35.168 [main] ERROR - error while generating tag: people
+2022-09-17 10:16:35.181 [main] INFO  - process finishing at 2022-09-17 10:16:35.18
+2022-09-17 10:17:47.124 [main] INFO  - process started at 2022-09-17 10:17:47.117
+2022-09-17 10:17:51.783 [main] ERROR - error while generating tag: concept
+2022-09-17 10:17:51.864 [main] ERROR - error while generating tag: people
+2022-09-17 10:17:51.968 [main] ERROR - error while generating tag: concept
+2022-09-17 10:17:52.040 [main] ERROR - error while generating tag: movie
+2022-09-17 10:17:52.108 [main] ERROR - error while generating tag: people
+2022-09-17 10:17:52.117 [main] INFO  - process finishing at 2022-09-17 10:17:52.117
+2022-09-17 10:18:10.532 [main] INFO  - process started at 2022-09-17 10:18:10.527
+2022-09-17 10:18:15.250 [main] ERROR - error while generating tag: concept
+2022-09-17 10:18:15.308 [main] ERROR - error while generating tag: people
+2022-09-17 10:18:15.403 [main] ERROR - error while generating tag: concept
+2022-09-17 10:18:15.468 [main] ERROR - error while generating tag: movie
+2022-09-17 10:18:15.529 [main] ERROR - error while generating tag: people
+2022-09-17 10:18:15.538 [main] INFO  - process finishing at 2022-09-17 10:18:15.538
+2022-09-17 10:18:47.473 [main] INFO  - process started at 2022-09-17 10:18:47.466
+2022-09-17 10:19:15.403 [main] INFO  - process started at 2022-09-17 10:19:15.398
+2022-09-17 10:19:54.475 [main] INFO  - process started at 2022-09-17 10:19:54.467
+2022-09-17 10:20:50.046 [main] INFO  - process started at 2022-09-17 10:20:50.038
+2022-09-17 10:20:55.002 [main] ERROR - error while generating tag: concept
+2022-09-17 10:20:55.062 [main] ERROR - error while generating tag: people
+2022-09-17 10:20:55.157 [main] ERROR - error while generating tag: concept
+2022-09-17 10:20:55.219 [main] ERROR - error while generating tag: movie
+2022-09-17 10:20:55.282 [main] ERROR - error while generating tag: people
+2022-09-17 10:20:55.291 [main] INFO  - process finishing at 2022-09-17 10:20:55.291
+2022-09-17 10:21:26.705 [main] INFO  - process started at 2022-09-17 10:21:26.7
+2022-09-17 10:21:32.740 [main] ERROR - error while generating tag: concept
+2022-09-17 10:21:32.800 [main] ERROR - error while generating tag: people
+2022-09-17 10:21:32.892 [main] ERROR - error while generating tag: concept
+2022-09-17 10:21:32.971 [main] ERROR - error while generating tag: movie
+2022-09-17 10:21:33.043 [main] ERROR - error while generating tag: people
+2022-09-17 10:21:33.056 [main] INFO  - process finishing at 2022-09-17 10:21:33.056
+2022-09-17 10:21:57.749 [main] INFO  - process started at 2022-09-17 10:21:57.744
+2022-09-17 10:22:01.331 [main] ERROR - error while generating tag: concept
+2022-09-17 10:22:01.397 [main] ERROR - error while generating tag: people
+2022-09-17 10:22:01.507 [main] ERROR - error while generating tag: concept
+2022-09-17 10:22:01.577 [main] ERROR - error while generating tag: movie
+2022-09-17 10:22:01.642 [main] ERROR - error while generating tag: people
+2022-09-17 10:22:01.655 [main] INFO  - process finishing at 2022-09-17 10:22:01.655
+2022-09-17 10:22:44.274 [main] INFO  - process started at 2022-09-17 10:22:44.267
+2022-09-17 10:22:48.724 [main] ERROR - error while generating tag: concept
+2022-09-17 10:22:48.790 [main] ERROR - error while generating tag: people
+2022-09-17 10:22:48.882 [main] ERROR - error while generating tag: concept
+2022-09-17 10:22:48.947 [main] ERROR - error while generating tag: movie
+2022-09-17 10:22:49.010 [main] ERROR - error while generating tag: people
+2022-09-17 10:22:49.021 [main] INFO  - process finishing at 2022-09-17 10:22:49.021
+2022-09-17 10:28:52.078 [main] INFO  - process started at 2022-09-17 10:28:52.074
+2022-09-17 10:29:03.104 [main] ERROR - error while generating tag: concept
+2022-09-17 10:29:03.172 [main] ERROR - error while generating tag: people
+2022-09-17 10:29:03.274 [main] ERROR - error while generating tag: concept
+2022-09-17 10:29:03.334 [main] ERROR - error while generating tag: movie
+2022-09-17 10:29:03.392 [main] ERROR - error while generating tag: people
+2022-09-17 10:29:03.402 [main] INFO  - process finishing at 2022-09-17 10:29:03.402
+2022-09-17 10:29:44.901 [main] INFO  - process started at 2022-09-17 10:29:44.894
+2022-09-17 10:31:13.316 [main] INFO  - process started at 2022-09-17 10:31:13.312
+2022-09-17 10:31:20.844 [main] ERROR - error while generating tag: concept
+2022-09-17 10:31:20.898 [main] ERROR - error while generating tag: people
+2022-09-17 10:31:20.987 [main] ERROR - error while generating tag: concept
+2022-09-17 10:31:21.041 [main] ERROR - error while generating tag: movie
+2022-09-17 10:31:21.096 [main] ERROR - error while generating tag: people
+2022-09-17 10:31:21.105 [main] INFO  - process finishing at 2022-09-17 10:31:21.105
+2022-09-17 10:31:44.566 [main] INFO  - process started at 2022-09-17 10:31:44.562
+2022-09-17 10:31:48.286 [main] ERROR - error while generating tag: concept
+2022-09-17 10:31:48.348 [main] ERROR - error while generating tag: people
+2022-09-17 10:31:48.450 [main] ERROR - error while generating tag: concept
+2022-09-17 10:31:48.513 [main] ERROR - error while generating tag: movie
+2022-09-17 10:31:48.574 [main] ERROR - error while generating tag: people
+2022-09-17 10:31:48.585 [main] INFO  - process finishing at 2022-09-17 10:31:48.585
+2022-09-17 10:37:27.551 [main] INFO  - process started at 2022-09-17 10:37:27.546
+2022-09-17 10:37:32.680 [main] INFO  - tag concept not found
+2022-09-17 10:37:32.730 [main] ERROR - error while generating tag: people
+2022-09-17 10:37:32.832 [main] INFO  - tag concept not found
+2022-09-17 10:37:32.900 [main] ERROR - error while generating tag: movie
+2022-09-17 10:37:32.974 [main] ERROR - error while generating tag: people
+2022-09-17 10:37:32.986 [main] INFO  - process finishing at 2022-09-17 10:37:32.986
+2022-09-17 10:39:46.156 [main] INFO  - process started at 2022-09-17 10:39:46.152
+2022-09-17 10:39:50.898 [main] INFO  - tag concept not found
+2022-09-17 10:39:51.057 [main] ERROR - error while generating tag: people
+2022-09-17 10:39:51.145 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:39:51.200 [main] ERROR - error while generating tag: movie
+2022-09-17 10:39:51.251 [main] ERROR - error while generating tag: people
+2022-09-17 10:39:51.261 [main] INFO  - process finishing at 2022-09-17 10:39:51.26
+2022-09-17 10:44:32.474 [main] INFO  - process started at 2022-09-17 10:44:32.466
+2022-09-17 10:44:36.677 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:44:36.726 [main] ERROR - error while generating tag: people
+2022-09-17 10:44:36.819 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:44:36.874 [main] ERROR - error while generating tag: movie
+2022-09-17 10:44:36.926 [main] ERROR - error while generating tag: people
+2022-09-17 10:44:36.935 [main] INFO  - process finishing at 2022-09-17 10:44:36.935
+2022-09-17 10:46:27.351 [main] INFO  - process started at 2022-09-17 10:46:27.346
+2022-09-17 10:46:31.529 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:46:31.584 [main] ERROR - error while generating tag: people
+2022-09-17 10:46:31.675 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:46:31.729 [main] ERROR - error while generating tag: movie
+2022-09-17 10:46:31.788 [main] ERROR - error while generating tag: people
+2022-09-17 10:46:31.798 [main] INFO  - process finishing at 2022-09-17 10:46:31.798
+2022-09-17 10:46:59.072 [main] INFO  - process started at 2022-09-17 10:46:59.066
+2022-09-17 10:47:08.185 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:47:08.238 [main] ERROR - error while generating tag: people
+2022-09-17 10:47:08.320 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:47:08.372 [main] ERROR - error while generating tag: movie
+2022-09-17 10:47:08.424 [main] ERROR - error while generating tag: people
+2022-09-17 10:47:08.433 [main] INFO  - process finishing at 2022-09-17 10:47:08.433
+2022-09-17 10:49:53.262 [main] INFO  - process started at 2022-09-17 10:49:53.254
+2022-09-17 10:49:59.478 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:49:59.540 [main] ERROR - error while generating tag: people
+2022-09-17 10:49:59.637 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:49:59.701 [main] ERROR - error while generating tag: movie
+2022-09-17 10:49:59.761 [main] ERROR - error while generating tag: people
+2022-09-17 10:49:59.770 [main] INFO  - process finishing at 2022-09-17 10:49:59.77
+2022-09-17 10:54:24.756 [main] INFO  - process started at 2022-09-17 10:54:24.751
+2022-09-17 10:54:29.655 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:54:29.723 [main] ERROR - error while generating tag: people
+2022-09-17 10:54:29.814 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:54:29.868 [main] ERROR - error while generating tag: movie
+2022-09-17 10:54:29.918 [main] ERROR - error while generating tag: people
+2022-09-17 10:54:29.926 [main] INFO  - process finishing at 2022-09-17 10:54:29.926
+2022-09-17 10:55:09.566 [main] INFO  - process started at 2022-09-17 10:55:09.56
+2022-09-17 10:55:14.654 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:55:14.706 [main] ERROR - error while generating tag: people
+2022-09-17 10:55:14.799 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:55:14.852 [main] ERROR - error while generating tag: movie
+2022-09-17 10:55:14.903 [main] ERROR - error while generating tag: people
+2022-09-17 10:55:14.914 [main] INFO  - process finishing at 2022-09-17 10:55:14.913
+2022-09-17 10:55:44.468 [main] INFO  - process started at 2022-09-17 10:55:44.464
+2022-09-17 10:55:49.462 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:55:49.515 [main] ERROR - error while generating tag: people
+2022-09-17 10:55:49.601 [main] ERROR - error while creatintg tag java.lang.IllegalStateException: No match found
+2022-09-17 10:55:49.655 [main] ERROR - error while generating tag: movie
+2022-09-17 10:55:49.709 [main] ERROR - error while generating tag: people
+2022-09-17 10:55:49.718 [main] INFO  - process finishing at 2022-09-17 10:55:49.718
+2022-09-17 10:59:59.627 [main] INFO  - process started at 2022-09-17 10:59:59.622
+2022-09-17 11:00:03.511 [main] ERROR - error while generating tag: people
+2022-09-17 11:00:03.673 [main] ERROR - error while generating tag: movie
+2022-09-17 11:00:03.770 [main] ERROR - error while generating tag: people
+2022-09-17 11:00:03.779 [main] INFO  - process finishing at 2022-09-17 11:00:03.779
+2022-09-17 11:01:40.701 [main] INFO  - process started at 2022-09-17 11:01:40.696
+2022-09-17 11:01:44.852 [main] ERROR - error while generating tag: people
+2022-09-17 11:01:44.994 [main] ERROR - error while generating tag: movie
+2022-09-17 11:01:45.048 [main] ERROR - error while generating tag: people
+2022-09-17 11:01:45.059 [main] INFO  - process finishing at 2022-09-17 11:01:45.059
+2022-09-17 11:06:02.196 [main] INFO  - process started at 2022-09-17 11:06:02.192
+2022-09-17 11:06:06.877 [main] ERROR - error while generating tag: people
+2022-09-17 11:06:07.009 [main] ERROR - error while generating tag: movie
+2022-09-17 11:06:07.059 [main] ERROR - error while generating tag: people
+2022-09-17 11:06:07.069 [main] INFO  - process finishing at 2022-09-17 11:06:07.069
+2022-09-17 11:21:21.734 [main] INFO  - process started at 2022-09-17 11:21:21.727
+2022-09-17 11:21:26.927 [main] ERROR - error while generating tag: movie
+2022-09-17 11:21:27.019 [main] INFO  - process finishing at 2022-09-17 11:21:27.019
+2022-09-17 11:28:20.899 [main] INFO  - process started at 2022-09-17 11:28:20.891
+2022-09-17 11:28:26.248 [main] INFO  - process finishing at 2022-09-17 11:28:26.248
+2022-09-17 11:31:04.883 [main] INFO  - process started at 2022-09-17 11:31:04.875
+2022-09-17 11:31:09.822 [main] INFO  - process finishing at 2022-09-17 11:31:09.822
+2022-09-17 11:42:17.362 [main] INFO  - process started at 2022-09-17 11:42:17.355
+2022-09-17 11:42:22.806 [main] INFO  - process finishing at 2022-09-17 11:42:22.806
+2022-09-17 11:52:21.209 [main] INFO  - process started at 2022-09-17 11:52:21.201
+2022-09-17 11:52:25.756 [main] INFO  - process finishing at 2022-09-17 11:52:25.756
+2022-09-17 13:52:12.558 [main] INFO  - process started at 2022-09-17 13:52:12.551
+2022-09-17 13:52:16.861 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.add(Object)" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:16.919 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.size()" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:16.955 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.size()" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:16.990 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.add(Object)" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:17.024 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.add(Object)" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:17.055 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.size()" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:17.087 [main] ERROR - java.lang.NullPointerException: Cannot invoke "java.util.Set.add(Object)" because "com.ramos.obsidian.models.Note.contained_header1" is null
+2022-09-17 13:52:17.088 [main] INFO  - process finishing at 2022-09-17 13:52:17.088
+2022-09-17 13:56:22.650 [main] INFO  - process started at 2022-09-17 13:56:22.642
+2022-09-17 13:56:26.681 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 13:56:26.755 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 13:56:27.044 [main] INFO  - process finishing at 2022-09-17 13:56:27.044
+2022-09-17 13:59:58.136 [main] INFO  - process started at 2022-09-17 13:59:58.124
+2022-09-17 14:00:02.902 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:00:02.996 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:00:03.239 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:00:03.357 [main] INFO  - process finishing at 2022-09-17 14:00:03.357
+2022-09-17 14:11:19.399 [main] INFO  - process started at 2022-09-17 14:11:19.392
+2022-09-17 14:11:23.304 [main] INFO  - tag concept not found
+2022-09-17 14:11:23.689 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:11:23.946 [main] INFO  - tag people not found
+2022-09-17 14:11:24.273 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:11:24.740 [main] INFO  - tag concept not found
+2022-09-17 14:11:25.323 [main] INFO  - tag movie not found
+2022-09-17 14:11:25.420 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:11:25.513 [main] INFO  - tag people not found
+2022-09-17 14:11:25.642 [main] INFO  - process finishing at 2022-09-17 14:11:25.642
+2022-09-17 14:12:54.116 [main] INFO  - process started at 2022-09-17 14:12:54.109
+2022-09-17 14:12:59.276 [main] INFO  - tag concept not found
+2022-09-17 14:12:59.376 [main] INFO  - tag people not found
+2022-09-17 14:12:59.532 [main] INFO  - tag concept not found
+2022-09-17 14:12:59.628 [main] INFO  - tag movie not found
+2022-09-17 14:12:59.706 [main] INFO  - tag people not found
+2022-09-17 14:12:59.724 [main] INFO  - process finishing at 2022-09-17 14:12:59.724
+2022-09-17 14:15:28.785 [main] INFO  - process started at 2022-09-17 14:15:28.778
+2022-09-17 14:15:31.971 [main] INFO  - tag concept not found
+2022-09-17 14:15:32.053 [main] INFO  - tag people not found
+2022-09-17 14:15:32.174 [main] INFO  - tag concept not found
+2022-09-17 14:15:32.285 [main] INFO  - tag movie not found
+2022-09-17 14:15:32.363 [main] INFO  - tag people not found
+2022-09-17 14:15:32.379 [main] INFO  - process finishing at 2022-09-17 14:15:32.378
+2022-09-17 14:20:34.222 [main] INFO  - process started at 2022-09-17 14:20:34.209
+2022-09-17 14:20:38.522 [main] INFO  - tag concept not found
+2022-09-17 14:20:38.600 [main] INFO  - tag people not found
+2022-09-17 14:20:38.765 [main] INFO  - tag concept not found
+2022-09-17 14:20:38.863 [main] INFO  - tag movie not found
+2022-09-17 14:20:38.964 [main] INFO  - tag people not found
+2022-09-17 14:20:38.981 [main] INFO  - process finishing at 2022-09-17 14:20:38.981
+2022-09-17 14:23:54.761 [main] INFO  - process started at 2022-09-17 14:23:54.75
+2022-09-17 14:23:58.886 [main] INFO  - tag concept not found
+2022-09-17 14:23:58.967 [main] INFO  - tag people not found
+2022-09-17 14:23:59.110 [main] INFO  - tag concept not found
+2022-09-17 14:23:59.193 [main] INFO  - tag movie not found
+2022-09-17 14:23:59.273 [main] INFO  - tag people not found
+2022-09-17 14:23:59.289 [main] INFO  - process finishing at 2022-09-17 14:23:59.288
+2022-09-17 14:34:00.196 [main] INFO  - process started at 2022-09-17 14:34:00.19
+2022-09-17 14:34:03.909 [main] INFO  - process finishing at 2022-09-17 14:34:03.909
+2022-09-17 14:35:48.169 [main] INFO  - process started at 2022-09-17 14:35:48.164
+2022-09-17 14:35:52.515 [main] INFO  - process finishing at 2022-09-17 14:35:52.515
+2022-09-17 14:37:59.315 [main] INFO  - process started at 2022-09-17 14:37:59.309
+2022-09-17 14:38:02.561 [main] INFO  - tag concept not found
+2022-09-17 14:38:02.697 [main] INFO  - tag concept not found
+2022-09-17 14:38:02.826 [main] INFO  - process finishing at 2022-09-17 14:38:02.826
+2022-09-17 14:39:57.040 [main] INFO  - process started at 2022-09-17 14:39:57.035
+2022-09-17 14:40:00.804 [main] INFO  - tag concept not found
+2022-09-17 14:40:00.882 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:40:01.127 [main] INFO  - process finishing at 2022-09-17 14:40:01.127
+2022-09-17 14:42:32.517 [main] INFO  - process started at 2022-09-17 14:42:32.512
+2022-09-17 14:42:36.158 [main] INFO  - process finishing at 2022-09-17 14:42:36.157
+2022-09-17 14:45:10.479 [main] INFO  - process started at 2022-09-17 14:45:10.474
+2022-09-17 14:45:14.586 [main] INFO  - tag concept not found
+2022-09-17 14:45:14.662 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:45:14.923 [main] INFO  - process finishing at 2022-09-17 14:45:14.923
+2022-09-17 14:51:21.467 [main] INFO  - process started at 2022-09-17 14:51:21.463
+2022-09-17 14:51:24.980 [main] INFO  - tag concept not found
+2022-09-17 14:51:25.074 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:51:25.318 [main] INFO  - process finishing at 2022-09-17 14:51:25.318
+2022-09-17 14:53:12.162 [main] INFO  - process started at 2022-09-17 14:53:12.157
+2022-09-17 14:53:15.380 [main] INFO  - tag concept not found
+2022-09-17 14:53:15.455 [main] ERROR - java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:53:15.705 [main] INFO  - process finishing at 2022-09-17 14:53:15.704
+2022-09-17 14:55:13.765 [main] INFO  - process started at 2022-09-17 14:55:13.76
+2022-09-17 14:55:17.205 [main] INFO  - process finishing at 2022-09-17 14:55:17.205
+2022-09-17 14:55:52.033 [main] INFO  - process started at 2022-09-17 14:55:52.028
+2022-09-17 14:55:55.723 [main] INFO  - tag concept not found
+2022-09-17 14:55:55.792 [main] ERROR - error while searching note (NotesReader): java.lang.StringIndexOutOfBoundsException: begin 0, end -2, length 0
+2022-09-17 14:55:56.027 [main] INFO  - process finishing at 2022-09-17 14:55:56.027
+2022-09-17 14:58:38.380 [main] INFO  - process started at 2022-09-17 14:58:38.375
+2022-09-17 14:58:42.772 [main] INFO  - process finishing at 2022-09-17 14:58:42.772
+2022-09-17 15:01:27.686 [main] INFO  - process started at 2022-09-17 15:01:27.681
+2022-09-17 15:01:33.507 [main] INFO  - process finishing at 2022-09-17 15:01:33.507
+2022-09-17 15:04:38.570 [main] INFO  - process started at 2022-09-17 15:04:38.566
+2022-09-17 15:04:43.354 [main] INFO  - process finishing at 2022-09-17 15:04:43.353
+2022-09-17 15:07:50.710 [main] INFO  - process started at 2022-09-17 15:07:50.705
+2022-09-17 15:07:55.146 [main] INFO  - process finishing at 2022-09-17 15:07:55.146
+2022-09-17 15:12:33.504 [main] INFO  - process started at 2022-09-17 15:12:33.499
+2022-09-17 15:12:37.695 [main] ERROR - error while generating tag: people
+2022-09-17 15:12:37.820 [main] ERROR - error while generating tag: movie
+2022-09-17 15:12:37.869 [main] ERROR - error while generating tag: people
+2022-09-17 15:12:37.879 [main] INFO  - process finishing at 2022-09-17 15:12:37.879
+2022-09-17 15:14:41.753 [main] INFO  - process started at 2022-09-17 15:14:41.748
+2022-09-17 15:14:45.620 [main] ERROR - error while generating tag: movie
+2022-09-17 15:14:45.676 [main] INFO  - process finishing at 2022-09-17 15:14:45.676
+2022-09-17 15:15:40.014 [main] INFO  - process started at 2022-09-17 15:15:40.01
+2022-09-17 15:15:43.730 [main] INFO  - process finishing at 2022-09-17 15:15:43.73
+2022-09-17 15:31:09.932 [main] INFO  - process started at 2022-09-17 15:31:09.927
+2022-09-17 15:31:14.326 [main] INFO  - process finishing at 2022-09-17 15:31:14.326
+2022-09-17 15:32:03.033 [main] INFO  - process started at 2022-09-17 15:32:03.027
+2022-09-17 15:32:08.045 [main] INFO  - process finishing at 2022-09-17 15:32:08.044
+2022-09-17 15:47:18.327 [main] INFO  - process started at 2022-09-17 15:47:18.323
+2022-09-17 15:47:22.354 [main] INFO  - process finishing at 2022-09-17 15:47:22.354
+2022-09-17 15:51:49.529 [main] INFO  - process started at 2022-09-17 15:51:49.525
+2022-09-17 15:51:53.682 [main] INFO  - process finishing at 2022-09-17 15:51:53.682
+2022-09-17 15:54:17.825 [main] INFO  - process started at 2022-09-17 15:54:17.821
+2022-09-17 15:54:21.977 [main] INFO  - process finishing at 2022-09-17 15:54:21.977
+2022-09-17 15:57:10.999 [main] INFO  - process started at 2022-09-17 15:57:10.994
+2022-09-17 15:57:14.752 [main] INFO  - process finishing at 2022-09-17 15:57:14.752
+2022-09-17 16:01:46.261 [main] INFO  - process started at 2022-09-17 16:01:46.256
+2022-09-17 16:01:50.226 [main] INFO  - process finishing at 2022-09-17 16:01:50.226
+2022-09-17 16:07:35.443 [main] INFO  - process started at 2022-09-17 16:07:35.439
+2022-09-17 16:07:41.097 [main] INFO  - process finishing at 2022-09-17 16:07:41.097
+2022-09-17 16:14:06.795 [main] INFO  - process started at 2022-09-17 16:14:06.79
+2022-09-17 16:14:10.700 [main] INFO  - process finishing at 2022-09-17 16:14:10.7
+2022-09-17 16:25:50.584 [main] INFO  - process started at 2022-09-17 16:25:50.58
+2022-09-17 16:25:54.996 [main] INFO  - process finishing at 2022-09-17 16:25:54.996
+2022-09-17 16:35:59.262 [main] INFO  - process started at 2022-09-17 16:35:59.253
+2022-09-17 16:36:03.274 [main] INFO  - process finishing at 2022-09-17 16:36:03.274
+2022-09-17 17:01:50.775 [main] INFO  - process started at 2022-09-17 17:01:50.768
+2022-09-17 17:01:55.087 [main] INFO  - process finishing at 2022-09-17 17:01:55.087
+2022-09-17 17:02:42.765 [main] INFO  - process started at 2022-09-17 17:02:42.758
+2022-09-17 17:02:47.532 [main] INFO  - process finishing at 2022-09-17 17:02:47.532
+2022-09-17 17:05:06.474 [main] INFO  - process started at 2022-09-17 17:05:06.465
+2022-09-17 17:05:14.046 [main] INFO  - process finishing at 2022-09-17 17:05:14.046
+2022-09-17 17:11:54.749 [main] INFO  - process started at 2022-09-17 17:11:54.74
+2022-09-17 17:12:05.110 [main] INFO  - process finishing at 2022-09-17 17:12:05.109
+2022-09-17 17:14:59.387 [main] INFO  - process started at 2022-09-17 17:14:59.379
+2022-09-17 17:15:06.058 [main] INFO  - process finishing at 2022-09-17 17:15:06.057
+2022-09-17 17:24:03.169 [main] INFO  - process started at 2022-09-17 17:24:03.159
+2022-09-17 17:24:09.064 [main] ERROR - linked found, not not related note with name Victor Frankl 
+2022-09-17 17:24:09.504 [main] ERROR - linked found, not not related note with name Sense of Control
+2022-09-17 17:24:09.754 [main] INFO  - process finishing at 2022-09-17 17:24:09.754
+2022-09-17 17:25:35.538 [main] INFO  - process started at 2022-09-17 17:25:35.531
+2022-09-17 17:25:40.666 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:25:41.049 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:25:41.285 [main] INFO  - process finishing at 2022-09-17 17:25:41.285
+2022-09-17 17:27:31.513 [main] INFO  - process started at 2022-09-17 17:27:31.505
+2022-09-17 17:27:37.198 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:27:37.348 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:27:37.525 [main] INFO  - process finishing at 2022-09-17 17:27:37.525
+2022-09-17 17:29:13.162 [main] INFO  - process started at 2022-09-17 17:29:13.151
+2022-09-17 17:29:19.276 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:29:19.653 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:29:19.835 [main] INFO  - process finishing at 2022-09-17 17:29:19.835
+2022-09-17 17:36:00.837 [main] INFO  - process started at 2022-09-17 17:36:00.828
+2022-09-17 17:36:06.605 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:36:06.964 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:36:07.133 [main] INFO  - process finishing at 2022-09-17 17:36:07.133
+2022-09-17 17:38:43.340 [main] INFO  - process started at 2022-09-17 17:38:43.331
+2022-09-17 17:38:49.204 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:38:49.643 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:38:49.809 [main] INFO  - process finishing at 2022-09-17 17:38:49.809
+2022-09-17 17:40:02.758 [main] INFO  - process started at 2022-09-17 17:40:02.751
+2022-09-17 17:40:08.802 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:40:08.991 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:40:09.079 [main] INFO  - process finishing at 2022-09-17 17:40:09.079
+2022-09-17 17:43:10.123 [main] INFO  - process started at 2022-09-17 17:43:10.108
+2022-09-17 17:43:16.879 [main] ERROR - linked found, but not related note with name Victor Frankl 
+2022-09-17 17:43:17.020 [main] ERROR - linked found, but not related note with name Sense of Control
+2022-09-17 17:43:17.096 [main] INFO  - process finishing at 2022-09-17 17:43:17.096

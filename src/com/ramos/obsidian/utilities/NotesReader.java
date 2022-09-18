@@ -23,9 +23,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.UserPrincipal;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -48,16 +50,6 @@ public abstract class NotesReader {
 				fileAttributes = Files.readAttributes(path, BasicFileAttributes.class);
 				if ((FilenameUtils.getExtension(directory.toString())).equalsIgnoreCase("md")){
 					UserPrincipal owner = Files.getOwner(path, LinkOption.NOFOLLOW_LINKS);
-//	        		System.out.println(owner.getName() + " name of file owner");
-
-//	        		System.out.println(directory.getName() + " is markdown file name");
-//	        		System.out.println("file name: "+directory.getName());
-//	        		System.out.println("file path: "+directory.getParent());
-//	        		System.out.println("file content: "+FileUtils.readFileToString(directory, "UTF-8"));
-//	        		System.out.println("file extension: "+FilenameUtils.getExtension(directory.toString()));
-//	                System.out.println("created_on:     " + fileAttributes.creationTime());
-//	                System.out.println("lastAccessTime:   " + fileAttributes.lastAccessTime());
-//	                System.out.println("lastModifiedTime: " + fileAttributes.lastModifiedTime());
 	                //proceeding to work with the note
 	                //we check if the note exist in fluree, before proceed to create it
 	                try {
@@ -76,29 +68,34 @@ public abstract class NotesReader {
 				        if (consulting_response.equals("[]")) {
 						     //create folder because it does not exist
 				        	//create note
-				    		
-				        	Note my_Note = new Note(directory.getName().toString(), FileUtils.readFileToString(directory, "UTF-8"),fileAttributes.creationTime(), owner.getName().toString(), directory.getParent());
+				        	List<String> lines = Files.readAllLines(Path.of(path.toUri()));
+				        	String myString = String.join("\n", lines);
 				        	
+				        	//System.out.println("lines of note: "+myString);
+				        	//FileUtils.readFileToString(directory, "UTF-8").replace("\"", "'")
+				    		
+				        	Note my_Note = new Note(directory.getName().toString(), myString.replace("\"", "'"),fileAttributes.creationTime(), owner.getName().toString(), directory.getParent());
 				        	my_Note.generateHeader1(logger);
 				    		my_Note.generateHeader2(logger);
 				    		my_Note.generateHeader3(logger);
 				    		my_Note.generateHeader4(logger);
 				    		my_Note.generateHeader5(logger);
+				    		//check tags generation
 				    		my_Note.generateTags(logger,content_type, query_url,transaction_url,http_method);
-				        	//System.out.println("notes json: "+my_Note.getFullJSON(logger));
+				        	System.out.println("notes fluree json: "+my_Note.getPartialJSON(logger));
 				        		 //request to create the tag
 				        	try {
 				        		String transaction_response = HttpURLFlureeDBConnection.
-										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getFullJSON(logger));
-				        		System.out.println("transaction_response: "+transaction_response);
+										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getPartialJSON(logger));
+				        		System.out.println("transaction_response on note: "+transaction_response);
 							} catch (Exception e) {
 								// TODO: handle exception
-								logger.error("error while creating the folder: "+directory.toString());
+								logger.error("error while creating note: "+directory.toString());
 							}
 						} //consulting response
 					} catch (Exception e) {
 						// TODO: handle exception
-						logger.error(e.toString());
+						logger.error("error while searching note (NotesReader): "+e.toString());
 					}
 	                
 				}//directory.isDirectory()
@@ -106,7 +103,7 @@ public abstract class NotesReader {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				logger.info("error while reading attributes of  "+directory);
+				logger.error("error while reading attributes of  "+directory.getName());
 			}
         });
     }

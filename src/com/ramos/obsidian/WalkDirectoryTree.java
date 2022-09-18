@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 import com.ramos.obsidian.models.Folder;
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
 import com.ramos.obsidian.utilities.FolderReader;
+import com.ramos.obsidian.utilities.NotesLinker;
 import com.ramos.obsidian.utilities.NotesReader;
  
 // Java sample program to iterate through directory tree
@@ -72,7 +73,7 @@ public class WalkDirectoryTree {
 			logger.info("process started at "+timestamp);
 			
 			//asking to customer, and getting answer
-			Console console = System.console();
+			//Console console = System.console();
 			Boolean read_folder = false;
 			while (!read_folder) {
 				System.out.println("Doy you want to read obsidian folders?: (y/n)");
@@ -94,6 +95,18 @@ public class WalkDirectoryTree {
 					read_notes=true;
 				} else if (read_note_answer.equalsIgnoreCase("n")){
 					read_notes=true;
+				}
+			}//while (read_folder) 
+			
+			Boolean link_notes = false;
+			while (!link_notes) {
+				System.out.println("Doy you want to link obsidian notes?: (y/n)");
+				String link_notes_answer = input.nextLine();    //getting an answer from user.
+				if (link_notes_answer.equalsIgnoreCase("y")) {
+					NotesLinker.notesSearchLink(rootFolder, logger, content_type, sparql_url, transaction_url,http_method);
+					link_notes=true;
+				} else if (link_notes_answer.equalsIgnoreCase("n")){
+					link_notes=true;
 				}
 			}//while (read_folder) 
 			

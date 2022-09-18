@@ -23,6 +23,7 @@
  */
 package com.ramos.obsidian.models;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.attribute.FileTime;
@@ -84,7 +85,17 @@ public final class Note {
 		this.created_on = created_on;
 		this.creator = creator;
 		this.located_in = located_in;
-		//this.full_notes_links=false;
+		this.contained_header1.clear();
+		this.contained_header2.clear();
+		this.contained_header3.clear();
+		this.contained_header4.clear();
+		this.contained_header5.clear();
+		this.contained_attention.clear();
+		this.contained_emphasys.clear();
+		this.contained_tags.clear();
+		this.contained_notes.clear();
+		this.tags_map.clear();
+		this.linked_notes.clear();
 	}
 
 	
@@ -378,7 +389,7 @@ public final class Note {
 			}
 			fluree_bodies.add(getHeader2Json(logger, contained_header2));
 		} else {
-			System.out.println("contained_header2.isEmpty()***: "+contained_header2.isEmpty());
+			//System.out.println("contained_header2.isEmpty()***: "+contained_header2.isEmpty());
 		}
 		
 		//adding header3
@@ -461,6 +472,7 @@ public final class Note {
 		    body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
 			
 			//System.out.println("fluree_bodies_string : "+body_result);
+			 //return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"\"}]";//if not tag, issue  "contains_tag"
 			 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"]";
 		    }
 		    //end fluree_array.size()==1
@@ -916,35 +928,56 @@ public final class Note {
 		Matcher m = pretags.matcher(this.content);
 		while (m.find()) {
 				try {
-					String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/textContent \\\"%s\\\". }\"", m.group(1));
+					String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/text_content \\\"%s\\\". }\"", m.group(1));
+					//System.out.println("tags query: "+http_body);
 					consulting_response = HttpURLFlureeDBConnection.
 							sendOkHttpClientPost(content_type,query_url,http_method,http_body);
-					 try {
-						 	Pattern pattern1 = Pattern.compile("\\[(\\d+)\\]");
-					        Matcher matcher1 = pattern1.matcher(consulting_response);
-					        //checking matches
-					        if (matcher1.find()) {
-							     HashMap result = new HashMap<>();
-								 tags_map.put(m.group(1), matcher1.group(1));
-								 //we found the tag, thus we get its fluree id, and set exist in fluree to true
+					//System.out.println("consulting_response: "+consulting_response);
+					if (consulting_response.equalsIgnoreCase("[]")) {
+						System.out.println("tag " +m.group(1)+ " not found");
+						 logger.info("tag " +m.group(1)+ " not found");
+						 //creating the tag object in db
+							final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
+									  +"\"text_content\""+":"+"\""+m.group(1)+"\"}]\n";
+							 //request to create the tag
+							 transaction_response = HttpURLFlureeDBConnection.
+										sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
+							  //converting to json to get fluree id
+							  JSONObject tag_json = new JSONObject(transaction_response);
+							  //System.out.println("transaction_response on tag: "+transaction_response);
+							 // System.out.println("Long.toString(tag_json.getJSONObject(\"tempids\").getLong(\"Tag$\"+m.group(1))): "+Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1))));
+							  try {
+								  Long fluree_id = tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1));
+								  tags_map.put(m.group(1), Long.toString(fluree_id));
+							} catch (Exception e) {
+								// TODO: handle exception
+								logger.error("error while adding tag "+m.group(1)+" to map");
+							}
+							  
+					} else {
+						System.out.println("found tag "+m.group(1));
+						try {
+							String consulting_left_brackets =consulting_response.replace("[", "");
+				        	//System.out.println("consulting_left_brackets: "+consulting_left_brackets);
+				        	String consulting_right_brackets =consulting_left_brackets.replace("]", "");
+				        	//System.out.println("consulting_right_brackets: "+consulting_right_brackets);
+				        	//after removing brackets, then try to splitting, if any
+				            String[] result = consulting_right_brackets.split(",");
+				            //System.out.println("splitted result "+result.length);
+				            if (result.length > 1) {
+				            	logger.error("error while generating tag: "+m.group(1));
 							} else {
-								 System.out.println("tag " +m.group(1)+ " not found");
-								 //creating the tag object in db
-									final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
-											  +"\"text_content\""+":"+"\""+m.group(1)+"\"}]\n";
-									 //request to create the tag
-									 transaction_response = HttpURLFlureeDBConnection.
-												sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
-									  //converting to json to get fluree id
-									  JSONObject tag_json = new JSONObject(transaction_response);
-									  tags_map.put(m.group(1), Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1))));
+								System.out.println("fluree id: "+result[0]);
+								tags_map.put(m.group(1), result[0]);
 							}
 
-				        } catch (JSONException err) {
-				            System.out.println("Exception : "+err.toString());
-				        }//end of second try catch
+						} catch (Exception e) {
+							logger.error("error while removing [ from string "+consulting_response);
+						}
+					}
+
 				} catch (Exception e) {
-				    e.printStackTrace();
+		            logger.error("error while creatintg tag "+e.toString());
 				}//end of first try catch
 		}//end while of m
 		
