@@ -34,7 +34,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import com.ramos.obsidian.WalkDirectoryTree;
+import com.ramos.obsidian.Main;
 
 class NoteTest2 {
 	

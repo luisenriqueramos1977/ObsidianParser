@@ -955,7 +955,7 @@ public final class Note {
 							}
 							  
 					} else {
-						System.out.println("found tag "+m.group(1));
+						//System.out.println("found tag "+m.group(1));
 						try {
 							String consulting_left_brackets =consulting_response.replace("[", "");
 				        	//System.out.println("consulting_left_brackets: "+consulting_left_brackets);
@@ -967,7 +967,7 @@ public final class Note {
 				            if (result.length > 1) {
 				            	logger.error("error while generating tag: "+m.group(1));
 							} else {
-								System.out.println("fluree id: "+result[0]);
+								//System.out.println("fluree id: "+result[0]);
 								tags_map.put(m.group(1), result[0]);
 							}
 

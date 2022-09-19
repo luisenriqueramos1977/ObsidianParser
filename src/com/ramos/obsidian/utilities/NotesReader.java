@@ -82,12 +82,14 @@ public abstract class NotesReader {
 				    		my_Note.generateHeader5(logger);
 				    		//check tags generation
 				    		my_Note.generateTags(logger,content_type, query_url,transaction_url,http_method);
-				        	System.out.println("notes fluree json: "+my_Note.getPartialJSON(logger));
+				    		//generate the json of note
+				    		my_Note.getPartialJSON(logger);
+				        	//System.out.println("notes fluree json: "+my_Note.getPartialJSON(logger));
 				        		 //request to create the tag
 				        	try {
 				        		String transaction_response = HttpURLFlureeDBConnection.
 										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getPartialJSON(logger));
-				        		System.out.println("transaction_response on note: "+transaction_response);
+				        		//System.out.println("transaction_response on note: "+transaction_response);
 							} catch (Exception e) {
 								// TODO: handle exception
 								logger.error("error while creating note: "+directory.toString());
