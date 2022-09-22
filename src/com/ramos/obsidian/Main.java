@@ -81,7 +81,7 @@ public class Main {
 					+ "Welcome to Obsidian Fluree Parser! \n"
 					+ "Some information will be requested and verified. \n"
 					+ "Take in account that if some information is wrong the program \n"
-					+ "will be inmediately terminated."
+					+ "will be inmediately terminated.\n"
 					+ "*******************************************************************");
 			Boolean obsidian_folder = false;
 			while (!obsidian_folder) {
@@ -138,10 +138,10 @@ public class Main {
 					
 					if (m.find()) {
 						fluree_db_gotten = true;
-						sparql_url = fluree_url+"/"+fluree_db_name+"/sparql";
-						System.out.println("sparql_url: "+sparql_url);
-						transaction_url = fluree_url+"/"+fluree_db_name+"/transact";
-						System.out.println("transaction_url: "+transaction_url);
+						sparql_url = fluree_url+"/fdb/"+fluree_db_name+"/sparql";
+						//System.out.println("sparql_url: "+sparql_url);
+						transaction_url = fluree_url+"/fdb/"+fluree_db_name+"/transact";
+						//System.out.println("transaction_url: "+transaction_url);
 					} else {
 						fluree_db_gotten= false;
 			            logger.error(fluree_db_name + " improperly formatted.  Program terminated");
