@@ -54,10 +54,6 @@ public abstract class NotesReader {
 	                //we check if the note exist in fluree, before proceed to create it
 	                try {
 	                	//modify separator
-//	                	String modified_directory = null;
-//	                	if (directory.toString().contains("\\")) {
-//							modified_directory = directory.toString().replace("\\", "/");
-//						}
 	                	String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", directory.getName().replaceAll("\\s+","_"));
 	                	//System.out.println("the query: "+http_body);
 	                	String consulting_response = HttpURLFlureeDBConnection.

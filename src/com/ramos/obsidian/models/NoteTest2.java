@@ -47,12 +47,12 @@ class NoteTest2 {
 	//create note string
 		final String content = "# heading 1 \n"
 				 + "# second heading 1 #testingtag \n"
-			     + "bla bla bla\n"
-			     + "fbla bla bla [[note 2]] \n"
+			     + "bla bla bla  *first emphasys* \n"
+			     + "fbla bla bla [[note 2]] **first attention** \n"
 			     + "### heading 3 djdjdj \n"
-			     + "bla [[note 3]] bla bla \n"
+			     + "bla [[note 3]] bla bla *second emphasys* \n"
 			     + "## heading 2 bal;kasddfas \n"
-			     + "fbla bla bla \n"
+			     + "fbla bla bla **second attention** \n"
 		         + "fbla [[note 4]] bla bla \n"
 				+ "#happy, #new, #year #cancer \n";
 		
@@ -67,14 +67,16 @@ class NoteTest2 {
 	@Order(1)
 	void testGetHeader1() {
 		my_Note.setContent(content);
+		my_Note.generateAttention(logger);
+		my_Note.generateEmphasys(logger);
 		my_Note.generateHeader1(logger);
 		my_Note.generateHeader2(logger);
 		my_Note.generateHeader3(logger);
 		my_Note.generateHeader4(logger);
 		my_Note.generateHeader5(logger);
-		my_Note.generateNoteLinks(logger,"text/plain", 
-				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql"
-				,"POST");
+		//my_Note.generateNoteLinks(logger,"text/plain", 
+		//		"http://127.0.0.1:8090/fdb/my/obsidian3/sparql"
+		//		,"POST");
 		my_Note.generateTags(logger,"text/plain", 
 				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
 				"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");

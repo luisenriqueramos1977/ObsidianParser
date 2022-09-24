@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ramos.obsidian.models.Folder;
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
+import com.ramos.obsidian.utilities.FolderNotesLinker;
 import com.ramos.obsidian.utilities.FolderReader;
 import com.ramos.obsidian.utilities.NotesLinker;
 import com.ramos.obsidian.utilities.NotesReader;
@@ -189,6 +190,22 @@ public class Main {
 					link_notes=true;
 				} else if (link_notes_answer.equalsIgnoreCase("n")){
 					link_notes=true;
+				}
+			}//while (read_folder) 
+			
+			/*
+			 * search for notes linked to folder
+			 */
+			Boolean folder_link_notes = false;
+			while (!folder_link_notes) {
+				System.out.println("Doy you want to link folder to obsidian notes?: (y/n)");
+				String link_notes_answer = input.nextLine();    //getting an answer from user.
+				if (link_notes_answer.equalsIgnoreCase("y")) {
+					NotesLinker.notesSearchLink(obsidianFolder, logger, content_type, sparql_url, transaction_url,http_method);
+					FolderNotesLinker.folderSearchNotesLink(logger, content_type, sparql_url, transaction_url,http_method);
+					folder_link_notes=true;
+				} else if (link_notes_answer.equalsIgnoreCase("n")){
+					folder_link_notes=true;
 				}
 			}//while (read_folder) 
 			

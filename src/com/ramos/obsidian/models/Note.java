@@ -62,7 +62,7 @@ public final class Note {
 	private static FileTime created_on;
 	private static String creator;
 	private static String located_in;
-	private static List<Attention> contained_attention = new ArrayList<Attention>();
+	private static Set<Attention> contained_attention = new HashSet<>();
 	private static Set<Emphasys> contained_emphasys = new HashSet<>();
 	private static Set<Header1> contained_header1 = new HashSet<>();
 	private static Set<Header2> contained_header2 = new HashSet<>();
@@ -193,7 +193,7 @@ public final class Note {
 	/**
 	 * @return the contained_attention
 	 */
-	public static List<Attention> getContained_attention() {
+	public static Set<Attention> getContained_attention() {
 		return contained_attention;
 	}
 
@@ -201,7 +201,7 @@ public final class Note {
 	/**
 	 * @param contained_attention the contained_attention to set
 	 */
-	public static void setContained_attention(List<Attention> contained_attention) {
+	public static void setContained_attention(Set<Attention> contained_attention) {
 		Note.contained_attention = contained_attention;
 	}
 
@@ -469,8 +469,8 @@ public final class Note {
 			String fluree_bodies_string = fluree_bodies.stream().map(n -> n).collect(Collectors.joining(",\n"));
 			String body_result = null;
 			//check end of string
-		    body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
-			
+		    //body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
+			body_result = fluree_bodies_string;
 			//System.out.println("fluree_bodies_string : "+body_result);
 			 //return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"\"}]";//if not tag, issue  "contains_tag"
 			 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"]";
@@ -479,7 +479,7 @@ public final class Note {
 	    }//fluree_bodies.isEmpty()
 	
 	
-	private String getAttentionRelationJson(Logger logger, List<Attention> ListofObjects, String containment) {
+	private String getAttentionRelationJson(Logger logger, Set<Attention> ListofObjects, String containment) {
 		String joinedString1= null;
 		String joinedString2= null;
 		String joinedString3 = null;
@@ -490,7 +490,7 @@ public final class Note {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
 				if (ListofObjects.size()>1) {
-					joinedString3=joinedString2+"],";
+					joinedString3=joinedString2+"]";
 				} else {
 					joinedString3=joinedString2+",";
 				}
@@ -506,7 +506,7 @@ public final class Note {
 		return joinedString3;
 	}
 	
-	private String getAttentionJson(Logger logger, List<Attention> ListofObjects) {
+	private String getAttentionJson(Logger logger, Set<Attention> ListofObjects) {
 		String joinedString;
 	
 		try {
@@ -528,7 +528,7 @@ public final class Note {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
 				if (ListofObjects.size()>1) {
-					joinedString3=joinedString2+"],";
+					joinedString3=joinedString2+"]";
 				} else {
 					joinedString3=joinedString2+",";
 				}
@@ -547,7 +547,6 @@ public final class Note {
 		String joinedString;
 		try {
 			joinedString = ListofObjects.stream().map(n -> n.getPartialJSON()).collect(Collectors.joining(",\n"));
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			joinedString="";
@@ -560,7 +559,6 @@ public final class Note {
 		String joinedString2= null;
 		String joinedString3 = null;
 		joinedString1 = containment;
-		
 		if (ListofObjects.size()>0) {
 			try {
 				joinedString2 = joinedString1+ListofObjects.stream().map(n -> n.getName()).collect(Collectors.joining("\", \"", "\"", "\""));
@@ -573,11 +571,9 @@ public final class Note {
 				// TODO: handle exception
 				joinedString3="";
 			}
-
 		} else {
 			joinedString3="";
 		}
-		
 		return joinedString3;
 	}
 	
@@ -616,7 +612,6 @@ public final class Note {
 		} else {
 			joinedString3="";
 		}
-		
 		return joinedString3;
 	}
 	
@@ -822,20 +817,68 @@ public final class Note {
 	}
 	
 	
+	public void generateAttention(Logger logger) {
+		try {
+			Pattern h1 = Pattern.compile("\\*{2}(.*?)\\*{2}");
+			Matcher m = h1.matcher(this.content);
+			while (m.find()) {
+				String contains = m.group(1);
+				//System.out.println("contains: "+m.group(1));
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_attention.add(new Attention("Attention$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting attentions from: "+this.getName());
+		}
+		if (contained_attention.size()>0) {
+			this.setContained_attention(contained_attention);
+		}
+	}//void generateAttention
+	
+	public void generateEmphasys(Logger logger) {
+		try {
+			Pattern h1 = Pattern.compile("\\*(.*?)\\*");
+			Matcher m = h1.matcher(this.content);
+			while (m.find()) {
+				String contains = m.group(1);
+				//System.out.println("contains = "+m.group(1));
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_emphasys.add(new Emphasys("Emphasys$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting emphasys from: "+this.getName());
+		}
+		if (contained_emphasys.size()>0) {
+			this.setContained_emphasys(contained_emphasys);
+		}
+	}//void generateAttention
+	
 	public void generateHeader1(Logger logger) {
 		//System.out.println("entering generateHeader1");
-		Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
-		Matcher m = h1.matcher(this.content);
-		while (m.find()) {
-			String[] parts = m.group().split("#");
-			String part1 = parts[0]; // 004
-			String contains = parts[1]; // 034556
-			//System.out.println("contains = parts[1] "+contains);
-	        UUID uuid = UUID.randomUUID();
-	        String uuidAsString = uuid.toString();
-			//generating uuid for every header
-		    contained_header1.add(new Header1("Header1$"+uuidAsString,contains));
+		try {
+			Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
+			Matcher m = h1.matcher(this.content);
+			while (m.find()) {
+				String[] parts = m.group().split("#");
+				String part1 = parts[0]; // 004
+				String contains = parts[1]; // 034556
+				//System.out.println("contains = parts[1] "+contains);
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_header1.add(new Header1("Header1$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting header1 from: "+this.getName());
 		}
+		
 		if (contained_header1.size()>0) {
 			this.setContained_header1(contained_header1);
 		}
@@ -843,17 +886,22 @@ public final class Note {
 	
 	
 	public void generateHeader2(Logger logger) {
-		Pattern h2 = Pattern.compile("(?m)^#{2}\s+(?!#)(.*)");
-		Matcher m = h2.matcher(this.content);
-		while (m.find()) {
-			String[] parts = m.group().split("##");
-			String part1 = parts[0]; // 004
-			String contains = parts[1]; // 034556
-			//System.out.println("contains = parts[1] "+contains);
-	        UUID uuid = UUID.randomUUID();
-	        String uuidAsString = uuid.toString();
-			//generating uuid for every header
-		    contained_header2.add(new Header2("Header2$"+uuidAsString,contains));
+		try {
+			Pattern h2 = Pattern.compile("(?m)^#{2}\s+(?!#)(.*)");
+			Matcher m = h2.matcher(this.content);
+			while (m.find()) {
+				String[] parts = m.group().split("##");
+				String part1 = parts[0]; // 004
+				String contains = parts[1]; // 034556
+				//System.out.println("contains = parts[1] "+contains);
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_header2.add(new Header2("Header2$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting header2 from: "+this.getName());
 		}
 		if (contained_header2.size()>0) {
 			this.setContained_header2(contained_header2);
@@ -862,17 +910,22 @@ public final class Note {
 	}
 	
 	public void generateHeader3(Logger logger) {
-		Pattern h3 = Pattern.compile("(?m)^#{3}\s+(?!#)(.*)");
-		Matcher m = h3.matcher(this.content);
-		while (m.find()) {
-			String[] parts = m.group().split("###");
-			String part1 = parts[0]; // 004
-			String contains = parts[1]; // 034556
-			//System.out.println("contains = parts[1] "+contains);
-	        UUID uuid = UUID.randomUUID();
-	        String uuidAsString = uuid.toString();
-			//generating uuid for every header
-		    contained_header3.add(new Header3("Header3$"+uuidAsString,contains));
+		try {
+			Pattern h3 = Pattern.compile("(?m)^#{3}\s+(?!#)(.*)");
+			Matcher m = h3.matcher(this.content);
+			while (m.find()) {
+				String[] parts = m.group().split("###");
+				String part1 = parts[0]; // 004
+				String contains = parts[1]; // 034556
+				//System.out.println("contains = parts[1] "+contains);
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_header3.add(new Header3("Header3$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting header3 from: "+this.getName());
 		}
 		if (contained_header3.size()>0) {
 			this.setContained_header3(contained_header3);
@@ -881,18 +934,24 @@ public final class Note {
 	}
 	
 	public void generateHeader4(Logger logger) {
-		Pattern h4 = Pattern.compile("(?m)^#{4}\s+(?!#)(.*)");
-		Matcher m = h4.matcher(this.content);
-		while (m.find()) {
-			String[] parts = m.group().split("####");
-			String part1 = parts[0]; // 004
-			String contains = parts[1]; // 034556
-			//System.out.println("contains = parts[1] "+contains);
-	        UUID uuid = UUID.randomUUID();
-	        String uuidAsString = uuid.toString();
-			//generating uuid for every header
-		    contained_header4.add(new Header4("Header4$"+uuidAsString,contains));
+		try {
+			Pattern h4 = Pattern.compile("(?m)^#{4}\s+(?!#)(.*)");
+			Matcher m = h4.matcher(this.content);
+			while (m.find()) {
+				String[] parts = m.group().split("####");
+				String part1 = parts[0]; // 004
+				String contains = parts[1]; // 034556
+				//System.out.println("contains = parts[1] "+contains);
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_header4.add(new Header4("Header4$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting header4 from: "+this.getName());
 		}
+		
 		if (contained_header4.size()>0) {
 			this.setContained_header4(contained_header4);
 		}
@@ -900,18 +959,24 @@ public final class Note {
 	
 	
 	public void generateHeader5(Logger logger) {
-		Pattern h5 = Pattern.compile("(?m)^#{5}\s+(?!#)(.*)");
-		Matcher m = h5.matcher(this.content);
-		while (m.find()) {
-			String[] parts = m.group().split("#####");
-			String part1 = parts[0]; // 004
-			String contains = parts[1]; // 034556
-			//System.out.println("contains = parts[1] "+contains);
-	        UUID uuid = UUID.randomUUID();
-	        String uuidAsString = uuid.toString();
-			//generating uuid for every header
-		    contained_header5.add(new Header5("Header5$"+uuidAsString,contains));
+		try {
+			Pattern h5 = Pattern.compile("(?m)^#{5}\s+(?!#)(.*)");
+			Matcher m = h5.matcher(this.content);
+			while (m.find()) {
+				String[] parts = m.group().split("#####");
+				String part1 = parts[0]; // 004
+				String contains = parts[1]; // 034556
+				//System.out.println("contains = parts[1] "+contains);
+		        UUID uuid = UUID.randomUUID();
+		        String uuidAsString = uuid.toString();
+				//generating uuid for every header
+			    contained_header5.add(new Header5("Header5$"+uuidAsString,contains));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting header5 from: "+this.getName());
 		}
+		
 		if (contained_header5.size()>0) {
 			this.setContained_header5(contained_header5);
 		}
@@ -922,65 +987,69 @@ public final class Note {
 
 		String consulting_response;
 		String transaction_response;
-		//contained_tags=null;
-		Map<String, String> tags_map = new HashMap<String, String>();
-		Pattern pretags = Pattern.compile("#(\\w+)");
-		Matcher m = pretags.matcher(this.content);
-		while (m.find()) {
-				try {
-					String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/text_content \\\"%s\\\". }\"", m.group(1));
-					//System.out.println("tags query: "+http_body);
-					consulting_response = HttpURLFlureeDBConnection.
-							sendOkHttpClientPost(content_type,query_url,http_method,http_body);
-					//System.out.println("consulting_response: "+consulting_response);
-					if (consulting_response.equalsIgnoreCase("[]")) {
-						System.out.println("tag " +m.group(1)+ " not found");
-						 logger.info("tag " +m.group(1)+ " not found");
-						 //creating the tag object in db
-							final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
-									  +"\"text_content\""+":"+"\""+m.group(1)+"\"}]\n";
-							 //request to create the tag
-							 transaction_response = HttpURLFlureeDBConnection.
-										sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
-							  //converting to json to get fluree id
-							  JSONObject tag_json = new JSONObject(transaction_response);
-							  //System.out.println("transaction_response on tag: "+transaction_response);
-							 // System.out.println("Long.toString(tag_json.getJSONObject(\"tempids\").getLong(\"Tag$\"+m.group(1))): "+Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1))));
-							  try {
-								  Long fluree_id = tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1));
-								  tags_map.put(m.group(1), Long.toString(fluree_id));
+		try {
+			//contained_tags=null;
+			Map<String, String> tags_map = new HashMap<String, String>();
+			Pattern pretags = Pattern.compile("#(\\w+)");
+			Matcher m = pretags.matcher(this.content);
+			while (m.find()) {
+					try {
+						String http_body = String.format("\"SELECT ?tag WHERE { ?tag fd:Tag/text_content \\\"%s\\\". }\"", m.group(1));
+						//System.out.println("tags query: "+http_body);
+						consulting_response = HttpURLFlureeDBConnection.
+								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
+						//System.out.println("consulting_response: "+consulting_response);
+						if (consulting_response.equalsIgnoreCase("[]")) {
+							System.out.println("tag " +m.group(1)+ " not found");
+							 logger.info("tag " +m.group(1)+ " not found");
+							 //creating the tag object in db
+								final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
+										  +"\"text_content\""+":"+"\""+m.group(1)+"\"}]\n";
+								 //request to create the tag
+								 transaction_response = HttpURLFlureeDBConnection.
+											sendOkHttpClientPost(content_type,transaction_url,http_method,an_json_tag);
+								  //converting to json to get fluree id
+								  JSONObject tag_json = new JSONObject(transaction_response);
+								  //System.out.println("transaction_response on tag: "+transaction_response);
+								 // System.out.println("Long.toString(tag_json.getJSONObject(\"tempids\").getLong(\"Tag$\"+m.group(1))): "+Long.toString(tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1))));
+								  try {
+									  Long fluree_id = tag_json.getJSONObject("tempids").getLong("Tag$"+m.group(1));
+									  tags_map.put(m.group(1), Long.toString(fluree_id));
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while adding tag "+m.group(1)+" to map");
+								}
+								  
+						} else {
+							//System.out.println("found tag "+m.group(1));
+							try {
+								String consulting_left_brackets =consulting_response.replace("[", "");
+					        	//System.out.println("consulting_left_brackets: "+consulting_left_brackets);
+					        	String consulting_right_brackets =consulting_left_brackets.replace("]", "");
+					        	//System.out.println("consulting_right_brackets: "+consulting_right_brackets);
+					        	//after removing brackets, then try to splitting, if any
+					            String[] result = consulting_right_brackets.split(",");
+					            //System.out.println("splitted result "+result.length);
+					            if (result.length > 1) {
+					            	logger.error("error while generating tag: "+m.group(1));
+								} else {
+									//System.out.println("fluree id: "+result[0]);
+									tags_map.put(m.group(1), result[0]);
+								}
+
 							} catch (Exception e) {
-								// TODO: handle exception
-								logger.error("error while adding tag "+m.group(1)+" to map");
+								logger.error("error while removing [ from string "+consulting_response);
 							}
-							  
-					} else {
-						//System.out.println("found tag "+m.group(1));
-						try {
-							String consulting_left_brackets =consulting_response.replace("[", "");
-				        	//System.out.println("consulting_left_brackets: "+consulting_left_brackets);
-				        	String consulting_right_brackets =consulting_left_brackets.replace("]", "");
-				        	//System.out.println("consulting_right_brackets: "+consulting_right_brackets);
-				        	//after removing brackets, then try to splitting, if any
-				            String[] result = consulting_right_brackets.split(",");
-				            //System.out.println("splitted result "+result.length);
-				            if (result.length > 1) {
-				            	logger.error("error while generating tag: "+m.group(1));
-							} else {
-								//System.out.println("fluree id: "+result[0]);
-								tags_map.put(m.group(1), result[0]);
-							}
-
-						} catch (Exception e) {
-							logger.error("error while removing [ from string "+consulting_response);
 						}
-					}
 
-				} catch (Exception e) {
-		            logger.error("error while creatintg tag "+e.toString());
-				}//end of first try catch
-		}//end while of m
-		
+					} catch (Exception e) {
+			            logger.error("error while creatintg tag "+e.toString());
+					}//end of first try catch
+			}//end while of m
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("error while getting Tag from: "+this.getName());
+		}	
 		//adding tags to note
 		if (tags_map.size()>0) {
 			this.setTags_map(tags_map);

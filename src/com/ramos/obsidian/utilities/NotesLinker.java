@@ -75,7 +75,7 @@ public abstract class NotesLinker {
 	                		//querying for existing linked note
 	                		try {
 			    				String http_body_1 = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", current_note);
-			    				System.out.println("queries for note to be linked: "+http_body_1);
+			    				//System.out.println("queries for note to be linked: "+http_body_1);
 			    				String consulting_note = HttpURLFlureeDBConnection.
 			    						sendOkHttpClientPost(content_type,query_url,http_method,http_body_1);
 			    				//System.out.println("main note in fluree: "+consulting_note);
@@ -138,11 +138,11 @@ public abstract class NotesLinker {
 						    			}//end first try catch
 						    		}//end while m.find
 						    		//checking if any to link
-						    		System.out.println("list of links in note text: "+to_link_notes);
+						    		//System.out.println("list of links in note text: "+to_link_notes);
 						    		/*
 									 * end searching notes in text, array linked_notes filled with linkable notes
 									 */
-						    		System.out.println("searching for linked notes in fluree");
+						    		//System.out.println("searching for linked notes in fluree");
 								   	//querying for existing linked note
 				                		try {
 						    				String http_body_2 = String.format("\"SELECT ?note_link WHERE { ?note fd:Note/note_name \\\"%s\\\"; "
@@ -190,10 +190,10 @@ public abstract class NotesLinker {
 										}
 						    			//proceed to write on fluree 
 						    			try {
-							    			System.out.println("fluree_json: "+fluree_json );
+							    			//System.out.println("fluree_json: "+fluree_json );
 							        		String transaction_response = HttpURLFlureeDBConnection.
 													sendOkHttpClientPost(content_type,transaction_url,http_method,fluree_json);
-							        		System.out.println("transaction_response on notes link: "+transaction_response);
+							        		//System.out.println("transaction_response on notes link: "+transaction_response);
 										} catch (Exception e) {
 											// TODO: handle exception
 											logger.error("error while creating note: "+directory.toString());
