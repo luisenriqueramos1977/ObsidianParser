@@ -74,11 +74,11 @@ public abstract class NotesLinker {
 	                		//getting note fluree id
 	                		//querying for existing linked note
 	                		try {
-			    				String http_body_1 = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", current_note);
+			    				String http_body_1 = String.format("\"SELECT ?note WHERE { ?note fd:Note/name \\\"%s\\\". }\"", current_note);
 			    				//System.out.println("queries for note to be linked: "+http_body_1);
 			    				String consulting_note = HttpURLFlureeDBConnection.
 			    						sendOkHttpClientPost(content_type,query_url,http_method,http_body_1);
-			    				//System.out.println("main note in fluree: "+consulting_note);
+			    				//System.out.println("consulting note name in fluree: "+consulting_note);
 			    				if (consulting_note.equals("[]")) {
 			    					note_in_fluree =false;
 			    					logger.error(current_note+ " not in fluree");
@@ -108,7 +108,7 @@ public abstract class NotesLinker {
 							    			//System.out.println(" notes linked in text 1: "+splitted_string_1); 
 											String splitted_string_2 = splitted_string_1.replaceAll("_.md",".md");
 							    			//System.out.println(" notes linked in text 2: "+splitted_string_2); 
-						    				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", splitted_string_2);
+						    				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/name \\\"%s\\\". }\"", splitted_string_2);
 						    				//System.out.println("http body query for note: "+http_body);
 						    				String consulting_response = HttpURLFlureeDBConnection.
 						    						sendOkHttpClientPost(content_type,query_url,http_method,http_body);
@@ -123,11 +123,11 @@ public abstract class NotesLinker {
 									        	//System.out.println("consulting_right_brackets: "+consulting_right_brackets);
 									        	//after removing brackets, then try to splitting, if any
 									            String[] result = consulting_right_brackets.split(",");
-									            //System.out.println("splitted result "+result.length);
+									            //System.out.println("splitted result fluree id "+result.length);
 									            if (result.length > 1) {
-									            	logger.error("error while generating tag: "+m.group(1));
+									            	logger.error("error while generating tag from: "+m.group(1));
 												} else {
-													//System.out.println("fluree id: "+result[0]);
+													//System.out.println("fluree id linked note: "+result[0]);
 													to_link_notes.add(result[0]);
 												}
 											}
@@ -138,19 +138,19 @@ public abstract class NotesLinker {
 						    			}//end first try catch
 						    		}//end while m.find
 						    		//checking if any to link
-						    		//System.out.println("list of links in note text: "+to_link_notes);
+						    		//System.out.println("list of links in note text: "+to_link_notes.size());
 						    		/*
 									 * end searching notes in text, array linked_notes filled with linkable notes
 									 */
 						    		//System.out.println("searching for linked notes in fluree");
 								   	//querying for existing linked note
 				                		try {
-						    				String http_body_2 = String.format("\"SELECT ?note_link WHERE { ?note fd:Note/note_name \\\"%s\\\"; "
-						    						+ "fd:Note/linked_to_note2 ?note_link . }\"", current_note);
+						    				String http_body_2 = String.format("\"SELECT ?note_link WHERE { ?note fd:Note/name \\\"%s\\\"; "
+						    						+ "fd:Note/linked_to_note ?note_link . }\"", current_note);
 						    				//System.out.println("queries for linked notes: "+http_body);
 						    				String consulting_linked_note = HttpURLFlureeDBConnection.
 						    						sendOkHttpClientPost(content_type,query_url,http_method,http_body_2);
-						    				//System.out.println("linked note response: "+consulting_linked_note);
+						    				//System.out.println("search linked note response: "+consulting_linked_note);
 						    				//whatever the result we have to get the fluree id of every one
 						    				//with the list of linked notes, we decide about the json and the load of linked notes					 
 						    				if (consulting_linked_note.equals("[]")) {
@@ -180,12 +180,12 @@ public abstract class NotesLinker {
 										//generate the json file
 						    			if (differences.size() == 1) {
 							    			fluree_json = "\n [{\"_id\":"+main_fluree_id+",\n"
-							    					+"\"linked_to_note2\":"+differences.get(0)+"}]";
+							    					+"\"linked_to_note\":"+differences.get(0)+"}]";
 							    			//System.out.println("fluree_json: "+fluree_json );
 										} else {
 											String fluree_string_head = "\n [{\"_id\":"+main_fluree_id+",\n";
 							    			String fluree_json_body = differences.stream().map(n -> n).collect(Collectors.joining(",\n"));
-							    			fluree_json =  fluree_string_head+"\"linked_to_note2\":["+fluree_json_body+"]}]";
+							    			fluree_json =  fluree_string_head+"\"linked_to_note\":["+fluree_json_body+"]}]";
 							    			//System.out.println("fluree json body: "+fluree_json);
 										}
 						    			//proceed to write on fluree 

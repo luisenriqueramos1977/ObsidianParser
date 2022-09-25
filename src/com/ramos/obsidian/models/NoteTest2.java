@@ -78,10 +78,10 @@ class NoteTest2 {
 		//		"http://127.0.0.1:8090/fdb/my/obsidian3/sparql"
 		//		,"POST");
 		my_Note.generateTags(logger,"text/plain", 
-				"http://127.0.0.1:8090/fdb/my/obsidian3/sparql", 
-				"http://127.0.0.1:8090/fdb/my/obsidian3/transact","POST");
+				"http://127.0.0.1:8090/fdb/my/obsidian2/sparql", 
+				"http://127.0.0.1:8090/fdb/my/obsidian2/transact","POST");
 		System.out.println("parsed all elements");
-		System.out.println("the partial fluree json: \n"+my_Note.getPartialJSON(logger));
+		System.out.println("the partial fluree json: \n"+my_Note.getFullJSON(logger));
 	}
 
 	

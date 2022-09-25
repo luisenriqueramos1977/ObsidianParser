@@ -34,7 +34,6 @@ public abstract class FolderReader {
 	
 	 // Prints all file/directory names in the entire directory tree!
     public static void folderSearchWrite(String rootFolder, Logger logger, String content_type, String query_url, String transaction_url, String http_method) throws Exception {
-    	//System.out.println("simply print files and folders");
    	    String separator = System.getProperty("file.separator");
         //System.out.println(separator);
         Files.walk(Paths.get(rootFolder)).forEach(path -> {
@@ -52,7 +51,7 @@ public abstract class FolderReader {
 	                	if (directory.toString().contains("\\")) {
 							modified_directory = directory.toString().replace("\\", "/");
 						}
-	                	String http_body = String.format("\"SELECT ?folder WHERE { ?folder fd:Folder/folderName \\\"%s\\\"; fd:Folder/located_in \\\"%s\\\" . }\"", folder_name, modified_directory);
+	                	String http_body = String.format("\"SELECT ?folder WHERE { ?folder fd:Folder/name \\\"%s\\\"; fd:Folder/located_in \\\"%s\\\" . }\"", folder_name, modified_directory);
 	                	//System.out.println("the query: "+http_body);
 	                	String consulting_response = HttpURLFlureeDBConnection.
 								sendOkHttpClientPost(content_type,query_url,http_method,http_body);

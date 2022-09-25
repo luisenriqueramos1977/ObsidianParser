@@ -337,10 +337,13 @@ public final class Note {
 		String json_links;
 		String json_bodies;
 		String fluree_head_links;
-		String fluree_string_head = "\n [{\"_id\": \"Note$"+this.getName()+"\",\n"+
+		String fluree_string_head = "\n{\"_id\": \"Note$"+this.getName()+"\",\n"+
 				  "\"text_content\""+":"+"\""+this.getContent().replace("\n", "").replace("\r", "")+"\",\n"+
-				  "\"note_name\""+":"+"\""+this.getName()+"\",\n"+
-				  "\"created\""+":"+"\""+this.getCreated_on()+"\"";
+				  "\"name\""+":"+"\""+this.getName()+"\",\n"+
+				  "\"located_in\""+":"+"\""+this.getLocated_in()+"\",\n"+
+				  "\"created_on\""+":"+"\""+this.getCreated_on().toString()+"\"";
+		
+		//System.out.println("fluree_string_head: "+fluree_string_head);
 		
 		//adding attentions
 		if (!contained_attention.isEmpty()) {
@@ -447,7 +450,7 @@ public final class Note {
 		//if fluree array is not larger than 1
 		String test_string = null;
 		if (fluree_links.isEmpty()) {
-			 //System.out.println("final fluree string: "+fluree_string_head +"}]");
+			 System.out.println("final fluree string: "+fluree_string_head +"}]");
 			 return fluree_string_head +"}]";
 		} else {
 			//streaming to generate the header string
@@ -461,19 +464,38 @@ public final class Note {
 		
 		//System.out.println("fluree_bodies.size()***: "+fluree_bodies.size());
 		//if fluree array is not larger than 1
-		if (fluree_bodies.isEmpty()) {
-			 //System.out.println("final fluree string: "+fluree_string_head +"}]");
-			 return fluree_string_head +fluree_head_links+"}]";
+		if (fluree_bodies.isEmpty() || (fluree_bodies.size()==1 && fluree_bodies.get(0).isBlank()) 
+				|| (fluree_bodies.size()==1 && fluree_bodies.get(0).isEmpty()) || (fluree_bodies.size()==1 && fluree_bodies.get(0).equals(" "))) {
+			 //System.out.println("final fluree string: "+fluree_string_head +",\n"+fluree_head_links+"}");
+			 return fluree_string_head +",\n"+fluree_head_links+"}";
 		} else {
-			//streaming to generate the header string
-			String fluree_bodies_string = fluree_bodies.stream().map(n -> n).collect(Collectors.joining(",\n"));
-			String body_result = null;
-			//check end of string
-		    //body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
-			body_result = fluree_bodies_string;
-			//System.out.println("fluree_bodies_string : "+body_result);
-			 //return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"\"}]";//if not tag, issue  "contains_tag"
-			 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"]";
+//				//streaming to generate the header string
+//				System.out.println("******** streaming fluree_bodies_string ****************");
+//				if (fluree_bodies.get(0).isBlank()) {
+//					System.out.println("******** return blank****************");
+//				} 
+			
+				try {
+					String fluree_bodies_string = fluree_bodies.stream().map(n -> n).collect(Collectors.joining(",\n"));
+					//System.out.println("fluree_bodies with issues: "+fluree_bodies);
+					//System.out.println("last fluree_bodies_string: "+fluree_bodies_string.substring(fluree_bodies_string.length() - 1));
+					String body_result = null;
+					//check end of string
+						if (fluree_bodies_string.substring(fluree_bodies_string.length() - 1).equals("}")) {
+						    body_result = fluree_bodies_string;
+						} else {
+						    body_result = fluree_bodies_string.substring(0, fluree_bodies_string.length() -2);
+						}
+					//body_result = fluree_bodies_string;
+					//System.out.println("fluree_bodies_string : "+body_result);
+					 //return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result+"\"}]";//if not tag, issue  "contains_tag"
+					 return fluree_string_head +",\n"+fluree_head_links+"},\n"+body_result;
+				} catch (Exception e) {
+					// TODO: handle exception
+					logger.error("error adding the body to: "+ this.getName());
+					 return fluree_string_head +",\n"+fluree_head_links+"}";
+				}
+				
 		    }
 		    //end fluree_array.size()==1
 	    }//fluree_bodies.isEmpty()
@@ -987,9 +1009,9 @@ public final class Note {
 
 		String consulting_response;
 		String transaction_response;
+		//Map<String, String> tags_map = new HashMap<String, String>();
 		try {
 			//contained_tags=null;
-			Map<String, String> tags_map = new HashMap<String, String>();
 			Pattern pretags = Pattern.compile("#(\\w+)");
 			Matcher m = pretags.matcher(this.content);
 			while (m.find()) {
@@ -1000,7 +1022,7 @@ public final class Note {
 								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
 						//System.out.println("consulting_response: "+consulting_response);
 						if (consulting_response.equalsIgnoreCase("[]")) {
-							System.out.println("tag " +m.group(1)+ " not found");
+							//System.out.println("tag " +m.group(1)+ " not found");
 							 logger.info("tag " +m.group(1)+ " not found");
 							 //creating the tag object in db
 								final String an_json_tag = "[{\"_id\""+":"+"\""+ "Tag$"+m.group(1)+"\","
@@ -1035,6 +1057,7 @@ public final class Note {
 								} else {
 									//System.out.println("fluree id: "+result[0]);
 									tags_map.put(m.group(1), result[0]);
+									//System.out.println("tags map size: "+ tags_map.size());
 								}
 
 							} catch (Exception e) {
@@ -1053,6 +1076,7 @@ public final class Note {
 		//adding tags to note
 		if (tags_map.size()>0) {
 			this.setTags_map(tags_map);
+			 //System.out.println("map of tags: "+tags_map);
 		}
 		
 	}//end generatetags()
@@ -1065,7 +1089,7 @@ public final class Note {
 			//System.out.println(" notes linked: "+m.group(1).replaceAll("\\s+","_")); 
 			//querying if to be linked note exists in db.
 			try {
-				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", m.group(1).replaceAll("\\s+","_"));
+				String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/name \\\"%s\\\". }\"", m.group(1).replaceAll("\\s+","_"));
 				//System.out.println("http body for note: "+http_body);
 				consulting_response = HttpURLFlureeDBConnection.
 						sendOkHttpClientPost(content_type,query_url,http_method,http_body);
@@ -1100,7 +1124,7 @@ public final class Note {
 	
 	
 	public String getFullJSON(Logger aLogger) {
-		return "["+this.getPartialJSON(aLogger);
+		return "["+this.getPartialJSON(aLogger)+"]";
 	}
 	
 	

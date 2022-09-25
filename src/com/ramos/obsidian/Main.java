@@ -55,7 +55,7 @@ public class Main {
     
     private static String obsidianFolder = null;//C:\\Users\\User\\Documents\\luis_obsidian
     private static String sparql_url = null;//"http://127.0.0.1:8090/fdb/my/obsidian3/sparql";
-    private static String transaction_url = null;//"http://127.0.0.1:8090/fdb/my/obsidian3/transact";
+    private static String transaction_url = null;//"http://127.0.0.1:8090/fdb/my/obsidian2/transact";
     private static String fluree_url = null;
     private static final String content_type = "text/plain";
     private static final String http_method = "POST";

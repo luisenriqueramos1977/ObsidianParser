@@ -169,7 +169,7 @@ public final class Folder {
 		//String notes_json = getNotesJson(contained_notes);
 		
 		final String a_json = "{\"_id\""+":"+"\""+ "Folder$"+this.getName()+"\",\n"
-							  +"\"folderName\""+":"+"\""+this.getName()+"\",\n"
+							  +"\"name\""+":"+"\""+this.getName()+"\",\n"
 							  +"\"created_on\""+":"+"\""+this.getCreation_on().toString()+"\",\n"+
 							  "\"located_in\""+":"+"\""+this.getLocated_in()+"\"}";
 		return a_json;

@@ -54,7 +54,7 @@ public abstract class NotesReader {
 	                //we check if the note exist in fluree, before proceed to create it
 	                try {
 	                	//modify separator
-	                	String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/note_name \\\"%s\\\". }\"", directory.getName().replaceAll("\\s+","_"));
+	                	String http_body = String.format("\"SELECT ?note WHERE { ?note fd:Note/name \\\"%s\\\". }\"", directory.getName().replaceAll("\\s+","_"));
 	                	//System.out.println("the query: "+http_body);
 	                	String consulting_response = HttpURLFlureeDBConnection.
 								sendOkHttpClientPost(content_type,query_url,http_method,http_body);
@@ -62,32 +62,99 @@ public abstract class NotesReader {
 	                	//reading response
 	                	
 				        if (consulting_response.equals("[]")) {
-						     //create folder because it does not exist
-				        	//create note
-				        	List<String> lines = Files.readAllLines(Path.of(path.toUri()));
-				        	String myString = String.join("\n", lines);
-				        	
-				        	//System.out.println("lines of note: "+myString);
-				        	//FileUtils.readFileToString(directory, "UTF-8").replace("\"", "'")
-				    		
-				        	Note my_Note = new Note(directory.getName().toString(), myString.replace("\"", "'"),fileAttributes.creationTime(), owner.getName().toString(), directory.getParent());
-				        	my_Note.generateHeader1(logger);
-				    		my_Note.generateHeader2(logger);
-				    		my_Note.generateHeader3(logger);
-				    		my_Note.generateHeader4(logger);
-				    		my_Note.generateHeader5(logger);
-				    		//check tags generation
-				    		my_Note.generateTags(logger,content_type, query_url,transaction_url,http_method);
-				    		//generate the json of note
-				    		my_Note.getPartialJSON(logger);
-				        	//System.out.println("notes fluree json: "+my_Note.getPartialJSON(logger));
-				        		 //request to create the tag
-				        	try {
+						    try {
+						    	 //create folder because it does not exist
+					        	//create note
+					        	List<String> lines = Files.readAllLines(Path.of(path.toUri()));
+					        	//System.out.println("lines of note: "+lines);
+					        	String myString =null;
+					        	try {
+						        	myString = String.join("\n", lines).replace("\"", "'");
+								} catch (Exception e) {
+									// TODO: handle exception
+									System.out.println("second try error: "+e);
+						        	try {
+							        	myString = String.join("\n", lines);
+									} catch (Exception e2) {
+										// TODO: handle exception
+										System.out.println("third try error: "+e);
+							        	myString = lines.toString();
+									}
+								}//end try 
+					    		
+//					        	System.out.println("my string: "+myString);
+//					        	System.out.println("end my string: ");
+//					        	System.out.println("checking inputs *****");
+//					        	System.out.println("directory.getName().toString(): "+directory.getName().toString());
+//					        	System.out.println("fileAttributes.creationTime(): "+fileAttributes.creationTime());
+//					        	System.out.println("owner.getName().toString(): "+owner.getName().toString());
+//					        	System.out.println("directory.getParent().toString().replace(\"\\\\\", \"/\"): "+directory.getParent().toString().replace("\\", "/"));
+
+					        	Note my_Note = new Note(directory.getName().toString(), myString,fileAttributes.creationTime(), owner.getName().toString(), directory.getParent().toString().replace("\\", "/"));
+					        	
+					        	//System.out.println("object created adding additional elements **************");
+					        	
+					        	try {
+						        	my_Note.generateAttention(logger);
+								} catch (Exception e2) {
+									// TODO: handle exception
+									logger.error("error while generating  attention of "+directory.getName().toString());
+								}
+					        	try {
+						    		my_Note.generateEmphasys(logger);
+								} catch (Exception e2) {
+									// TODO: handle exception
+									logger.error("error while generating  emphasys of "+directory.getName().toString());
+								}
+					        	try {
+						        	my_Note.generateHeader1(logger);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  heading1 of "+directory.getName().toString());
+								}
+					        	try {
+						    		my_Note.generateHeader2(logger);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  heading2 of "+directory.getName().toString());
+								}
+					        	try {
+						    		my_Note.generateHeader3(logger);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  heading3 of "+directory.getName().toString());
+								}
+					        	try {
+						    		my_Note.generateHeader4(logger);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  heading4 of "+directory.getName().toString());
+								}
+					        	try {
+						    		my_Note.generateHeader5(logger);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  heading5 of "+directory.getName().toString());
+								}
+					    		try {
+						    		my_Note.generateTags(logger,content_type, query_url,transaction_url,http_method);
+								} catch (Exception e) {
+									// TODO: handle exception
+									logger.error("error while generating  tags of "+directory.getName().toString());
+								}
+					    		
+					        	//System.out.println("object created and additonal elementsadded **************");
+
+					    		//check tags generation
+					        	//System.out.println("notes fluree json to test: "+my_Note.getFullJSON(logger));
+					        		 //request to create the tag
+					        	
 				        		String transaction_response = HttpURLFlureeDBConnection.
-										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getPartialJSON(logger));
+										sendOkHttpClientPost(content_type,transaction_url,http_method,my_Note.getFullJSON(logger));
 				        		//System.out.println("transaction_response on note: "+transaction_response);
 							} catch (Exception e) {
 								// TODO: handle exception
+								System.out.println("error while creating note: "+e);
 								logger.error("error while creating note: "+directory.toString());
 							}
 						} //consulting response
