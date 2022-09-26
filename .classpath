@@ -17,5 +17,14 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/User/.m2/repository/org/apache/jena/jena-core/4.1.0/jena-core-4.1.0.jar" sourcepath="C:/Users/User/.m2/repository/org/apache/jena/jena-core/4.1.0/jena-core-4.1.0-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.apache.jena"/>
+			<attribute name="maven.artifactId" value="jena-core"/>
+			<attribute name="maven.version" value="4.1.0"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

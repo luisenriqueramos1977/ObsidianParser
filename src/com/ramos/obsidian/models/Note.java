@@ -45,6 +45,10 @@ import java.util.stream.Collectors;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.json.JSONException;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.DC;
+import org.apache.jena.vocabulary.DCTerms;
 
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
 
@@ -1127,7 +1131,31 @@ public final class Note {
 		return "["+this.getPartialJSON(aLogger)+"]";
 	}
 	
-	
+	public String generateJsonLD(Logger aLogger) {
+        Model aModel = null;
+        String modelURI    = this.getLocated_in()+"/"+this.getName();
+        
+       
+        
+     // create the resource
+		Resource aResource = aModel.createResource(modelURI);
+		//adding properties to the rdf resource
+		aResource.addProperty(DCTerms.creator, this.getCreator())
+				  .addProperty(DCTerms.format, "MD");
+		
+		 if (contained_attention.size()>0) {
+				 contained_attention.stream().forEach(n -> {
+					 Resource noteResource = aModel.createResource(modelURI+"#"+n.name);
+					 noteResource.addProperty(DCTerms.title, n.name).addProperty(DCTerms.description, n.content);
+					 aResource.addLiteral(DCTerms.hasPart, noteResource);
+				 });
+			}
+		 
+		//print the model to string
+		
+		return aResource;
+		
+	}//end generateJson
 	
 	
 	
