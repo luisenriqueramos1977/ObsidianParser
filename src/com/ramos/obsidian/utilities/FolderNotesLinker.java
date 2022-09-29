@@ -20,14 +20,14 @@
 
 package com.ramos.obsidian.utilities;
 
-import static org.hamcrest.CoreMatchers.containsString;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
+
+
 
 public abstract class FolderNotesLinker {
 	
@@ -36,8 +36,7 @@ public abstract class FolderNotesLinker {
 		//first we get all folders in fluree, if any, in no folder, we finish
 		try {
 			String http_body_1 = "\"SELECT ?id ?location WHERE { ?folder fd:Folder/located_in  ?location ;  fd:_id ?id.}\"";
-			String consulting_note = HttpURLFlureeDBConnection.
-					sendOkHttpClientPost(content_type,query_url,http_method,http_body_1);
+			String consulting_note = HttpURLFlureeDBConnection.sendOkHttpClientPost(content_type,query_url,http_method,http_body_1);
 			if (!consulting_note.equals("[]")) {
 				List<String> response_list = GenericUtilities.getList(consulting_note);
 				//streamign over the list

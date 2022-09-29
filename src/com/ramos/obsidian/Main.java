@@ -34,12 +34,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Scanner;
-
-
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.ramos.obsidian.models.Folder;
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
 import com.ramos.obsidian.utilities.FolderNotesLinker;
@@ -64,8 +61,10 @@ public class Main {
     public static void main(String[] args)  {
     	
     	
+    	String userDirectory = System.getProperty("user.dir");
     	 System.setProperty("log4j.configurationFile",  "bin/com/ramos/obsidian/resources/log4j2.xml");
-    	 System.setProperty("logFilename", "obsidian_fluree_logs.log");
+    	 System.setProperty("logFilename", "C:\\Users\\User\\Desktop\\obsidian_logs\\obsidian_fluree_logs.log");
+    	 //System.out.println("logs written to: "+userDirectory+"\\obsidian_fluree_logs.log");
         Logger logger = LoggerFactory.getLogger( Main.class);
 		Scanner input = new Scanner(System.in);//set up input reader
 		
@@ -78,7 +77,7 @@ public class Main {
 			//requested basic information to proceed 
 			
 			System.out.println(""
-					+ "*******************************************************************"
+					+ "******************************************************************* \n"
 					+ "Welcome to Obsidian Fluree Parser! \n"
 					+ "Some information will be requested and verified. \n"
 					+ "Take in account that if some information is wrong the program \n"
@@ -118,10 +117,10 @@ public class Main {
 			        	fluree_server_up= true;
 			        }
 			        else {
-			            logger.error(fluree_url + "server is not available.  Program terminated");
+			            logger.error(fluree_url + " server is not available.  Program terminated");
 			            System.exit(1);
 			        }
-			    } catch (InvalidPathException  | NullPointerException ex) {
+			    } catch (InvalidPathException  | NullPointerException | java.net.ConnectException ex) {
 			    	fluree_server_up= false;
 		            logger.error(fluree_url + "server is not available.  Program terminated");
 		            System.exit(1);

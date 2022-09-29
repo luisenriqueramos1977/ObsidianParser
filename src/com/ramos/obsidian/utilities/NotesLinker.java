@@ -155,7 +155,7 @@ public abstract class NotesLinker {
 						    				//with the list of linked notes, we decide about the json and the load of linked notes					 
 						    				if (consulting_linked_note.equals("[]")) {
 						    					previouslinkednotes =true;
-						    					System.out.println("");
+						    					//System.out.println("");
 											} else {
 												previouslinkednotes =false;
 												String consulting_left_brackets =consulting_linked_note.replace("[", "");

@@ -23,8 +23,7 @@
  */
 package com.ramos.obsidian.models;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 import java.nio.file.attribute.FileTime;
 import java.time.LocalDate;
@@ -45,12 +44,13 @@ import java.util.stream.Collectors;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.json.JSONException;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.DC;
-import org.apache.jena.vocabulary.DCTerms;
+//import org.apache.jena.rdf.model.Model;
+//import org.apache.jena.rdf.model.Resource;
+//import org.apache.jena.vocabulary.DC;
+//import org.apache.jena.vocabulary.DCTerms;
 
 import com.ramos.obsidian.models.HttpURLFlureeDBConnection;
+import com.ramos.obsidian.models.*;
 
 /**
  * @author Luis Ramos
@@ -888,7 +888,7 @@ public final class Note {
 	public void generateHeader1(Logger logger) {
 		//System.out.println("entering generateHeader1");
 		try {
-			Pattern h1 = Pattern.compile("(?m)^#\s+(?!#)(.*)");
+			Pattern h1 = Pattern.compile("(?m)^#\\s+(?!#)(.*)");
 			Matcher m = h1.matcher(this.content);
 			while (m.find()) {
 				String[] parts = m.group().split("#");
@@ -913,7 +913,7 @@ public final class Note {
 	
 	public void generateHeader2(Logger logger) {
 		try {
-			Pattern h2 = Pattern.compile("(?m)^#{2}\s+(?!#)(.*)");
+			Pattern h2 = Pattern.compile("(?m)^#{2}\\s+(?!#)(.*)");
 			Matcher m = h2.matcher(this.content);
 			while (m.find()) {
 				String[] parts = m.group().split("##");
@@ -937,7 +937,7 @@ public final class Note {
 	
 	public void generateHeader3(Logger logger) {
 		try {
-			Pattern h3 = Pattern.compile("(?m)^#{3}\s+(?!#)(.*)");
+			Pattern h3 = Pattern.compile("(?m)^#{3}\\s+(?!#)(.*)");
 			Matcher m = h3.matcher(this.content);
 			while (m.find()) {
 				String[] parts = m.group().split("###");
@@ -961,7 +961,7 @@ public final class Note {
 	
 	public void generateHeader4(Logger logger) {
 		try {
-			Pattern h4 = Pattern.compile("(?m)^#{4}\s+(?!#)(.*)");
+			Pattern h4 = Pattern.compile("(?m)^#{4}\\s+(?!#)(.*)");
 			Matcher m = h4.matcher(this.content);
 			while (m.find()) {
 				String[] parts = m.group().split("####");
@@ -986,7 +986,7 @@ public final class Note {
 	
 	public void generateHeader5(Logger logger) {
 		try {
-			Pattern h5 = Pattern.compile("(?m)^#{5}\s+(?!#)(.*)");
+			Pattern h5 = Pattern.compile("(?m)^#{5}\\s+(?!#)(.*)");
 			Matcher m = h5.matcher(this.content);
 			while (m.find()) {
 				String[] parts = m.group().split("#####");
@@ -1131,31 +1131,31 @@ public final class Note {
 		return "["+this.getPartialJSON(aLogger)+"]";
 	}
 	
-	public String generateJsonLD(Logger aLogger) {
-        Model aModel = null;
-        String modelURI    = this.getLocated_in()+"/"+this.getName();
-        
-       
-        
-     // create the resource
-		Resource aResource = aModel.createResource(modelURI);
-		//adding properties to the rdf resource
-		aResource.addProperty(DCTerms.creator, this.getCreator())
-				  .addProperty(DCTerms.format, "MD");
-		
-		 if (contained_attention.size()>0) {
-				 contained_attention.stream().forEach(n -> {
-					 Resource noteResource = aModel.createResource(modelURI+"#"+n.name);
-					 noteResource.addProperty(DCTerms.title, n.name).addProperty(DCTerms.description, n.content);
-					 aResource.addLiteral(DCTerms.hasPart, noteResource);
-				 });
-			}
-		 
-		//print the model to string
-		
-		return aResource;
-		
-	}//end generateJson
+//	public Resource generateJsonLD(Logger aLogger) {
+//        Model aModel = null;
+//        String modelURI    = this.getLocated_in()+"/"+this.getName();
+//        
+//       
+//        
+//     // create the resource
+//		Resource aResource = aModel.createResource(modelURI);
+//		//adding properties to the rdf resource
+//		aResource.addProperty(DCTerms.creator, this.getCreator())
+//				  .addProperty(DCTerms.format, "MD");
+//		
+//		 if (contained_attention.size()>0) {
+//				 contained_attention.stream().forEach(n -> {
+//					 Resource noteResource = aModel.createResource(modelURI+"#"+n.name);
+//					 noteResource.addProperty(DCTerms.title, n.name).addProperty(DCTerms.description, n.content);
+//					 aResource.addLiteral(DCTerms.hasPart, noteResource);
+//				 });
+//			}
+//		 
+//		//print the model to string
+//		
+//		return aResource;
+//		
+//	}//end generateJson
 	
 	
 	

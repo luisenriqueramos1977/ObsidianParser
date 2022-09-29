@@ -1,5 +1,16 @@
 Manifest-Version: 1.0
 Built-By: User
 Build-Jdk: 14.0.2
+Class-Path: . lib/json-20201115.jar lib/okhttp-3.14.2.jar lib/okio-1.17.
+ 2.jar lib/apiguardian-api-1.0.0.jar lib/junit-platform-engine-1.4.2.jar
+  lib/opentest4j-1.1.1.jar lib/junit-platform-commons-1.4.2.jar lib/juni
+ t-jupiter-5.8.2.jar lib/junit-jupiter-api-5.8.2.jar lib/junit-jupiter-p
+ arams-5.8.2.jar lib/junit-jupiter-engine-5.8.2.jar lib/slf4j-api-2.0.2.
+ jar lib/log4j-api-2.18.0.jar lib/log4j-core-2.18.0.jar lib/log4j-slf4j-
+ impl-2.18.0.jar lib/commons-io-2.8.0.jar lib/jena-base-4.1.0.jar lib/je
+ na-shaded-guava-4.1.0.jar lib/commons-csv-1.8.jar lib/commons-lang3-3.1
+ 2.0.jar lib/commons-codec-1.15.jar lib/commons-compress-1.20.jar lib/co
+ llection-0.7.jar
+Main-Class: com.ramos.obsidian.Main
 Created-By: Maven Integration for Eclipse
 
