@@ -62,10 +62,12 @@ public class Main {
     	
     	
     	String userDirectory = System.getProperty("user.dir");
-    	 System.setProperty("log4j.configurationFile",  "bin/com/ramos/obsidian/resources/log4j2.xml");
-    	 System.setProperty("logFilename", "C:\\Users\\User\\Desktop\\obsidian_logs\\obsidian_fluree_logs.log");
-    	 //System.out.println("logs written to: "+userDirectory+"\\obsidian_fluree_logs.log");
-        Logger logger = LoggerFactory.getLogger( Main.class);
+ 
+    	System.out.println("logs written to: "+userDirectory+"\\logs\\obsidian_fluree_logs.log");
+
+   	 	//System.setProperty("logFilename", "C:\\Users\\User\\Desktop\\obsidian_logs\\obsidian_fluree_logs.log");
+   	 	System.setProperty("logFilename", userDirectory+"\\logs\\obsidian_fluree_logs.log");
+        Logger logger = LoggerFactory.getLogger( Main.class.getName());
 		Scanner input = new Scanner(System.in);//set up input reader
 		
 		//it is required to provide all information before begin!!!!
@@ -120,7 +122,7 @@ public class Main {
 			            logger.error(fluree_url + " server is not available.  Program terminated");
 			            System.exit(1);
 			        }
-			    } catch (InvalidPathException  | NullPointerException | java.net.ConnectException ex) {
+			    } catch ( NullPointerException | java.net.ConnectException | IllegalArgumentException ex) {
 			    	fluree_server_up= false;
 		            logger.error(fluree_url + "server is not available.  Program terminated");
 		            System.exit(1);

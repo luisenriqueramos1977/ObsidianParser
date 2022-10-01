@@ -1,0 +1,7 @@
+2022-09-29 14:56:48.688 [main] INFO  - process started at 2022-09-29 14:56:48.681
+2022-09-29 14:57:21.666 [main] ERROR - http://127.0.0.1:8090server is not available.  Program terminated
+2022-10-01 07:47:09.995 [main] INFO  - process started at 2022-10-01 07:47:09.985
+2022-10-01 07:47:55.988 [main] INFO  - process started at 2022-10-01 07:47:55.981
+2022-10-01 07:48:06.744 [main] ERROR - Path ykvblkd<n is invalid!. Program terminated
+2022-10-01 07:48:18.299 [main] INFO  - process started at 2022-10-01 07:48:18.29
+2022-10-01 07:49:10.943 [main] ERROR - error reading the files java.lang.IllegalArgumentException: Expected URL scheme 'http' or 'https' but no colon was found
